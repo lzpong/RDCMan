@@ -79,6 +79,8 @@
     <Compile Include="RdcMan\ConfigForm\BuiltInVirtualGroupCheckedMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="RdcMan\Ctrl\InternalGroup.cs" />
+    <Compile Include="RdcMan\Ctrl\InternalServerRef.cs" />
     <Compile Include="RdcMan\Models\ChangeType.cs" />
     <Compile Include="RdcMan\CheckedMenuItem.cs">
       <SubType>Component</SubType>
@@ -318,6 +320,7 @@
     <Compile Include="RdcMan\OcxClient\RdpClient8.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="RdcMan\Ctrl\RdpCtrl.cs" />
     <Compile Include="RdcMan\RecentlyUsedGroup.cs" />
     <Compile Include="RdcMan\RecentlyUsedServerRef.cs" />
     <Compile Include="RdcMan\ReconnectGroup.cs" />
