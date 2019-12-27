@@ -11,13 +11,13 @@ namespace RdcMan
 		public static void AddSessionMenuItems(ContextMenuStrip menu, ServerBase server)
 		{
 			bool isConnected = server.IsConnected;
-			ToolStripMenuItem toolStripMenuItem = new DelegateMenuItem("连接服务器", MenuNames.SessionConnect, server.Connect);
+			ToolStripMenuItem toolStripMenuItem = new DelegateMenuItem("连接", MenuNames.SessionConnect, server.Connect);
 			toolStripMenuItem.Enabled = !isConnected;
 			menu.Items.Add(toolStripMenuItem);
-			toolStripMenuItem = new DelegateMenuItem("连接服务器为...", MenuNames.SessionConnectAs, server.DoConnectAs);
+			toolStripMenuItem = new DelegateMenuItem("连接为...", MenuNames.SessionConnectAs, server.DoConnectAs);
 			toolStripMenuItem.Enabled = !isConnected;
 			menu.Items.Add(toolStripMenuItem);
-			toolStripMenuItem = new DelegateMenuItem("重新连接服务器", MenuNames.SessionReconnect, server.Reconnect);
+			toolStripMenuItem = new DelegateMenuItem("重新连接", MenuNames.SessionReconnect, server.Reconnect);
 			toolStripMenuItem.Enabled = isConnected;
 			menu.Items.Add(toolStripMenuItem);
 			menu.Items.Add("-");
@@ -31,11 +31,11 @@ namespace RdcMan
 				AddRemoteActionsMenuItems(toolStripMenuItem, () => server);
 			}
 			menu.Items.Add("-");
-			toolStripMenuItem = new DelegateMenuItem("端口服务器连接", MenuNames.SessionDisconnect, server.Disconnect);
+			toolStripMenuItem = new DelegateMenuItem("断开连接", MenuNames.SessionDisconnect, server.Disconnect);
 			toolStripMenuItem.Enabled = isConnected;
 			menu.Items.Add(toolStripMenuItem);
 			menu.Items.Add("-");
-			toolStripMenuItem = new DelegateMenuItem("注销服务器", MenuNames.SessionLogOff, server.LogOff);
+			toolStripMenuItem = new DelegateMenuItem("注销登录", MenuNames.SessionLogOff, server.LogOff);
 			toolStripMenuItem.Enabled = (!Policies.DisableLogOff && isConnected);
 			menu.Items.Add(toolStripMenuItem);
 			menu.Items.Add(new DelegateMenuItem("会话列表", MenuNames.SessionListSessions, delegate
