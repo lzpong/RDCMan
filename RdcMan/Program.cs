@@ -64,6 +64,8 @@ namespace RdcMan {
 
 		[STAThread]
 		internal static void Main(params string[] args) {
+			//防止工作目录不是文件所在目录
+			Environment.CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
 			Application.EnableVisualStyles();
 			Policies.Read();
 			using (Helpers.Timer("解析命令行")) {
