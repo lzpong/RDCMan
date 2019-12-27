@@ -75,7 +75,7 @@ namespace RdcMan {
 				Current.Read();
 			}
 			catch (Exception ex) {
-				FormTools.ErrorDialog("读取RDCMan配置文件时出错：{0}程序可能不稳定和/或功能不完全。".InvariantFormat(ex.Message));
+				FormTools.ErrorDialog("读取RDCMan配置文件时出错：{0}程序可能不稳定或功能不完全。".InvariantFormat(ex.Message));
 			}
 			using (CompositionContainer compositionContainer = new CompositionContainer(new AssemblyCatalog(Assembly.GetCallingAssembly()))) {
 				_builtInVirtualGroups.AddRange(compositionContainer.GetExportedValues<IBuiltInVirtualGroup>());
