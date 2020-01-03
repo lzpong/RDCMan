@@ -229,7 +229,7 @@ namespace RdcMan
 				string text;
 				if (base.IsThumbnail)
 				{
-					text = "已断开";
+					text = "未连接";
 					if (!string.IsNullOrEmpty(_disconnectionReason))
 					{
 						text += " [error]";
@@ -237,7 +237,7 @@ namespace RdcMan
 				}
 				else
 				{
-					text = "已断开 " + GetQualifiedNameForUI();
+					text = "未连接 " + GetQualifiedNameForUI();
 					if (!string.IsNullOrEmpty(_disconnectionReason))
 					{
 						string text2 = text;
