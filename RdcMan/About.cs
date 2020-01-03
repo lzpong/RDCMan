@@ -9,45 +9,41 @@ namespace RdcMan
 	{
 		private void InitializeComponent(bool isLarge)
 		{
-			int num = isLarge ? 400 : 350;
+			int num = isLarge ? 410 : 360;
 			int num2 = num - 26;
 			System.Windows.Forms.Label label = new System.Windows.Forms.Label();
 			label.Location = new System.Drawing.Point(13, 13);
-			label.Size = new System.Drawing.Size(num2, 28);
-			label.Text = "{1}{0}{2}".InvariantFormat(System.Environment.NewLine, RdcMan.Program.TheForm.DescriptionText, "by Julian Burger" + System.Environment.NewLine + "บบปฏ by lzpong");
+			label.Size = new System.Drawing.Size(num2, 50);
+			label.Text = "{1}{0}{2}{3}{4}".InvariantFormat(System.Environment.NewLine, RdcMan.Program.TheForm.DescriptionText, "by Julian Burger", System.Environment.NewLine, "บบปฏ by lzpong");
 			System.Windows.Forms.Label value = label;
 			System.Windows.Forms.Panel panel = new System.Windows.Forms.Panel();
 			panel.AutoScroll = true;
-			panel.Location = new System.Drawing.Point(13, 55);
-			panel.Size = new System.Drawing.Size(num2, 110);
+			panel.Location = new System.Drawing.Point(13, 60);
+			panel.Size = new System.Drawing.Size(num2, 100);
 			System.Text.StringBuilder versionText = new System.Text.StringBuilder();
 			versionText.AppendLine("RDCMan v{0} build {1}".InvariantFormat(RdcMan.Program.TheForm.VersionText, RdcMan.Program.TheForm.BuildText)).AppendLine().AppendLine(System.Environment.OSVersion.ToString())
 				.AppendLine(".NET v{0}".InvariantFormat(System.Environment.Version))
 				.AppendLine("mstscax.dll v{0}".InvariantFormat(RdcMan.RdpClient.RdpControlVersion));
 			bool first = true;
-			RdcMan.Program.PluginAction(delegate(RdcMan.IPlugin p)
-			{
-				if (first)
-				{
+			RdcMan.Program.PluginAction(delegate(RdcMan.IPlugin p) {
+				if (first) {
 					versionText.AppendLine().AppendLine("Plugins:");
 					first = false;
 				}
 				versionText.AppendLine(p.GetType().FullName);
 			});
-			System.Windows.Forms.TextBox versionLabel = new System.Windows.Forms.TextBox
-			{
+			System.Windows.Forms.TextBox versionLabel = new System.Windows.Forms.TextBox {
 				ScrollBars = System.Windows.Forms.ScrollBars.Vertical,
 				BackColor = BackColor,
 				Enabled = true,
 				ForeColor = System.Drawing.SystemColors.WindowText,
-				Location = new System.Drawing.Point(13, 55),
+				Location = new System.Drawing.Point(13, 60),
 				Multiline = true,
 				ReadOnly = true,
-				Size = new System.Drawing.Size(num2, 110),
+				Size = new System.Drawing.Size(num2, 100),
 				Text = versionText.ToString()
 			};
-			versionLabel.VisibleChanged += delegate
-			{
+			versionLabel.VisibleChanged += delegate {
 				versionLabel.Select(0, 0);
 			};
 			System.Windows.Forms.Button button = new System.Windows.Forms.Button();
@@ -72,8 +68,7 @@ namespace RdcMan
 			this.ScaleAndLayout();
 		}
 
-		public About(bool isLarge)
-		{
+		public About(bool isLarge) {
 			InitializeComponent(isLarge);
 		}
 	}
