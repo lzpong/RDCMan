@@ -5,7 +5,7 @@ namespace RdcMan
 {
 	public class ConnectionSettings : SettingsGroup
 	{
-		internal const string TabName = "Connection Settings";
+		internal const string TabName = "连接设置";
 
 		private static Dictionary<string, SettingProperty> _settingProperties;
 
@@ -32,7 +32,7 @@ namespace RdcMan
 		}
 
 		public ConnectionSettings()
-			: base("Connection Settings", "connectionSettings")
+			: base("连接设置", "connectionSettings")
 		{
 		}
 

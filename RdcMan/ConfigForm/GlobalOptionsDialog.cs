@@ -345,7 +345,7 @@ namespace RdcMan
 		{
 			int rowIndex = 0;
 			int tabIndex = 0;
-			TabPage tabPage = NewTabPage("树");
+			TabPage tabPage = NewTabPage("群组树");
 			GroupBox groupBox = new GroupBox();
 			groupBox.Text = "服务器树";
 			GroupBox groupBox2 = groupBox;

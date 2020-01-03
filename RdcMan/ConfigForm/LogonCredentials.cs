@@ -10,7 +10,7 @@ namespace RdcMan
 	/// </summary>
 	public class LogonCredentials : SettingsGroup, ILogonCredentials
 	{
-		internal const string TabName = "Logon Credentials";
+		internal const string TabName = "µÇÂ¼Æ¾Ö¤";
 
 		public static readonly string GlobalStoreName;
 
@@ -49,7 +49,7 @@ namespace RdcMan
 		}
 
 		public LogonCredentials()
-			: this("Logon Credentials", "logonCredentials")
+			: this("µÇÂ¼Æ¾Ö¤", "logonCredentials")
 		{
 		}
 

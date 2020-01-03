@@ -74,7 +74,7 @@ namespace RdcMan
 		{
 			if ((options & LogonCredentialsDialogOptions.ShowProfiles) != 0)
 			{
-				ProfileComboBox = FormTools.AddLabeledValueDropDown<CredentialsProfile>(parent, "Profile", ref rowIndex, ref tabIndex, null, null);
+				ProfileComboBox = FormTools.AddLabeledValueDropDown<CredentialsProfile>(parent, "配置:", ref rowIndex, ref tabIndex, null, null);
 				ProfileComboBox.SelectedIndexChanged += OnProfileChanged;
 				ProfileComboBox.VisibleChanged += OnProfileVisible;
 				_saveProfileButton = new Button

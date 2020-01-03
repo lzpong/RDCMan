@@ -26,12 +26,12 @@ namespace RdcMan
 		}
 
 		public AddCredentialsDialog(RdcTreeNode node)
-			: base("Add Credentials", "Save")
+			: base("添加凭据", "保存")
 		{
 			_file = node.FileGroup;
 			int rowIndex = 0;
 			int tabIndex = 0;
-			_profileNameTextBox = FormTools.AddLabeledTextBox(this, "Profile &name:", ref rowIndex, ref tabIndex);
+			_profileNameTextBox = FormTools.AddLabeledTextBox(this, "配置文件名:", ref rowIndex, ref tabIndex);
 			_profileNameTextBox.Enabled = true;
 			RdcTextBox profileNameTextBox = _profileNameTextBox;
 			EventHandler value = delegate
@@ -52,11 +52,11 @@ namespace RdcMan
 			_profileNameTextBox.Text = _profileNameTextBox.Text.Trim();
 			if (string.IsNullOrEmpty(_profileNameTextBox.Text))
 			{
-				return "Please enter a profile name";
+				return "请输入配置文件名";
 			}
 			if (LogonCredentials.IsCustomProfile(ProfileName))
 			{
-				return "'{0}' is a reserved profile name".InvariantFormat("Custom");
+				return "'{0}' 是保留的配置文件名称".InvariantFormat("Custom");
 			}
 			CredentialsStore credentialsProfiles = Program.CredentialsProfiles;
 			string text = "Global";
@@ -70,7 +70,7 @@ namespace RdcMan
 				DialogResult dialogResult = FormTools.YesNoDialog(ProfileName + " already exists in " + text + Environment.NewLine + "Update?", MessageBoxDefaultButton.Button2);
 				if (dialogResult != DialogResult.Yes)
 				{
-					return "Profile exists";
+					return "配置文件存在";
 				}
 			}
 			return null;

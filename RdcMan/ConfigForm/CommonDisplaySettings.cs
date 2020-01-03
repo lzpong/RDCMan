@@ -2,7 +2,7 @@ namespace RdcMan
 {
 	public abstract class CommonDisplaySettings : SettingsGroup
 	{
-		public const string TabName = "Display Settings";
+		public const string TabName = "œ‘ æ…Ë÷√";
 
 		[Setting("thumbnailScale", DefaultValue = 1)]
 		public IntSetting ThumbnailScale { get; protected set; }
