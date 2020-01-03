@@ -178,48 +178,48 @@ namespace RdcMan
 
 		protected void CreateMainMenu()
 		{
-			_sessionConnectServerMenuItem = new DelegateMenuItem("&Connect server", MenuNames.SessionConnect, "Enter", delegate
+			_sessionConnectServerMenuItem = new DelegateMenuItem("连接", MenuNames.SessionConnect, "Enter", delegate
 			{
 				_server.Connect();
 			});
-			_sessionConnectServerAsMenuItem = new DelegateMenuItem("Connect server &as...", MenuNames.SessionConnectAs, "Shift+Enter", delegate
+			_sessionConnectServerAsMenuItem = new DelegateMenuItem("连接为...", MenuNames.SessionConnectAs, "Shift+Enter", delegate
 			{
 				_server.DoConnectAs();
 			});
-			_sessionReconnectServerMenuItem = new DelegateMenuItem("R&econnect server", MenuNames.SessionReconnect, delegate
+			_sessionReconnectServerMenuItem = new DelegateMenuItem("重连接", MenuNames.SessionReconnect, delegate
 			{
 				_server.Reconnect();
 			});
-			_sessionDisconnectServerMenuItem = new DelegateMenuItem("&Disconnect server", MenuNames.SessionDisconnect, delegate
+			_sessionDisconnectServerMenuItem = new DelegateMenuItem("断开连接", MenuNames.SessionDisconnect, delegate
 			{
 				_server.Disconnect();
 			});
-			_sessionFullScreenMenuItem = new DelegateMenuItem("&Full screen", MenuNames.SessionFullScreen, delegate
+			_sessionFullScreenMenuItem = new DelegateMenuItem("全屏", MenuNames.SessionFullScreen, delegate
 			{
 				_server.Client.MsRdpClient.FullScreen = true;
 			});
-			DelegateMenuItem value = new DelegateMenuItem("Doc&k", MenuNames.SessionDock, delegate
+			DelegateMenuItem value = new DelegateMenuItem("停靠", MenuNames.SessionDock, delegate
 			{
 				Close();
 			});
-			_sessionScreenCaptureMenuItem = new DelegateMenuItem("Screen capture", MenuNames.SessionScreenCapture, delegate
+			_sessionScreenCaptureMenuItem = new DelegateMenuItem("屏幕截图", MenuNames.SessionScreenCapture, delegate
 			{
 				_server.ScreenCapture();
 			});
-			DelegateMenuItem value2 = new DelegateMenuItem("P&roperties", MenuNames.EditProperties, "Alt+Enter", delegate
+			DelegateMenuItem value2 = new DelegateMenuItem("属性", MenuNames.EditProperties, "Alt+Enter", delegate
 			{
 				_server.DoPropertiesDialog();
 			});
-			ToolStripMenuItem toolStripMenuItem = _menuStrip.Add("&Session", MenuNames.Session);
+			ToolStripMenuItem toolStripMenuItem = _menuStrip.Add("会话", MenuNames.Session);
 			toolStripMenuItem.DropDownItems.Add(_sessionConnectServerMenuItem);
 			toolStripMenuItem.DropDownItems.Add(_sessionConnectServerAsMenuItem);
 			toolStripMenuItem.DropDownItems.Add(_sessionReconnectServerMenuItem);
 			toolStripMenuItem.DropDownItems.Add("-");
-			_sessionSendKeysMenuItem = toolStripMenuItem.DropDownItems.Add("Send keys", MenuNames.SessionSendKeys);
+			_sessionSendKeysMenuItem = toolStripMenuItem.DropDownItems.Add("发送按键", MenuNames.SessionSendKeys);
 			MenuHelper.AddSendKeysMenuItems(_sessionSendKeysMenuItem, () => _server);
 			if (RdpClient.SupportsRemoteSessionActions)
 			{
-				_sessionRemoteActionsMenuItem = toolStripMenuItem.DropDownItems.Add("Remote actions", MenuNames.SessionRemoteActions);
+				_sessionRemoteActionsMenuItem = toolStripMenuItem.DropDownItems.Add("远程动作", MenuNames.SessionRemoteActions);
 				MenuHelper.AddRemoteActionsMenuItems(_sessionRemoteActionsMenuItem, () => _server);
 			}
 			toolStripMenuItem.DropDownItems.Add("-");
@@ -231,16 +231,16 @@ namespace RdcMan
 			toolStripMenuItem.DropDownItems.Add(_sessionScreenCaptureMenuItem);
 			toolStripMenuItem.DropDownItems.Add("-");
 			toolStripMenuItem.DropDownItems.Add(value2);
-			ToolStripMenuItem toolStripMenuItem2 = _menuStrip.Add("&View", MenuNames.View);
-			ToolStripMenuItem toolStripMenuItem3 = toolStripMenuItem2.DropDownItems.Add("&Client size", MenuNames.ViewClientSize);
+			ToolStripMenuItem toolStripMenuItem2 = _menuStrip.Add("视图", MenuNames.View);
+			ToolStripMenuItem toolStripMenuItem3 = toolStripMenuItem2.DropDownItems.Add("桌面大小", MenuNames.ViewClientSize);
 			Size[] stockSizes = SizeHelper.StockSizes;
 			foreach (Size size in stockSizes)
 			{
 				ClientSizeCheckedMenuItem value3 = new ClientSizeCheckedMenuItem(this, size);
 				toolStripMenuItem3.DropDownItems.Add(value3);
 			}
-			toolStripMenuItem3.DropDownItems.Add(new CustomClientSizeCheckedMenuItem(this, "&Custom"));
-			toolStripMenuItem3.DropDownItems.Add(new ToolStripMenuItem("From remote desktop size", null, delegate
+			toolStripMenuItem3.DropDownItems.Add(new CustomClientSizeCheckedMenuItem(this, "自定义"));
+			toolStripMenuItem3.DropDownItems.Add(new ToolStripMenuItem("适应远程桌面大小", null, delegate
 			{
 				SetClientSize(_server.IsConnected ? _server.Client.DesktopSize : _server.RemoteDesktopSettings.DesktopSize.Value);
 			}));

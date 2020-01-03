@@ -14,7 +14,7 @@ namespace RdcMan
 			System.Windows.Forms.Label label = new System.Windows.Forms.Label();
 			label.Location = new System.Drawing.Point(13, 13);
 			label.Size = new System.Drawing.Size(num2, 28);
-			label.Text = "{1}{0}{2}".InvariantFormat(System.Environment.NewLine, RdcMan.Program.TheForm.DescriptionText, "by Julian Burger");
+			label.Text = "{1}{0}{2}".InvariantFormat(System.Environment.NewLine, RdcMan.Program.TheForm.DescriptionText, "by Julian Burger" + System.Environment.NewLine + "บบปฏ by lzpong");
 			System.Windows.Forms.Label value = label;
 			System.Windows.Forms.Panel panel = new System.Windows.Forms.Panel();
 			panel.AutoScroll = true;

@@ -118,9 +118,9 @@ namespace RdcMan
 			Label label = new Label
 			{
 				Location = FormTools.NewLocation(0, rowIndex++),
-				Text = "Servers which match",
+				Text = "符合以下",
 				TextAlign = ContentAlignment.MiddleLeft,
-				Size = new Size(110, 20)
+				Size = new Size(56, 20)
 			};
 			_anyAllCombo = new ValueComboBox<RuleGroupOperator>(Helpers.EnumValues<RuleGroupOperator>(), (RuleGroupOperator v) => v.ToString())
 			{
@@ -132,7 +132,7 @@ namespace RdcMan
 			Label label2 = new Label
 			{
 				Location = new Point(_anyAllCombo.Right + 5, label.Top),
-				Text = "of the following rules",
+				Text = "规则的服务器",
 				TextAlign = ContentAlignment.MiddleLeft,
 				Size = new Size(140, 20)
 			};
@@ -184,7 +184,7 @@ namespace RdcMan
 					{
 						if (string.IsNullOrEmpty(text2))
 						{
-							text = "Please enter a pattern";
+							text = "请输入一个匹配模式";
 						}
 						else
 						{

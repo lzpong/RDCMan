@@ -71,7 +71,7 @@ namespace RdcMan
 
 		protected void AddParentCombo(ref int rowIndex, ref int tabIndex)
 		{
-			_parentComboBox = FormTools.AddLabeledValueDropDown<GroupBase>(this, "&Parent:", ref rowIndex, ref tabIndex, null, null);
+			_parentComboBox = FormTools.AddLabeledValueDropDown<GroupBase>(this, "¸¸×é:", ref rowIndex, ref tabIndex, null, null);
 			_parentComboBox.SelectedIndexChanged += ParentGroupChangedHandler;
 		}
 

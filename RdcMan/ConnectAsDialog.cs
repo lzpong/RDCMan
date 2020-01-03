@@ -23,7 +23,7 @@ namespace RdcMan
 
 		public static ConnectAsDialog NewConnectAsDialog(RdcTreeNode node, Form parentForm)
 		{
-			ConnectAsDialog connectAsDialog = new ConnectAsDialog("Connect " + node.Text + " As", "Connect", parentForm);
+			ConnectAsDialog connectAsDialog = new ConnectAsDialog("连接 " + node.Text + " 为", "连接", parentForm);
 			connectAsDialog.LogonCredentials = new LogonCredentials();
 			connectAsDialog.ConnectionSettings = new ConnectionSettings();
 			if (node.LogonCredentials != null)

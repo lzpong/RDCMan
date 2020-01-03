@@ -216,9 +216,9 @@ namespace RdcMan
 			{
 				if (base.IsThumbnail)
 				{
-					return "Connecting";
+					return "连接中...";
 				}
-				return "Connecting to " + GetQualifiedNameForUI();
+				return "连接到 " + GetQualifiedNameForUI();
 			}
 		}
 
@@ -229,7 +229,7 @@ namespace RdcMan
 				string text;
 				if (base.IsThumbnail)
 				{
-					text = "Disconnected";
+					text = "已断开";
 					if (!string.IsNullOrEmpty(_disconnectionReason))
 					{
 						text += " [error]";
@@ -237,7 +237,7 @@ namespace RdcMan
 				}
 				else
 				{
-					text = "Disconnected from " + GetQualifiedNameForUI();
+					text = "已断开 " + GetQualifiedNameForUI();
 					if (!string.IsNullOrEmpty(_disconnectionReason))
 					{
 						string text2 = text;
@@ -336,61 +336,61 @@ namespace RdcMan
 				new DisconnectionReason(1, ""),
 				new DisconnectionReason(2, ""),
 				new DisconnectionReason(3, ""),
-				new DisconnectionReason(260, "DNS name lookup failure"),
-				new DisconnectionReason(263, "Authentication failure"),
-				new DisconnectionReason(264, "Connection timed out"),
-				new DisconnectionReason(516, "Unable to establish a connection"),
-				new DisconnectionReason(522, "Smart card reader not detected"),
-				new DisconnectionReason(1289, "Server does not support authentication"),
-				new DisconnectionReason(1800, "You already have a console session in progress"),
-				new DisconnectionReason(2052, "Bad IP address specified"),
-				new DisconnectionReason(2055, "Login failed"),
-				new DisconnectionReason(2056, "Server has no sessions available"),
-				new DisconnectionReason(2308, "Socket closed"),
-				new DisconnectionReason(2567, "The specified user has no account"),
-				new DisconnectionReason(2824, "Session connected by other client"),
-				new DisconnectionReason(2825, "Server authentication failure"),
-				new DisconnectionReason(3847, "The password is expired"),
-				new DisconnectionReason(4615, "The user password must be changed before logging on for the first time"),
-				new DisconnectionReason(7175, "An incorrect PIN was presented to the smart card"),
-				new DisconnectionReason(7943, "No credentials entered"),
-				new DisconnectionReason(8711, "The smart card is blocked"),
-				new DisconnectionReason(50331655, "Gateway authentication failure"),
-				new DisconnectionReason(50331656, "Server not found"),
-				new DisconnectionReason(50331660, "Unable to connect to gateway"),
-				new DisconnectionReason(50331669, "Smartcard authentication failure"),
-				new DisconnectionReason(50331670, "Server not found"),
-				new DisconnectionReason(50331676, "Your user or computer account is not authorized to access the gateway server"),
-				new DisconnectionReason(50331677, "No gateway credentials entered"),
+				new DisconnectionReason(260, "DNS名称查找失败"),
+				new DisconnectionReason(263, "验证失败"),
+				new DisconnectionReason(264, "连接超时"),
+				new DisconnectionReason(516, "无法建立连接"),
+				new DisconnectionReason(522, "未检测到智能卡读卡器"),
+				new DisconnectionReason(1289, "服务器不支持身份验证"),
+				new DisconnectionReason(1800, "您已经在进行控制台会话"),
+				new DisconnectionReason(2052, "指定的IP地址错误"),
+				new DisconnectionReason(2055, "登录失败"),
+				new DisconnectionReason(2056, "服务器没有可用的会话"),
+				new DisconnectionReason(2308, "套接字已关闭"),
+				new DisconnectionReason(2567, "没有指定的用户账号"),
+				new DisconnectionReason(2824, "会话被其他客户端连接"),
+				new DisconnectionReason(2825, "服务器身份验证失败"),
+				new DisconnectionReason(3847, "密码已过期"),
+				new DisconnectionReason(4615, "首次登录前必须更改用户密码"),
+				new DisconnectionReason(7175, "向智能卡提供了错误的PIN"),
+				new DisconnectionReason(7943, "没有提供证书"),
+				new DisconnectionReason(8711, "智能卡被阻止"),
+				new DisconnectionReason(50331655, "网关身份验证失败"),
+				new DisconnectionReason(50331656, "找不到服务器"),
+				new DisconnectionReason(50331660, "无法连接到网关"),
+				new DisconnectionReason(50331669, "智能卡身份验证失败"),
+				new DisconnectionReason(50331670, "找不到服务器"),
+				new DisconnectionReason(50331676, "您的用户或计算机帐户无权访问网关服务器"),
+				new DisconnectionReason(50331677, "没有提供网关凭证"),
 				new DisconnectionReason(50331678, ""),
-				new DisconnectionReason(50331686, "No smartcard PIN entered")
+				new DisconnectionReason(50331686, "未输入智能卡PIN码")
 			};
 			ExtendedDisconnectionReasons = new DisconnectionReason[26]
 			{
-				new DisconnectionReason(0, "No additional information is available"),
+				new DisconnectionReason(0, "没有其他可用信息"),
 				new DisconnectionReason(1, ""),
 				new DisconnectionReason(2, ""),
-				new DisconnectionReason(3, "The server has disconnected the client because the client has been idle for a period of time longer than the designated time-out period"),
-				new DisconnectionReason(4, "The server has disconnected the client because the client has exceeded the period designated for connection"),
-				new DisconnectionReason(5, "The client's connection was replaced by another connection"),
-				new DisconnectionReason(6, "No memory is available"),
-				new DisconnectionReason(7, "The server denied the connection"),
-				new DisconnectionReason(8, "The server denied the connection for security reasons"),
-				new DisconnectionReason(9, "The user account is not authorized for remote login"),
-				new DisconnectionReason(10, "The user account credentials must be reentered"),
-				new DisconnectionReason(11, "The client was remotely disconnected"),
-				new DisconnectionReason(12, "The connection was lost"),
-				new DisconnectionReason(256, "Internal licensing error"),
-				new DisconnectionReason(257, "No license server was available"),
-				new DisconnectionReason(258, "No valid software license was available"),
-				new DisconnectionReason(259, "The remote computer received a licensing message that was not valid"),
-				new DisconnectionReason(260, "The hardware ID does not match the one designated on the software license"),
-				new DisconnectionReason(261, "Client license error"),
-				new DisconnectionReason(262, "Network problems occurred during the licensing protocol"),
-				new DisconnectionReason(263, "The client ended the licensing protocol prematurely"),
-				new DisconnectionReason(264, "A licensing message was encrypted incorrectly"),
-				new DisconnectionReason(265, "The local computer's client access license could not be upgraded or renewed"),
-				new DisconnectionReason(266, "The remote computer is not licensed to accept remote connections"),
+				new DisconnectionReason(3, "服务器已断开与客户端的连接，因为客户端空闲时间超过了指定的超时时间"),
+				new DisconnectionReason(4, "服务器已断开客户端连接，因为客户端已超过指定的连接期限"),
+				new DisconnectionReason(5, "客户端的连接已替换为另一个连接"),
+				new DisconnectionReason(6, "内存不足"),
+				new DisconnectionReason(7, "服务器拒绝连接"),
+				new DisconnectionReason(8, "服务器出于安全原因拒绝连接"),
+				new DisconnectionReason(9, "用户帐户无权进行远程登录"),
+				new DisconnectionReason(10, "必须重新提供用户帐户证书"),
+				new DisconnectionReason(11, "客户端已远程断开连接"),
+				new DisconnectionReason(12, "连接丢失"),
+				new DisconnectionReason(256, "内部许可错误"),
+				new DisconnectionReason(257, "没有可用的许可服务器"),
+				new DisconnectionReason(258, "没有有效的软件许可证"),
+				new DisconnectionReason(259, "远程计算机收到无效的许可消息"),
+				new DisconnectionReason(260, "硬件ID与软件许可证上指定的ID不匹配"),
+				new DisconnectionReason(261, "客户端许可证错误"),
+				new DisconnectionReason(262, "许可协议期间发生网络问题"),
+				new DisconnectionReason(263, "客户端过早终止了许可协议"),
+				new DisconnectionReason(264, "授权消息未正确加密"),
+				new DisconnectionReason(265, "本地计算机的客户端访问许可证无法升级或更新"),
+				new DisconnectionReason(266, "远程计算机未获得许可以接受远程连接"),
 				new DisconnectionReason(267, ""),
 				new DisconnectionReason(768, "")
 			};
@@ -520,7 +520,7 @@ namespace RdcMan
 			}
 			catch (Exception ex)
 			{
-				FormTools.ErrorDialog("Error capturing session screen: " + ex.Message);
+				FormTools.ErrorDialog("捕获会话屏幕时出错: " + ex.Message);
 			}
 			finally
 			{
@@ -876,8 +876,8 @@ namespace RdcMan
 					catch (Exception ex)
 					{
 						ConnectionState = RdpClient.ConnectionState.Disconnected;
-						_disconnectionReason = "Error setting up connection properties";
-						FormTools.ErrorDialog("Error possibly involving '" + str + "':\n" + ex.Message);
+						_disconnectionReason = "设置连接属性时出错";
+						FormTools.ErrorDialog("错误可能涉及 '" + str + "':\n" + ex.Message);
 						Log.Write("Error({1}) connecting to {0}", base.DisplayName, ex.Message);
 					}
 				}
@@ -979,7 +979,7 @@ namespace RdcMan
 				if (!remoteSessions.OpenServer())
 				{
 					success = false;
-					reason = "Unable to access remote sessions";
+					reason = "无法访问远程会话";
 				}
 				else
 				{
@@ -987,7 +987,7 @@ namespace RdcMan
 					if (list == null)
 					{
 						success = false;
-						reason = "Unable to enumerate remote sessions";
+						reason = "无法枚举远程会话";
 					}
 					else
 					{
@@ -999,7 +999,7 @@ namespace RdcMan
 								if (num != -1)
 								{
 									success = false;
-									reason = "Multiple active sessions, couldn't determine which to log off";
+									reason = "多个活动会话，无法确定要注销的会话";
 									return;
 								}
 								num = item.SessionId;
@@ -1008,7 +1008,7 @@ namespace RdcMan
 						if (success)
 						{
 							success = remoteSessions.LogOffSession(num);
-							reason = "Log off session API failed";
+							reason = "注销会话API失败";
 						}
 					}
 				}
@@ -1016,7 +1016,7 @@ namespace RdcMan
 			catch
 			{
 				success = false;
-				reason = "Internal error";
+				reason = "内部错误";
 			}
 			finally
 			{
@@ -1033,7 +1033,7 @@ namespace RdcMan
 			Log.Write("End logoff from {0}", base.DisplayName);
 			if (!success)
 			{
-				FormTools.ErrorDialog("Unable to log off from " + base.DisplayName + "\r\nReason: " + text);
+				FormTools.ErrorDialog("无法从 " + base.DisplayName + " 中注销\r\n原因: " + text);
 			}
 		}
 
@@ -1073,7 +1073,7 @@ namespace RdcMan
 					disconnectionReason = ExtendedDisconnectionReasons.SingleOrDefault((DisconnectionReason r) => r.Code == (int)_client.MsRdpClient.ExtendedDisconnectReason);
 					if (disconnectionReason == null)
 					{
-						_disconnectionReason = $"Unknown extended disconnection reason {_client.MsRdpClient.ExtendedDisconnectReason}";
+						_disconnectionReason = $"未知的延长断开连接原因 {_client.MsRdpClient.ExtendedDisconnectReason}";
 					}
 				}
 				else if (e != null)
@@ -1081,7 +1081,7 @@ namespace RdcMan
 					disconnectionReason = DisconnectionReasons.SingleOrDefault((DisconnectionReason r) => r.Code == e.discReason);
 					if (disconnectionReason == null)
 					{
-						_disconnectionReason = $"Unknown disconnection reason {e.discReason}";
+						_disconnectionReason = $"未知的断开连接原因 {e.discReason}";
 					}
 				}
 				if (disconnectionReason != null)
@@ -1312,7 +1312,7 @@ namespace RdcMan
 		{
 			if (IsConnected)
 			{
-				FormTools.InformationDialog("There is an active session on " + base.Text + ". Disconnect it before removing the server.");
+				FormTools.InformationDialog(base.Text + " 上有一个活动的会话。 删除服务器之前先断开连接。");
 				return false;
 			}
 			return base.ConfirmRemove(askUser);

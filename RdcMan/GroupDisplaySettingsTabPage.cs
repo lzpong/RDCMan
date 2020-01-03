@@ -13,8 +13,8 @@ namespace RdcMan
 			: base(dialog, settings)
 		{
 			Create(out int rowIndex, out int tabIndex);
-			_previewCheckBox = FormTools.AddCheckBox(this, "&Preview session in thumbnail", settings.SessionThumbnailPreview, 0, ref rowIndex, ref tabIndex);
-			_interactionCheckBox = FormTools.AddCheckBox(this, "&Allow thumbnail session interaction", settings.AllowThumbnailSessionInteraction, 0, ref rowIndex, ref tabIndex);
+			_previewCheckBox = FormTools.AddCheckBox(this, "以缩略图预览会话", settings.SessionThumbnailPreview, 0, ref rowIndex, ref tabIndex);
+			_interactionCheckBox = FormTools.AddCheckBox(this, "允许缩略图会话交互", settings.AllowThumbnailSessionInteraction, 0, ref rowIndex, ref tabIndex);
 			_interactionCheckBox.Location = new Point(_previewCheckBox.Left + 24, _interactionCheckBox.Top);
 			RdcCheckBox previewCheckBox = _previewCheckBox;
 			EventHandler value = delegate
@@ -29,7 +29,7 @@ namespace RdcMan
 					PreviewCheckBoxChanged();
 				};
 			}
-			FormTools.AddCheckBox(this, "Show &disconnected thumbnails", settings.ShowDisconnectedThumbnails, 0, ref rowIndex, ref tabIndex);
+			FormTools.AddCheckBox(this, "显示断开的缩略图", settings.ShowDisconnectedThumbnails, 0, ref rowIndex, ref tabIndex);
 		}
 
 		private void PreviewCheckBoxChanged()
