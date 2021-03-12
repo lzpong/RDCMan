@@ -1,10 +1,9 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace RdcMan
-{
+namespace RdcMan {
 	internal class ServerPropertiesTabPage : NodePropertiesPage<ServerSettings>
 	{
 		private RdcTextBox _serverNameTextBox;
@@ -26,11 +25,15 @@ namespace RdcMan
 		}
 
 		public ServerPropertiesTabPage(TabbedSettingsDialog dialog, ServerSettings settings)
-			: base(dialog, settings, "Server Settings")
+			: base(dialog, settings, "服务器信息")
 		{
 			int tabIndex = 0;
 			int rowIndex = 0;
-			_serverNameTextBox = FormTools.AddLabeledTextBox(this, "&Server name:", base.Settings.ServerName, ref rowIndex, ref tabIndex);
+			_displayNameTextBox = FormTools.AddLabeledTextBox(this, "显示名称:", base.Settings.DisplayName, ref rowIndex, ref tabIndex);
+			_displayNameTextBox.Enabled = true;
+			_displayNameTextBox.TextChanged += DisplayNameChanged;
+			_displayNameTextBox.Validate = ValidateDisplayName;
+			_serverNameTextBox = FormTools.AddLabeledTextBox(this, "服务器地址:", base.Settings.ServerName, ref rowIndex, ref tabIndex);
 			_serverNameTextBox.Enabled = true;
 			_serverNameTextBox.TextChanged += ServerNameChanged;
 			_serverNameTextBox.Validate = ValidateServerName;
@@ -52,15 +55,11 @@ namespace RdcMan
 				TabIndex = tabIndex++,
 				Visible = false
 			};
-			_displayNameTextBox = FormTools.AddLabeledTextBox(this, "&Display name:", base.Settings.DisplayName, ref rowIndex, ref tabIndex);
-			_displayNameTextBox.Enabled = true;
-			_displayNameTextBox.TextChanged += DisplayNameChanged;
-			_displayNameTextBox.Validate = ValidateDisplayName;
 			_displayNameUserCreated = !base.Settings.ServerName.Value.Equals(base.Settings.DisplayName.Value);
 			AddParentCombo(ref rowIndex, ref tabIndex);
 			AddComment(ref rowIndex, ref tabIndex).Setting = base.Settings.Comment;
 			base.Controls.Add(_vmConsoleConnectCheckBox, _vmIdLabel, _vmIdTextBox);
-			base.FocusControl = _serverNameTextBox;
+			base.FocusControl = _displayNameTextBox;//_serverNameTextBox
 		}
 
 		protected override bool CanBeParent(GroupBase group)
@@ -152,7 +151,7 @@ namespace RdcMan
 				"Local Resources",
 				"Remote Desktop Settings",
 				"Security Settings",
-				"Connection Settings"
+				"连接设置" //"Connection Settings"
 			};
 			EnableTabsEventArgs args = enableTabsEventArgs;
 			NodePropertiesDialog nodePropertiesDialog = FindForm() as NodePropertiesDialog;

@@ -1,7 +1,6 @@
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
-namespace RdcMan
-{
+namespace RdcMan {
 	internal class ServerPropertiesDialog : NodePropertiesDialog
 	{
 		private ServerPropertiesDialog(Server server, string dialogTitle, string acceptButtonText, Form parentForm)
@@ -26,7 +25,7 @@ namespace RdcMan
 		public static ServerPropertiesDialog NewAddDialog(GroupBase parent)
 		{
 			Server server = Server.CreateForAddDialog();
-			ServerPropertiesDialog serverPropertiesDialog = new ServerPropertiesDialog(server, "Add Server", "Add", null);
+			ServerPropertiesDialog serverPropertiesDialog = new ServerPropertiesDialog(server, "添加服务器", "添加", null);//(server, "Add Server", "Add", null)
 			serverPropertiesDialog.CreateServerPropertiesPage(server);
 			serverPropertiesDialog.CreateControls(server);
 			if (!serverPropertiesDialog.PropertiesPage.PopulateParentDropDown(null, parent))
@@ -40,7 +39,7 @@ namespace RdcMan
 		public static ServerPropertiesDialog NewImportDialog(GroupBase parent)
 		{
 			Server server = Server.CreateForAddDialog();
-			ServerPropertiesDialog serverPropertiesDialog = new ServerPropertiesDialog(server, "Import Servers", "Import", null);
+			ServerPropertiesDialog serverPropertiesDialog = new ServerPropertiesDialog(server, "导入服务器配置", "导入", null);//(server, "Import Servers", "Import", null)
 			serverPropertiesDialog.CreateImportServersPage(server);
 			serverPropertiesDialog.CreateControls(server);
 			if (!serverPropertiesDialog.PropertiesPage.PopulateParentDropDown(null, parent))
@@ -53,7 +52,7 @@ namespace RdcMan
 
 		public static ServerPropertiesDialog NewPropertiesDialog(Server server, Form parentForm)
 		{
-			ServerPropertiesDialog serverPropertiesDialog = new ServerPropertiesDialog(server, server.DisplayName + " Server Properties", "OK", parentForm);
+			ServerPropertiesDialog serverPropertiesDialog = new ServerPropertiesDialog(server, server.DisplayName + " 配置", "OK", parentForm);
 			serverPropertiesDialog.CreateServerPropertiesPage(server);
 			serverPropertiesDialog.CreateControls(server);
 			if (server.FileGroup == null)

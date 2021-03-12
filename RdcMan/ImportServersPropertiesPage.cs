@@ -1,12 +1,11 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace RdcMan
-{
+namespace RdcMan {
 	internal class ImportServersPropertiesPage : NodePropertiesPage<SettingsGroup>
 	{
 		private RdcTextBox _fileNameTextBox;
@@ -20,7 +19,7 @@ namespace RdcMan
 		}
 
 		public ImportServersPropertiesPage(TabbedSettingsDialog dialog)
-			: base(dialog, (SettingsGroup)null, "Server Settings")
+			: base(dialog, (SettingsGroup)null, "æœåŠ¡å™¨ä¿¡æ¯")
 		{
 			int tabIndex = 0;
 			int num = 0;
@@ -28,14 +27,14 @@ namespace RdcMan
 			{
 				Location = FormTools.NewLocation(0, num),
 				Size = new Size(480, 48),
-				Text = "Ñ¡Ôñ°üº¬·şÎñÆ÷ĞÅÏ¢µÄÎÄ¼ş£¬»òÔÚÏÂÃæµÄÎÄ±¾¿òÖĞÊäÈëĞÅÏ¢¡£ ·şÎñÆ÷Ãû³ÆÓÉ¶ººÅºÍ»»ĞĞ·û·Ö¸ô¡£ ÔÊĞíÀ©Õ¹¡£"
+				Text = "é€‰æ‹©åŒ…å«æœåŠ¡å™¨ä¿¡æ¯çš„æ–‡ä»¶ï¼Œæˆ–åœ¨ä¸‹é¢çš„æ–‡æœ¬æ¡†ä¸­è¾“å…¥ä¿¡æ¯ã€‚ æœåŠ¡å™¨åç§°ç”±é€—å·å’Œæ¢è¡Œç¬¦åˆ†éš”ã€‚ å…è®¸æ‰©å±•ã€‚"
 			};
 			num += 2;
 			base.Controls.Add(value);
 			Button browseButton = new Button
 			{
 				TabIndex = tabIndex++,
-				Text = "&Bä¯ÀÀ"
+				Text = "æµè§ˆ"
 			};
 			browseButton.Click += OnBrowseClick;
 			_fileNameTextBox = FormTools.AddLabeledTextBox(this, "&File name:", ref num, ref tabIndex);
@@ -85,7 +84,7 @@ namespace RdcMan
 			}
 			if (string.IsNullOrWhiteSpace(text))
 			{
-				base.Dialog.SetError(_fileNameTextBox, "ÇëÊäÈëÎÄ¼şÃû");
+				base.Dialog.SetError(_fileNameTextBox, "è¯·è¾“å…¥æ–‡ä»¶å");
 				return false;
 			}
 			try
@@ -115,7 +114,7 @@ namespace RdcMan
 		{
 			using (OpenFileDialog openFileDialog = new OpenFileDialog())
 			{
-				openFileDialog.Title = "µ¼Èë";
+				openFileDialog.Title = "å¯¼å…¥";
 				openFileDialog.DefaultExt = "txt";
 				openFileDialog.AddExtension = true;
 				openFileDialog.CheckFileExists = true;

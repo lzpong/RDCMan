@@ -1,8 +1,7 @@
-using System;
+ï»¿using System;
 using System.Windows.Forms;
 
-namespace RdcMan
-{
+namespace RdcMan {
 	public abstract class NodePropertiesPage<TSettingsGroup> : SettingsTabPage<TSettingsGroup>, INodePropertiesPage where TSettingsGroup : SettingsGroup
 	{
 		protected ValueComboBox<GroupBase> _parentComboBox;
@@ -71,15 +70,18 @@ namespace RdcMan
 
 		protected void AddParentCombo(ref int rowIndex, ref int tabIndex)
 		{
-			_parentComboBox = FormTools.AddLabeledValueDropDown<GroupBase>(this, "¸¸×é:", ref rowIndex, ref tabIndex, null, null);
+			_parentComboBox = FormTools.AddLabeledValueDropDown<GroupBase>(this, "çˆ¶ç»„:", ref rowIndex, ref tabIndex, null, null);
 			_parentComboBox.SelectedIndexChanged += ParentGroupChangedHandler;
 		}
 
 		protected RdcTextBox AddComment(ref int rowIndex, ref int tabIndex)
 		{
-			Label label = FormTools.NewLabel("&Comment:", 0, rowIndex);
-			RdcTextBox rdcTextBox = FormTools.NewTextBox(1, rowIndex++, tabIndex++, 7);
+			Label label = FormTools.NewLabel("å¤‡æ³¨:", 0, rowIndex);//("&Comment:", 0, rowIndex)
+			label.Size = new System.Drawing.Size(label.Size.Width - 100, label.Size.Height);
+			RdcTextBox rdcTextBox = FormTools.NewTextBox(1, rowIndex++, tabIndex++, 10);
 			rdcTextBox.Enabled = true;
+			rdcTextBox.Location = new System.Drawing.Point(rdcTextBox.Location.X - 100, rdcTextBox.Location.Y);
+			rdcTextBox.Size = new System.Drawing.Size(rdcTextBox.Size.Width + 100, rdcTextBox.Size.Height - 8);
 			base.Controls.Add(label, rdcTextBox);
 			return rdcTextBox;
 		}
