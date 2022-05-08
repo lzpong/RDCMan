@@ -1,7 +1,5 @@
-namespace Win32
-{
-	public enum WinVerifyTrustResult : uint
-	{
+namespace Win32 {
+	public enum WinVerifyTrustResult : uint {
 		Success = 0u,
 		ProviderUnknown = 2148204545u,
 		ActionUnknown = 2148204546u,

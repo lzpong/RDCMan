@@ -1,33 +1,18 @@
 using System.Runtime.InteropServices;
 
-namespace Win32
-{
-	public class Kernel
-	{
-		public static uint MajorVersion
-		{
-			get;
-			private set;
-		}
+namespace Win32 {
+	public class Kernel {
+		public static uint MajorVersion { get; private set; }
 
-		public static uint MinorVersion
-		{
-			get;
-			private set;
-		}
+		public static uint MinorVersion { get; private set; }
 
-		public static uint Build
-		{
-			get;
-			private set;
-		}
+		public static uint Build { get; private set; }
 
-		static Kernel()
-		{
+		static Kernel() {
 			uint version = GetVersion();
-			MajorVersion = (version & 0xFF);
+			MajorVersion = version & 0xFFu;
 			MinorVersion = (version & 0xFF00) >> 8;
-			Build = (uint)((int)version & -65536) >> 16;
+			Build = (version & 0xFFFF0000u) >> 16;
 		}
 
 		[DllImport("kernel32.dll")]

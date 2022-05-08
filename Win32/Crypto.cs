@@ -1,19 +1,15 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Win32
-{
-	public class Crypto
-	{
-		public struct DataBlob
-		{
+namespace Win32 {
+	public class Crypto {
+		public struct DataBlob {
 			public int Size;
 
 			public IntPtr Data;
 		}
 
-		public struct CryptProtectPromptStruct
-		{
+		public struct CryptProtectPromptStruct {
 			public int Size;
 
 			public int Flags;

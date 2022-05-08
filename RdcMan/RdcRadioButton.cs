@@ -1,33 +1,20 @@
 using System.Windows.Forms;
 
-namespace RdcMan
-{
-	public class RdcRadioButton : RadioButton, ISettingControl
-	{
-		public BoolSetting Setting
-		{
-			get;
-			set;
-		}
+namespace RdcMan {
+	public class RdcRadioButton : RadioButton, ISettingControl {
+		public BoolSetting Setting { get; set; }
 
-		void ISettingControl.UpdateControl()
-		{
+		void ISettingControl.UpdateControl() {
 			if (Setting != null)
-			{
 				base.Checked = Setting.Value;
-			}
 		}
 
-		void ISettingControl.UpdateSetting()
-		{
+		void ISettingControl.UpdateSetting() {
 			if (Setting != null)
-			{
 				Setting.Value = base.Checked;
-			}
 		}
 
-		string ISettingControl.Validate()
-		{
+		string ISettingControl.Validate() {
 			return null;
 		}
 	}

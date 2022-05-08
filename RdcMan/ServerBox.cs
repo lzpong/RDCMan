@@ -2,14 +2,11 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace RdcMan
-{
-	public class ServerBox : Label
-	{
+namespace RdcMan {
+	public class ServerBox : Label {
 		private Server _server;
 
-		public ServerBox(Server server)
-		{
+		public ServerBox(Server server) {
 			_server = server;
 			BackColor = Color.White;
 			BorderStyle = BorderStyle.FixedSingle;
@@ -17,13 +14,11 @@ namespace RdcMan
 			Hide();
 		}
 
-		public void SetText()
-		{
+		public void SetText() {
 			string text = _server.GetConnectionStateText();
 			if (_server.IsClientUndocked)
-			{
-				text = text + Environment.NewLine + "{ Undocked }";
-			}
+				text = text + Environment.NewLine + "{ Î´Í£¿¿ }";
+
 			Text = text;
 		}
 	}

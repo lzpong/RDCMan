@@ -1,13 +1,10 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Win32
-{
-	public class Structs
-	{
+namespace Win32 {
+	public class Structs {
 		[StructLayout(LayoutKind.Sequential, Pack = 8)]
-		public struct HDITEM
-		{
+		public struct HDITEM {
 			public uint mask;
 
 			public int cxy;
@@ -34,8 +31,7 @@ namespace Win32
 		}
 
 		[StructLayout(LayoutKind.Sequential, Pack = 8)]
-		public struct NMHDR
-		{
+		public struct NMHDR {
 			public IntPtr hwndFrom;
 
 			public IntPtr idFrom;
@@ -44,8 +40,7 @@ namespace Win32
 		}
 
 		[StructLayout(LayoutKind.Sequential, Pack = 8)]
-		public struct NMHEADER
-		{
+		public struct NMHEADER {
 			public NMHDR hdr;
 
 			public int iItem;
@@ -55,8 +50,7 @@ namespace Win32
 			private IntPtr pitem;
 		}
 
-		public struct RECT
-		{
+		public struct RECT {
 			public int left;
 
 			public int top;
@@ -66,8 +60,7 @@ namespace Win32
 			public int bottom;
 		}
 
-		public struct TRACKMOUSEEVENT
-		{
+		public struct TRACKMOUSEEVENT {
 			public int cbSize;
 
 			public uint dwFlags;
@@ -76,8 +69,7 @@ namespace Win32
 
 			public uint dwHoverTime;
 
-			public TRACKMOUSEEVENT(uint dwFlags, IntPtr hWnd, uint dwHoverTime)
-			{
+			public TRACKMOUSEEVENT(uint dwFlags, IntPtr hWnd, uint dwHoverTime) {
 				cbSize = Marshal.SizeOf(typeof(TRACKMOUSEEVENT));
 				this.dwFlags = dwFlags;
 				this.hWnd = hWnd;

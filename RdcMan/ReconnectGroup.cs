@@ -1,39 +1,33 @@
 using System.ComponentModel.Composition;
 using System.Windows.Forms;
 
-namespace RdcMan
-{
+namespace RdcMan {
 	[Export(typeof(IBuiltInVirtualGroup))]
-	internal class ReconnectGroup : BuiltInVirtualGroup<ReconnectServerRef>, IServerRefFactory
-	{
+	internal class ReconnectGroup : BuiltInVirtualGroup<ReconnectServerRef>, IServerRefFactory {
 		public static ReconnectGroup Instance { get; private set; }
 
-		public override string ConfigName => "RecentlyUsed";
-		private ReconnectGroup()
-		{
-			base.Text = "重连接";
+		protected override string XmlNodeName => "reconnect";
+
+		private ReconnectGroup() {
+			base.Text = "重新连接";
 			Instance = this;
 		}
 
-		public override bool CanDropServers()
-		{
+		public override bool CanDropServers() {
 			return true;
 		}
 
-		public override DragDropEffects DropBehavior()
-		{
+		public override DragDropEffects DropBehavior() {
 			return DragDropEffects.Copy;
 		}
 
-		public override bool HandleMove(RdcTreeNode childNode)
-		{
+		public override bool HandleMove(RdcTreeNode childNode) {
 			ReconnectServerRef reconnectServerRef = AddReference(childNode as ServerBase);
 			reconnectServerRef.Start(removeAfterConnection: false);
 			return true;
 		}
 
-		public ServerRef Create(Server server)
-		{
+		public ServerRef Create(Server server) {
 			return new ReconnectServerRef(server);
 		}
 	}

@@ -1,7 +1,5 @@
-namespace Win32
-{
-	public enum WinTrustDataUIContext : uint
-	{
+namespace Win32 {
+	public enum WinTrustDataUIContext : uint {
 		Execute,
 		Install
 	}

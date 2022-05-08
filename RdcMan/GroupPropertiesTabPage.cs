@@ -1,15 +1,12 @@
-namespace RdcMan
-{
-	internal class GroupPropertiesTabPage : GroupBasePropertiesTabPage<GroupSettings>
-	{
+namespace RdcMan {
+	internal class GroupPropertiesTabPage : GroupBasePropertiesTabPage<GroupSettings> {
 		public GroupPropertiesTabPage(TabbedSettingsDialog dialog, GroupSettings settings)
-			: base(dialog, settings, settings.Name)
-		{
+			: base(dialog, settings, settings.Name) {
 			int rowIndex = 0;
-			int tabIndex = 0;
-			AddGroupName(ref rowIndex, ref tabIndex);
-			AddParentCombo(ref rowIndex, ref tabIndex);
-			AddComment(ref rowIndex, ref tabIndex).Setting = base.Settings.Comment;
+			int num = 0;
+			AddGroupName(ref rowIndex, ref num);
+			AddParentCombo(ref rowIndex, ref num);
+			AddComment(ref rowIndex, ref num).Setting = base.Settings.Comment;
 		}
 	}
 }

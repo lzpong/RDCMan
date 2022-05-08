@@ -1,11 +1,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Win32
-{
+namespace Win32 {
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
-	public class WinTrustData
-	{
+	public class WinTrustData {
 		private uint StructSize = (uint)Marshal.SizeOf(typeof(WinTrustData));
 
 		private IntPtr PolicyCallbackData = IntPtr.Zero;
@@ -30,19 +28,18 @@ namespace Win32
 
 		private WinTrustDataUIContext UIContext;
 
-		public WinTrustData(string _fileName)
-		{
-			if (Environment.OSVersion.Version.Major > 6 || (Environment.OSVersion.Version.Major == 6 && Environment.OSVersion.Version.Minor > 1) || (Environment.OSVersion.Version.Major == 6 && Environment.OSVersion.Version.Minor == 1 && !string.IsNullOrEmpty(Environment.OSVersion.ServicePack)))
-			{
+		public WinTrustData(string _fileName) {
+			if (Environment.OSVersion.Version.Major > 6 
+				|| (Environment.OSVersion.Version.Major == 6 && Environment.OSVersion.Version.Minor > 1) 
+				|| (Environment.OSVersion.Version.Major == 6 && Environment.OSVersion.Version.Minor == 1 && !string.IsNullOrEmpty(Environment.OSVersion.ServicePack))) {
 				ProvFlags |= WinTrustDataProvFlags.DisableMD2andMD4;
 			}
 			WinTrustFileInfo structure = new WinTrustFileInfo(_fileName);
 			FileInfoPtr = Marshal.AllocCoTaskMem(Marshal.SizeOf(typeof(WinTrustFileInfo)));
-			Marshal.StructureToPtr((object)structure, FileInfoPtr, fDeleteOld: false);
+			Marshal.StructureToPtr(structure, FileInfoPtr, fDeleteOld: false);
 		}
 
-		~WinTrustData()
-		{
+		~WinTrustData() {
 			Marshal.FreeCoTaskMem(FileInfoPtr);
 		}
 	}

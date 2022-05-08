@@ -1,4 +1,3 @@
-using RdcMan.Configuration;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition.Hosting;
@@ -6,10 +5,12 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
+using RdcMan.Configuration;
 
 namespace RdcMan {
 	internal class Program {
@@ -22,8 +23,6 @@ namespace RdcMan {
 
 			public XmlNode SettingsNode { get; set; }
 		}
-
-		private const string PluginPattern = "Plugin.*.dll";
 
 		internal static CredentialsStore CredentialsProfiles = new CredentialsStore();
 
@@ -41,6 +40,20 @@ namespace RdcMan {
 
 		private static readonly List<IBuiltInVirtualGroup> _builtInVirtualGroups = new List<IBuiltInVirtualGroup>();
 
+		private const string PluginPattern = "Plugin.*.dll";
+
+		//private const int BASE_SEARCH_PATH_ENABLE_SAFE_SEARCHMODE = 1;
+
+		//private const int BASE_SEARCH_PATH_PERMANENT = 32768;
+
+		//private const uint NoRemoteImages = 1u;
+
+		//private const uint PreferSystem32Images = 4u;
+
+		private const int ProcessImageLoadPolicy = 10;
+
+		private const int LOAD_LIBRARY_SEARCH_SYSTEM32 = 2048;
+
 		internal static MainForm TheForm { get; set; }
 
 		internal static Preferences Preferences { get; private set; }
@@ -56,63 +69,96 @@ namespace RdcMan {
 		public static void PluginAction(Action<IPlugin> action) {
 			Plugins.Values.ForEach(delegate (PluginConfig v) {
 				IPlugin plugin = v.Plugin;
-				if (plugin != null) {
+				if (plugin != null)
 					action(plugin);
-				}
 			});
+		}
+
+		[DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+		[return: MarshalAs(UnmanagedType.Bool)]
+		private static extern bool SetDllDirectory(string lpPathName);
+
+		[DllImport("kernel32.dll", SetLastError = true)]
+		[return: MarshalAs(UnmanagedType.Bool)]
+		private static extern bool SetSearchPathMode(int flags);
+
+		[DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+		[return: MarshalAs(UnmanagedType.Bool)]
+		private static extern bool SetProcessMitigationPolicy(int policy, UIntPtr lpBuffer, UIntPtr size);
+
+		[DllImport("kernel32.dll", SetLastError = true)]
+		private static extern bool SetDefaultDllDirectories(uint directoryFlags);
+
+		private unsafe static bool DisableLocalDllLoading() {
+			int num = 0;
+			if (!SetDllDirectory(""))
+				num++;
+
+			if (!SetDefaultDllDirectories(LOAD_LIBRARY_SEARCH_SYSTEM32))
+				num++;
+
+			if (!SetSearchPathMode(32769))
+				num++;
+
+			uint structure = 5u;
+			if (!SetProcessMitigationPolicy(ProcessImageLoadPolicy, (UIntPtr)(&structure), (UIntPtr)(ulong)Marshal.SizeOf(structure))) {
+				Marshal.GetLastWin32Error();
+				num++;
+			}
+			return num == 0;
 		}
 
 		[STAThread]
 		internal static void Main(params string[] args) {
-			//防止工作目录不是文件所在目录
-			Environment.CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+			if (!DisableLocalDllLoading())
+				FormTools.InformationDialog("警告 - RDCMan 可能由于无法整合进程而加载未签名的库。");
+
 			Application.EnableVisualStyles();
+			Application.SetCompatibleTextRenderingDefault(defaultValue: true);
 			Policies.Read();
-			using (Helpers.Timer("解析命令行")) {
+			using (Helpers.Timer("parsing command line")) {
 				ParseCommandLine();
 			}
 			try {
 				Current.Read();
 			}
 			catch (Exception ex) {
-				FormTools.ErrorDialog("读取RDCMan配置文件时出错：{0}程序可能不稳定或功能不完全。".InvariantFormat(ex.Message));
+				FormTools.ErrorDialog("读取 RDCMan 配置文件时出错：{0} 程序可能不稳定和/或功能不完整。".InvariantFormat(ex.Message));
 			}
 			using (CompositionContainer compositionContainer = new CompositionContainer(new AssemblyCatalog(Assembly.GetCallingAssembly()))) {
 				_builtInVirtualGroups.AddRange(compositionContainer.GetExportedValues<IBuiltInVirtualGroup>());
 				_builtInVirtualGroups.Sort((IBuiltInVirtualGroup a, IBuiltInVirtualGroup b) => a.Text.CompareTo(b.Text));
 			}
-			using (Helpers.Timer("读取个性设置")) {
+			using (Helpers.Timer("reading preferences")) {
 				Preferences = Preferences.Load();
-				if (Preferences == null) {
+				if (Preferences == null)
 					Environment.Exit(1);
-				}
 			}
-			Thread thread2;
-			using (Helpers.Timer("启动消息循环线程")) {
+			Thread thread;
+			using (Helpers.Timer("starting message loop thread")) {
 				InitializedEvent = new ManualResetEvent(initialState: false);
-				Thread thread = new Thread(StartMessageLoop);
-				thread.IsBackground = true;
-				thread2 = thread;
-				thread2.SetApartmentState(ApartmentState.STA);
-				thread2.Start();
+				thread = new Thread(StartMessageLoop) {
+					IsBackground = true
+				};
+				thread.SetApartmentState(ApartmentState.STA);
+				thread.Start();
 				InitializedEvent.WaitOne();
 			}
-			if (TheForm == null) {
+			if (TheForm == null)
 				Environment.Exit(1);
-			}
+
 			TheForm.Invoke(new MethodInvoker(CompleteInitialization));
-			thread2.Join();
-			Log.Write("正在退出");
+			thread.Join();
+			Log.Write("Exiting");
 		}
 
 		private static void CompleteInitialization() {
 			InstantiatePlugins();
-			if (_filesToOpen.Count > 0) {
+			if (_filesToOpen.Count > 0)
 				Preferences.FilesToOpen = _filesToOpen;
-			}
-			else if (!_openFiles) {
+			else if (!_openFiles)
 				Preferences.FilesToOpen = null;
-			}
+
 			List<ServerBase> connectedServers = new List<ServerBase>();
 			ServerTree.Instance.Operation(OperationBehavior.SuspendSort, delegate {
 				foreach (IBuiltInVirtualGroup item in BuiltInVirtualGroups.Where((IBuiltInVirtualGroup group) => group.IsVisibilityConfigurable)) {
@@ -131,12 +177,12 @@ namespace RdcMan {
 			ServerTree.Instance.Show();
 			ServerTree.Instance.Focus();
 			bool isFirstConnection = ReconnectAtStartup(connectedServers);
-			if (_serversToConnect != null) {
+			if (_serversToConnect != null)
 				ConnectNamedServers(_serversToConnect, isFirstConnection);
-			}
-			if (Preferences.ServerTreeVisibility != 0) {
+
+			if (Preferences.ServerTreeVisibility != 0)
 				ServerTree.Instance.Hide();
-			}
+
 			PluginAction(delegate (IPlugin p) {
 				p.PostLoad(PluginContext);
 			});
@@ -145,7 +191,7 @@ namespace RdcMan {
 			ThreadPool.QueueUserWorkItem(delegate {
 				CheckForUpdate();
 			});
-			Log.Write("启动完成");
+			Log.Write("Startup completed");
 		}
 
 		private static bool ReconnectAtStartup(List<ServerBase> connectedServers) {
@@ -157,9 +203,8 @@ namespace RdcMan {
 				case ReconnectServerOptions.None:
 					return false;
 				case ReconnectServerOptions.Ask:
-					if (Preferences.ReconnectOnStartup && connectedServers.Any()) {
+					if (Preferences.ReconnectOnStartup && connectedServers.Any())
 						reconnectServers = new List<ServerBase>(ConnectServersDialog(connectedServers));
-					}
 					break;
 			}
 			return ConnectServers(reconnectServers, isFirstConnection: true);
@@ -178,24 +223,23 @@ namespace RdcMan {
 					try {
 						string value2 = item.Attributes["path"].Value;
 						if (!string.IsNullOrEmpty(value2)) {
-							PluginConfig pluginConfig = new PluginConfig();
-							pluginConfig.Name = value2;
-							pluginConfig.SettingsNode = item;
-							PluginConfig value3 = pluginConfig;
+							PluginConfig value3 = new PluginConfig {
+								Name = value2,
+								SettingsNode = item
+							};
 							Plugins[value2] = value3;
 						}
 					}
-					catch {
-					}
+					catch { }
 				}
 			}
 			foreach (IPlugin item2 in from e in compositionContainer.GetExports<IPlugin>()
 									  select e.Value) {
 				string name = item2.GetType().Assembly.GetName().Name;
-				if (!Plugins.TryGetValue(name, out PluginConfig value4)) {
-					PluginConfig pluginConfig2 = new PluginConfig();
-					pluginConfig2.Name = name;
-					value4 = pluginConfig2;
+				if (!Plugins.TryGetValue(name, out var value4)) {
+					value4 = new PluginConfig {
+						Name = name
+					};
 					Plugins[name] = value4;
 				}
 				try {
@@ -203,42 +247,41 @@ namespace RdcMan {
 					value4.Plugin = item2;
 				}
 				catch (Exception ex) {
-					stringBuilder.AppendLine("加载时出错 '{0}': {1}".InvariantFormat(name, ex.Message));
+					stringBuilder.AppendLine("加载“{0}”时出错：{1}".InvariantFormat(name, ex.Message));
 				}
 			}
 			foreach (PluginConfig item3 in Plugins.Values.Where((PluginConfig c) => c.Plugin == null)) {
-				stringBuilder.AppendLine("'{0}' 以前使用过，但现在未加载".InvariantFormat(item3.Name));
+				stringBuilder.AppendLine("“{0}”以前使用过，但现在未加载".InvariantFormat(item3.Name));
 			}
 			if (stringBuilder.Length > 0) {
-				stringBuilder.AppendLine().Append("单击取消退出");
-				string text = "某些插件尚未加载。 RDCMan可能无法按预期运行.{0}{0}".InvariantFormat(Environment.NewLine) + stringBuilder.ToString();
-				if (FormTools.ExclamationDialog(text, MessageBoxButtons.OKCancel) == DialogResult.Cancel) {
+				stringBuilder.AppendLine().Append("Click Cancel to exit");
+				string text = "一些插件尚未加载。 RDCMan 可能无法按预期运行。{0}{0}".InvariantFormat(Environment.NewLine) + stringBuilder.ToString();
+				if (FormTools.ExclamationDialog(text, MessageBoxButtons.OKCancel) == DialogResult.Cancel)
 					Environment.Exit(1);
-				}
 			}
 		}
 
 		private static void OpenFiles() {
 			List<string> filesToOpen = Preferences.FilesToOpen;
-			if (filesToOpen != null) {
-				bool flag = true;
-				foreach (string item in filesToOpen) {
-					FileGroup fileGroup = RdgFile.OpenFile(item);
-					if (fileGroup != null && flag) {
-						flag = false;
-						ServerTree.Instance.SelectedNode = fileGroup;
-					}
+			if (filesToOpen == null)
+				return;
+
+			bool flag = true;
+			foreach (string item in filesToOpen) {
+				FileGroup fileGroup = RdgFile.OpenFile(item);
+				if (fileGroup != null && flag) {
+					flag = false;
+					ServerTree.Instance.SelectedNode = fileGroup;
 				}
 			}
 		}
 
 		internal static IEnumerable<ServerBase> ConnectServersDialog(IEnumerable<ServerBase> servers) {
-			using (ConnectServersDialog connectServersDialog = new ConnectServersDialog(servers)) {
-				if (connectServersDialog.ShowDialog(TheForm) == DialogResult.OK) {
-					return connectServersDialog.SelectedServers.ToList();
-				}
-				return new ServerBase[0];
-			}
+			using ConnectServersDialog connectServersDialog = new ConnectServersDialog(servers);
+			if (connectServersDialog.ShowDialog(TheForm) == DialogResult.OK)
+				return connectServersDialog.SelectedServers.ToList();
+
+			return new ServerBase[0];
 		}
 
 		internal static bool ConnectServers(IEnumerable<ServerBase> reconnectServers, bool isFirstConnection) {
@@ -256,17 +299,16 @@ namespace RdcMan {
 			HashSet<string> nameHash = new HashSet<string>(serverNames, StringComparer.OrdinalIgnoreCase);
 			List<ServerBase> serversToConnect = new List<ServerBase>();
 			ServerTree.Instance.Nodes.VisitNodes(delegate (RdcTreeNode node) {
-				Server server = node as Server;
-				if (server != null && nameHash.Contains(server.ServerName)) {
-					if (!server.IsConnected) {
+				if (node is Server server && nameHash.Contains(server.ServerName)) {
+					if (!server.IsConnected)
 						serversToConnect.Add(server);
-					}
+
 					nameHash.Remove(server.ServerName);
 				}
 			});
 			isFirstConnection = ConnectServers(serversToConnect, isFirstConnection);
 			if (nameHash.Count > 0) {
-				StringBuilder stringBuilder = new StringBuilder("找不到以下服务器，无法连接:").AppendLine().AppendLine();
+				StringBuilder stringBuilder = new StringBuilder("未找到以下服务器，无法连接：").AppendLine().AppendLine();
 				foreach (string item in nameHash) {
 					stringBuilder.AppendLine(item);
 				}
@@ -295,29 +337,33 @@ namespace RdcMan {
 				Usage();
 				Environment.Exit(0);
 			}
-			if (argumentParser.HasSwitch("reset")) {
+			if (argumentParser.HasSwitch("reset"))
 				ResetPreferences = true;
-			}
-			if (argumentParser.HasSwitch("noopen")) {
+
+			if (argumentParser.HasSwitch("noopen"))
 				_openFiles = false;
-			}
-			if (argumentParser.HasSwitch("noconnect")) {
+
+			if (argumentParser.HasSwitch("noconnect"))
 				_reconnectServersAtStart = ReconnectServerOptions.None;
-			}
-			if (argumentParser.HasSwitch("reconnect")) {
+
+			if (argumentParser.HasSwitch("reconnect"))
 				_reconnectServersAtStart = ReconnectServerOptions.All;
-			}
-			if (argumentParser.HasSwitch("c")) {
-				_serversToConnect = argumentParser.SwitchValues["c"].Split(new char[1]{','}, StringSplitOptions.RemoveEmptyEntries);
-			}
+
+			if (argumentParser.HasSwitch("c"))
+				_serversToConnect = argumentParser.SwitchValues["c"].Split(new char[1] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
 			_filesToOpen.AddRange(argumentParser.PlainArgs);
 		}
 
 		internal static void Usage() {
 			Assembly executingAssembly = Assembly.GetExecutingAssembly();
 			string text = Path.Combine(Path.GetDirectoryName(executingAssembly.Location), "Resources\\help.htm");
-			text = text.Replace('\\', '/');
-			Process.Start("IExplore.exe", text);
+			if (File.Exists(text)) {
+				text = text.Replace('\\', '/');
+				Process.Start(text);
+			}
+			else
+				FormTools.InformationDialog("未能找到帮助文件:\r\n" + text);
 		}
 
 		private static void StartMessageLoop() {
@@ -343,29 +389,31 @@ namespace RdcMan {
 		}
 
 		private static void CheckForUpdate() {
+			ProgramUpdateElement updateElement = Current.RdcManSection?.ProgramUpdate;
 			try {
-				ProgramUpdateElement updateElement = Current.RdcManSection.ProgramUpdate;
-				if (!string.IsNullOrEmpty(updateElement.VersionPath) && !string.IsNullOrEmpty(updateElement.UpdateUrl)) {
-					if (!DateTime.TryParse(Preferences.LastUpdateCheckTimeUtc, out DateTime result) || DateTime.UtcNow.Subtract(result).TotalDays < 1.0) {
-						Log.Write("上次检查更新于 {0}, 明天之前不再检查", result.ToString("s"));
-					}
-					else {
-						Preferences.LastUpdateCheckTimeUtc = DateTime.UtcNow.ToString("u");
-						string input = File.ReadAllText(updateElement.VersionPath);
-						if (Version.TryParse(input, out Version result2)) {
-							Assembly executingAssembly = Assembly.GetExecutingAssembly();
-							AssemblyName name = executingAssembly.GetName();
-							Log.Write("最新版本 = {0}", result2);
-							if (name.Version < result2) {
-								TheForm.Invoke((MethodInvoker)delegate {
-									FormTools.InformationDialog("有一个新版本的RDCMan可从此处下载: {0}".InvariantFormat(updateElement.UpdateUrl));
-								});
-							}
-						}
-					}
+				if (string.IsNullOrEmpty(updateElement?.VersionPath) || string.IsNullOrEmpty(updateElement.UpdateUrl))
+					return;
+
+				if (!DateTime.TryParse(Preferences.LastUpdateCheckTimeUtc, out var result) || DateTime.UtcNow.Subtract(result).TotalDays < 1.0) {
+					Log.Write("Last checked for update on {0}, not checking until tomorrow", result.ToString("s"));
+					return;
+				}
+				Preferences.LastUpdateCheckTimeUtc = DateTime.UtcNow.ToString("u");
+				string input = File.ReadAllText(updateElement.VersionPath);
+				if (!Version.TryParse(input, out var result2))
+					return;
+
+				Assembly executingAssembly = Assembly.GetExecutingAssembly();
+				AssemblyName name = executingAssembly.GetName();
+				Log.Write("Latest version = {0}", result2);
+				if (name.Version < result2) {
+					TheForm.Invoke((MethodInvoker)delegate {
+						FormTools.InformationDialog("{0} 提供了新版本的 RDCMan".InvariantFormat(updateElement.UpdateUrl));
+					});
 				}
 			}
-			catch (Exception) {
+			catch (Exception ex) {
+				FormTools.InformationDialog("检测 RDCMan 新版本出错 {0}\r\n{1}".InvariantFormat(updateElement.UpdateUrl,ex.Message));
 			}
 		}
 	}

@@ -1,7 +1,5 @@
-namespace Win32
-{
-	public class Constants
-	{
+namespace Win32 {
+	public class Constants {
 		public const int GW_HWNDNEXT = 2;
 
 		public const int HDN_FIRST = -300;

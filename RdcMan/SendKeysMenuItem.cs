@@ -7,16 +7,16 @@ namespace RdcMan
 	{
 		public Keys[] KeyCodes;
 
-		public SendKeysMenuItem(string text, Keys[] keyCodes)
+		public SendKeysMenuItem(string name, Keys[] keyCodes)
 		{
 			KeyCodes = keyCodes;
 			StringBuilder stringBuilder = new StringBuilder();
-			foreach (Keys keys in keyCodes)
+			for (int i = 0; i < keyCodes.Length; i++)
 			{
+				Keys keys = keyCodes[i];
 				if (stringBuilder.Length > 0)
-				{
 					stringBuilder.Append("+");
-				}
+
 				switch (keys)
 				{
 				case Keys.ControlKey:
@@ -33,14 +33,10 @@ namespace RdcMan
 					break;
 				}
 			}
-			if (text != null)
-			{
-				Text = text + " (" + stringBuilder.ToString() + ")";
-			}
+			if (name != null)
+				Text = name + " (" + stringBuilder.ToString() + ")";
 			else
-			{
 				Text = stringBuilder.ToString();
-			}
 		}
 	}
 }

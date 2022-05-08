@@ -1,12 +1,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Win32
-{
-	public class Wts
-	{
-		public enum ConnectstateClass
-		{
+namespace Win32 {
+	public class Wts {
+		public enum ConnectstateClass {
 			Active,
 			Connected,
 			ConnectQuery,
@@ -19,8 +16,7 @@ namespace Win32
 			Init
 		}
 
-		public enum InfoClass
-		{
+		public enum InfoClass {
 			InitialProgram,
 			ApplicationName,
 			WorkingDirectory,
@@ -46,15 +42,13 @@ namespace Win32
 			OutgoingFrames
 		}
 
-		public enum ShutdownMode
-		{
+		public enum ShutdownMode {
 			Reboot = 4,
 			PowerOff = 8
 		}
 
 		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
-		public class SessionInfo
-		{
+		public class SessionInfo {
 			public int SessionId;
 
 			[MarshalAs(UnmanagedType.LPWStr)]

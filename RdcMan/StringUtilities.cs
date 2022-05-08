@@ -2,10 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 
-namespace RdcMan
-{
-	public static class StringUtilities
-	{
+namespace RdcMan {
+	public static class StringUtilities {
 		private const char SetOpenChar = '{';
 
 		private const char SetSeparatorChar = ',';
@@ -18,141 +16,106 @@ namespace RdcMan
 
 		private const char RangeCloseChar = ']';
 
-		public static string CultureFormat(this string format, params object[] args)
-		{
+		public static string CultureFormat(this string format, params object[] args) {
 			return string.Format(CultureInfo.CurrentUICulture, format, args);
 		}
 
-		public static string InvariantFormat(this string format, params object[] args)
-		{
+		public static string InvariantFormat(this string format, params object[] args) {
 			return string.Format(CultureInfo.InvariantCulture, format, args);
 		}
 
-		public static IEnumerable<string> ExpandPattern(string pattern)
-		{
-			bool anyExpansions = false;
-			for (int i = 0; i < pattern.Length; i++)
-			{
-				switch (pattern[i])
-				{
-				case '{':
-				{
-					int closeIndex2 = pattern.IndexOf('}', i);
-					if (closeIndex2 == -1)
-					{
-						throw new ArgumentException($"Set not closed (missing {'}'}): {pattern.Substring(i)}");
-					}
-					string prefix2 = pattern.Substring(0, i);
-					string suffix2 = pattern.Substring(closeIndex2 + 1);
-					IEnumerable<string> setEnumerator = ExpandSet(pattern.Substring(i + 1, closeIndex2 - i - 1));
-					foreach (string setValue in setEnumerator)
-					{
-						foreach (string suffixExpansion2 in ExpandPattern(suffix2))
-						{
-							yield return prefix2 + setValue + suffixExpansion2;
+		public static IEnumerable<string> ExpandPattern(string pattern) {
+			bool flag = false;
+			for (int i = 0; i < pattern.Length; i++) {
+				switch (pattern[i]) {
+					case SetOpenChar: {
+						int num2 = pattern.IndexOf(SetCloseChar, i);
+						if (num2 == -1)
+							throw new ArgumentException($"集合未闭合（缺失 {SetCloseChar}）：{pattern.Substring(i)}");
+
+						string prefix = pattern.Substring(0, i);
+						string suffix = pattern.Substring(num2 + 1);
+						IEnumerable<string> enumerable2 = ExpandSet(pattern.Substring(i + 1, num2 - i - 1));
+						foreach (string setValue in enumerable2) {
+							foreach (string item in ExpandPattern(suffix)) {
+								yield return prefix + setValue + item;
+							}
 						}
+						flag = true;
+						break;
 					}
-					anyExpansions = true;
-					break;
-				}
-				case '[':
-				{
-					int closeIndex = pattern.IndexOf(']', i);
-					if (closeIndex == -1)
-					{
-						throw new ArgumentException($"Range not closed (missing {']'}): {pattern.Substring(i)}");
-					}
-					string prefix = pattern.Substring(0, i);
-					string suffix = pattern.Substring(closeIndex + 1);
-					IEnumerable<string> rangeEnumerator = ExpandRange(pattern.Substring(i + 1, closeIndex - i - 1));
-					foreach (string rangeValue in rangeEnumerator)
-					{
-						foreach (string suffixExpansion in ExpandPattern(suffix))
-						{
-							yield return prefix + rangeValue + suffixExpansion;
+					case RangeOpenChar: {
+						int num = pattern.IndexOf(RangeCloseChar, i);
+						if (num == -1)
+							throw new ArgumentException($"范围未闭合（缺失 {RangeCloseChar}）：{pattern.Substring(i)}");
+
+						string suffix = pattern.Substring(0, i);
+						string prefix = pattern.Substring(num + 1);
+						IEnumerable<string> enumerable = ExpandRange(pattern.Substring(i + 1, num - i - 1));
+						foreach (string setValue in enumerable) {
+							foreach (string item2 in ExpandPattern(prefix)) {
+								yield return suffix + setValue + item2;
+							}
 						}
+						flag = true;
+						break;
 					}
-					anyExpansions = true;
-					break;
-				}
-				default:
-					continue;
+					default:
+						continue;
 				}
 				break;
 			}
-			if (!anyExpansions)
-			{
+			if (!flag)
 				yield return pattern;
-			}
 		}
 
-		private static IEnumerable<string> ExpandSet(string set)
-		{
-			return set.Split(',');
+		private static IEnumerable<string> ExpandSet(string set) {
+			return set.Split(SetSeparatorChar);
 		}
 
-		private static IEnumerable<string> ExpandRange(string range)
-		{
-			string[] rangeValues = range.Split('-');
-			if (rangeValues.Length != 2)
-			{
-				throw new ArgumentException($"Range does not contain low and high values (single {'-'} separator): {range}");
-			}
-			string low = rangeValues[0];
-			string high = rangeValues[1];
-			if (low.Length == 0 || high.Length == 0)
-			{
-				throw new ArgumentException($"Range is missing a value: {range}");
-			}
-			if (char.IsLetter(low, 0))
-			{
-				if (!char.IsLetter(high, 0))
-				{
-					throw new ArgumentException($"Range must be homogenous (letter bounds or numeric bounds): {range}");
-				}
-				if (low.Length != 1 || high.Length != 1)
-				{
-					throw new ArgumentException($"Letter range must be single character: {range}");
-				}
-				if (char.IsLower(low[0]) != char.IsLower(high[0]))
-				{
-					throw new ArgumentException($"Letter range must be same case: {range}");
-				}
-				if (low.CompareTo(high) > 0)
-				{
-					throw new ArgumentException($"Range low cannot be greater than high: {range}");
-				}
-				int lowValue2 = low[0];
-				int highValue2 = high[0];
-				for (int value2 = lowValue2; value2 <= highValue2; value2++)
-				{
+		private static IEnumerable<string> ExpandRange(string range) {
+			string[] array = range.Split(RangeSeparatorChar);
+			if (array.Length != 2)
+				throw new ArgumentException($"范围不包含低值和高值（单个 {RangeSeparatorChar} 分隔符）：{range}");
+
+			string text = array[0];
+			string text2 = array[1];
+			if (text.Length == 0 || text2.Length == 0)
+				throw new ArgumentException($"范围缺少值： {range}");
+
+			if (char.IsLetter(text, 0)) {
+				if (!char.IsLetter(text2, 0))
+					throw new ArgumentException($"范围必须是同类型的（字母范围或数字范围）： {range}");
+				if (text.Length != 1 || text2.Length != 1)
+					throw new ArgumentException($"字母范围必须是单个字符：{range}");
+				if (char.IsLower(text[0]) != char.IsLower(text2[0]))
+					throw new ArgumentException($"字母范围必须相同： {range}");
+				if (text.CompareTo(text2) > 0)
+					throw new ArgumentException($"范围低不能大于高：{range}");
+
+				int num = text[0];
+				int highValue2 = text2[0];
+				for (int value2 = num; value2 <= highValue2; value2++) {
 					yield return $"{(char)value2}";
 				}
-				yield break;
 			}
-			if (char.IsDigit(low, 0))
-			{
-				if (!int.TryParse(low, out int lowValue) || !int.TryParse(high, out int highValue))
-				{
-					throw new ArgumentException($"Range must be homogenous (letter bounds or numeric bounds): {range}");
-				}
-				if (lowValue > highValue)
-				{
-					throw new ArgumentException($"Range low cannot be greater than high: {range}");
-				}
-				int numDigits = low.Length;
+			else {
+				if (!char.IsDigit(text, 0))
+					throw new ArgumentException($"格式错误的范围（必须有字母范围或数字范围）：{range}");
+				if (!int.TryParse(text, out var result) || !int.TryParse(text2, out var highValue2))
+					throw new ArgumentException($"范围必须是同质的（字母范围或数字范围）：{range}");
+				if (result > highValue2)
+					throw new ArgumentException($"范围低不能大于高：{range}");
+
+				int length = text.Length;
 				string format = "";
-				for (int i = 0; i < numDigits; i++)
-				{
+				for (int i = 0; i < length; i++) {
 					format += "0";
 				}
-				for (int value = lowValue; value <= highValue; value++)
-				{
-					yield return value.ToString(format);
+				for (int value2 = result; value2 <= highValue2; value2++) {
+					yield return value2.ToString(format);
 				}
-				yield break;
 			}
-			throw new ArgumentException($"Malformed range (must have letter bounds or numeric bounds): {range}");
 		}
 	}
 }

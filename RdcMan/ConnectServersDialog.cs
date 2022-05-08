@@ -1,32 +1,25 @@
-using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace RdcMan
-{
-	internal class ConnectServersDialog : SelectServersDialogBase
-	{
+namespace RdcMan {
+	internal class ConnectServersDialog : SelectServersDialogBase {
 		public ConnectServersDialog(IEnumerable<ServerBase> servers)
-			: base("连接服务器", "连接")
-		{
+			: base("连接服务器", "连接(&C)") {
 			int rowIndex = 0;
-			int tabIndex = 0;
-			AddLabel("选择要连接的服务器", ref rowIndex, ref tabIndex);
-			AddListView(ref rowIndex, ref tabIndex);
+			int num = 0;
+			AddLabel("选择要连接的服务器", ref rowIndex, ref num);
+			AddListView(ref rowIndex, ref num);
 			InitButtons();
 			this.ScaleAndLayout();
-			Action<ServerBase> action = delegate(ServerBase server)
-			{
+			servers.ForEach(delegate (ServerBase server) {
 				base.ListView.Items.Add(CreateListViewItem(server));
-			};
-			servers.ForEach(action);
+			});
 			base.ListView.ItemChecked += ListView_ItemChecked;
 			_acceptButton.Enabled = false;
 		}
 
-		private void ListView_ItemChecked(object sender, ItemCheckedEventArgs e)
-		{
-			_acceptButton.Enabled = (base.ListView.CheckedItems.Count > 0);
+		private void ListView_ItemChecked(object sender, ItemCheckedEventArgs e) {
+			_acceptButton.Enabled = base.ListView.CheckedItems.Count > 0;
 		}
 	}
 }

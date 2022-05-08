@@ -1,7 +1,5 @@
-namespace RdcMan
-{
-	public enum ServerProperty
-	{
+namespace RdcMan {
+	public enum ServerProperty {
 		DisplayName,
 		ServerName,
 		Parent,

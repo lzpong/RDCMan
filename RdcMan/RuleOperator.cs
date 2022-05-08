@@ -1,7 +1,5 @@
-namespace RdcMan
-{
-	public enum RuleOperator
-	{
+namespace RdcMan {
+	public enum RuleOperator {
 		Matches,
 		DoesNotMatch
 	}

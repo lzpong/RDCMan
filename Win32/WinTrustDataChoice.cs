@@ -1,7 +1,5 @@
-namespace Win32
-{
-	public enum WinTrustDataChoice : uint
-	{
+namespace Win32 {
+	public enum WinTrustDataChoice : uint {
 		File = 1u,
 		Catalog,
 		Blob,

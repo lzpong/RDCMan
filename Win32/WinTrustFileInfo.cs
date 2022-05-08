@@ -1,11 +1,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Win32
-{
+namespace Win32 {
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
-	public class WinTrustFileInfo
-	{
+	public class WinTrustFileInfo {
 		private uint StructSize = (uint)Marshal.SizeOf(typeof(WinTrustFileInfo));
 
 		private IntPtr pszFilePath;
@@ -14,13 +12,11 @@ namespace Win32
 
 		private IntPtr pgKnownSubject = IntPtr.Zero;
 
-		public WinTrustFileInfo(string _filePath)
-		{
+		public WinTrustFileInfo(string _filePath) {
 			pszFilePath = Marshal.StringToCoTaskMemAuto(_filePath);
 		}
 
-		~WinTrustFileInfo()
-		{
+		~WinTrustFileInfo() {
 			Marshal.FreeCoTaskMem(pszFilePath);
 		}
 	}

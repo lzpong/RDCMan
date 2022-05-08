@@ -1,7 +1,5 @@
-namespace Win32
-{
-	public enum WinTrustDataStateAction : uint
-	{
+namespace Win32 {
+	public enum WinTrustDataStateAction : uint {
 		Ignore,
 		Verify,
 		Close,

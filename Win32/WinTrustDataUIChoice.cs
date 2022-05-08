@@ -1,7 +1,5 @@
-namespace Win32
-{
-	public enum WinTrustDataUIChoice : uint
-	{
+namespace Win32 {
+	public enum WinTrustDataUIChoice : uint {
 		All = 1u,
 		None,
 		NoBad,

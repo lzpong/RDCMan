@@ -1,22 +1,20 @@
 using System;
 
-namespace Win32
-{
+namespace Win32 {
 	[Flags]
-	public enum WinTrustDataProvFlags : uint
-	{
-		UseIe4TrustFlag = 0x1,
-		NoIe4ChainFlag = 0x2,
-		NoPolicyUsageFlag = 0x4,
-		RevocationCheckNone = 0x10,
-		RevocationCheckEndCert = 0x20,
-		RevocationCheckChain = 0x40,
-		RevocationCheckChainExcludeRoot = 0x80,
-		SaferFlag = 0x100,
-		HashOnlyFlag = 0x200,
-		UseDefaultOsverCheck = 0x400,
-		LifetimeSigningFlag = 0x800,
-		CacheOnlyUrlRetrieval = 0x1000,
-		DisableMD2andMD4 = 0x2000
+	public enum WinTrustDataProvFlags : uint {
+		UseIe4TrustFlag = 1u,
+		NoIe4ChainFlag = 2u,
+		NoPolicyUsageFlag = 4u,
+		RevocationCheckNone = 0x10u,
+		RevocationCheckEndCert = 0x20u,
+		RevocationCheckChain = 0x40u,
+		RevocationCheckChainExcludeRoot = 0x80u,
+		SaferFlag = 0x100u,
+		HashOnlyFlag = 0x200u,
+		UseDefaultOsverCheck = 0x400u,
+		LifetimeSigningFlag = 0x800u,
+		CacheOnlyUrlRetrieval = 0x1000u,
+		DisableMD2andMD4 = 0x2000u
 	}
 }

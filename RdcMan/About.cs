@@ -1,75 +1,72 @@
-using System;
+using System.Diagnostics;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
-namespace RdcMan
-{
-	internal class About : Form
-	{
-		private void InitializeComponent(bool isLarge)
-		{
-			int num = isLarge ? 410 : 360;
+namespace RdcMan {
+	internal class About : Form {
+		private void InitializeComponent(bool isLarge) {
+			int num = (isLarge ? 450 : 400);
 			int num2 = num - 26;
-			System.Windows.Forms.Label label = new System.Windows.Forms.Label();
-			label.Location = new System.Drawing.Point(13, 13);
-			label.Size = new System.Drawing.Size(num2, 50);
-			label.Text = "{1}{0}{2}{3}{4}".InvariantFormat(System.Environment.NewLine, RdcMan.Program.TheForm.DescriptionText, "by Julian Burger", System.Environment.NewLine, "���� by lzpong");
-			System.Windows.Forms.Label value = label;
-			System.Windows.Forms.Panel panel = new System.Windows.Forms.Panel();
-			panel.AutoScroll = true;
-			panel.Location = new System.Drawing.Point(13, 60);
-			panel.Size = new System.Drawing.Size(num2, 100);
-			System.Text.StringBuilder versionText = new System.Text.StringBuilder();
-			versionText.AppendLine("RDCMan v{0} build {1}".InvariantFormat(RdcMan.Program.TheForm.VersionText, RdcMan.Program.TheForm.BuildText)).AppendLine().AppendLine(System.Environment.OSVersion.ToString())
-				.AppendLine(".NET v{0}".InvariantFormat(System.Environment.Version))
-				.AppendLine("mstscax.dll v{0}".InvariantFormat(RdcMan.RdpClient.RdpControlVersion));
-			bool first = true;
-			RdcMan.Program.PluginAction(delegate(RdcMan.IPlugin p) {
-				if (first) {
-					versionText.AppendLine().AppendLine("Plugins:");
-					first = false;
-				}
-				versionText.AppendLine(p.GetType().FullName);
-			});
-			System.Windows.Forms.TextBox versionLabel = new System.Windows.Forms.TextBox {
-				ScrollBars = System.Windows.Forms.ScrollBars.Vertical,
-				BackColor = BackColor,
-				Enabled = true,
-				ForeColor = System.Drawing.SystemColors.WindowText,
-				Location = new System.Drawing.Point(13, 60),
-				Multiline = true,
-				ReadOnly = true,
-				Size = new System.Drawing.Size(num2, 100),
-				Text = versionText.ToString()
+			Label label = new Label {
+				Location = new Point(53, 13),
+				AutoSize = true,
+				Text = "{0} v{1}".InvariantFormat(Program.TheForm.DescriptionText, Program.TheForm.VersionText)
 			};
-			versionLabel.VisibleChanged += delegate {
-				versionLabel.Select(0, 0);
+			Label value = label;
+			Label value2 = new Label {
+				Location = new Point(53, 29),
+				Width = num2 - FormTools.LabelWidth,
+				AutoSize = true,
+				Text = "Copyright © 2022 Microsoft. By Julian Burger, lzp 汉化"
 			};
-			System.Windows.Forms.Button button = new System.Windows.Forms.Button();
-			button.TabIndex = 1;
-			button.Text = "OK";
-			System.Windows.Forms.Button button2 = button;
-			button2.Location = new System.Drawing.Point(num2 - button2.Width, 167);
-			base.AutoScaleDimensions = new System.Drawing.SizeF(96f, 96f);
-			base.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-			base.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-			base.ClientSize = new System.Drawing.Size(num, 200);
-			base.Controls.Add(versionLabel);
+			LinkLabel linkLabel = new LinkLabel {
+				Location = new Point(53, 48),
+				AutoSize = true,
+				Text = "Sysinternals - www.sysinternals.com"
+			};
+			linkLabel.LinkClicked += delegate {
+				Process.Start("https://www.sysinternals.com");
+			};
+			LinkLabel linkLabel2 = new LinkLabel {
+				Location = new Point(53, 66),
+				AutoSize = true,
+				Text = "lzpong/RDCMan - github.com/lzpong/RDCMan"
+			};
+			linkLabel2.LinkClicked += delegate {
+				Process.Start("https://github.com/lzpong/RDCMan");
+			};
+			Button button = new Button {
+				TabIndex = 1,
+				Text = "确定"
+			};
+			button.Location = new Point(num2 - button.Width + FormTools.TopMargin, 60);
+			base.AutoScaleDimensions = new SizeF(96f, 96f);
+			base.AutoScaleMode = AutoScaleMode.Dpi;
+			base.FormBorderStyle = FormBorderStyle.FixedDialog;
+			base.ClientSize = new Size(num, 90);
 			base.Controls.Add(value);
-			base.Controls.Add(button2);
+			base.Controls.Add(value2);
+			base.Controls.Add(linkLabel);
+			base.Controls.Add(linkLabel2);
+			base.Controls.Add(button);
 			base.MaximizeBox = false;
 			base.MinimizeBox = false;
-			base.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-			base.AcceptButton = button2;
-			base.CancelButton = button2;
-			Text = "About Remote Desktop Connection Manager";
-			base.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+			base.SizeGripStyle = SizeGripStyle.Hide;
+			base.AcceptButton = button;
+			base.CancelButton = button;
+			this.Text = "关于远程桌面连接管理器";
+			base.StartPosition = FormStartPosition.CenterParent;
 			this.ScaleAndLayout();
+			base.ActiveControl = button;
 		}
 
 		public About(bool isLarge) {
 			InitializeComponent(isLarge);
+		}
+
+		protected override void OnPaint(PaintEventArgs e) {
+			e.Graphics.DrawIcon(Program.TheForm.Icon, 10, 10);
+			base.OnPaint(e);
 		}
 	}
 }

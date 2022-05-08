@@ -2,12 +2,9 @@ using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
 
-namespace Win32
-{
-	public class User
-	{
-		public struct INPUT
-		{
+namespace Win32 {
+	public class User {
+		public struct INPUT {
 			public uint type;
 
 			public InputUnion U;
@@ -16,8 +13,7 @@ namespace Win32
 		}
 
 		[StructLayout(LayoutKind.Explicit)]
-		public struct InputUnion
-		{
+		public struct InputUnion {
 			[FieldOffset(0)]
 			public MOUSEINPUT mi;
 
@@ -25,8 +21,7 @@ namespace Win32
 			public KEYBDINPUT ki;
 		}
 
-		public struct MOUSEINPUT
-		{
+		public struct MOUSEINPUT {
 			public int dx;
 
 			public int dy;
@@ -41,34 +36,31 @@ namespace Win32
 		}
 
 		[Flags]
-		public enum MouseEventDataXButtons : uint
-		{
-			Nothing = 0x0,
-			XBUTTON1 = 0x1,
-			XBUTTON2 = 0x2
+		public enum MouseEventDataXButtons : uint {
+			Nothing = 0u,
+			XBUTTON1 = 1u,
+			XBUTTON2 = 2u
 		}
 
 		[Flags]
-		public enum MOUSEEVENTF : uint
-		{
-			ABSOLUTE = 0x8000,
-			HWHEEL = 0x1000,
-			MOVE = 0x1,
-			MOVE_NOCOALESCE = 0x2000,
-			LEFTDOWN = 0x2,
-			LEFTUP = 0x4,
-			RIGHTDOWN = 0x8,
-			RIGHTUP = 0x10,
-			MIDDLEDOWN = 0x20,
-			MIDDLEUP = 0x40,
-			VIRTUALDESK = 0x4000,
-			WHEEL = 0x800,
-			XDOWN = 0x80,
-			XUP = 0x100
+		public enum MOUSEEVENTF : uint {
+			ABSOLUTE = 0x8000u,
+			HWHEEL = 0x1000u,
+			MOVE = 1u,
+			MOVE_NOCOALESCE = 0x2000u,
+			LEFTDOWN = 2u,
+			LEFTUP = 4u,
+			RIGHTDOWN = 8u,
+			RIGHTUP = 0x10u,
+			MIDDLEDOWN = 0x20u,
+			MIDDLEUP = 0x40u,
+			VIRTUALDESK = 0x4000u,
+			WHEEL = 0x800u,
+			XDOWN = 0x80u,
+			XUP = 0x100u
 		}
 
-		public struct KEYBDINPUT
-		{
+		public struct KEYBDINPUT {
 			public VirtualKeyShort wVk;
 
 			public ScanCodeShort wScan;
@@ -81,16 +73,14 @@ namespace Win32
 		}
 
 		[Flags]
-		public enum KEYEVENTF : uint
-		{
-			EXTENDEDKEY = 0x1,
-			KEYUP = 0x2,
-			SCANCODE = 0x8,
-			UNICODE = 0x4
+		public enum KEYEVENTF : uint {
+			EXTENDEDKEY = 1u,
+			KEYUP = 2u,
+			SCANCODE = 8u,
+			UNICODE = 4u
 		}
 
-		public enum VirtualKeyShort : short
-		{
+		public enum VirtualKeyShort : short {
 			LBUTTON = 1,
 			RBUTTON = 2,
 			CANCEL = 3,
@@ -101,7 +91,7 @@ namespace Win32
 			TAB = 9,
 			CLEAR = 12,
 			RETURN = 13,
-			SHIFT = 0x10,
+			SHIFT = 16,
 			CONTROL = 17,
 			MENU = 18,
 			PAUSE = 19,
@@ -116,8 +106,8 @@ namespace Win32
 			CONVERT = 28,
 			NONCONVERT = 29,
 			ACCEPT = 30,
-			MODECHANGE = 0x1F,
-			SPACE = 0x20,
+			MODECHANGE = 31,
+			SPACE = 32,
 			PRIOR = 33,
 			NEXT = 34,
 			END = 35,
@@ -204,8 +194,8 @@ namespace Win32
 			F13 = 124,
 			F14 = 125,
 			F15 = 126,
-			F16 = 0x7F,
-			F17 = 0x80,
+			F16 = 127,
+			F17 = 128,
 			F18 = 129,
 			F19 = 130,
 			F20 = 131,
@@ -265,8 +255,7 @@ namespace Win32
 			OEM_CLEAR = 254
 		}
 
-		public enum ScanCodeShort : short
-		{
+		public enum ScanCodeShort : short {
 			LBUTTON = 0,
 			RBUTTON = 0,
 			CANCEL = 70,
@@ -274,7 +263,7 @@ namespace Win32
 			XBUTTON1 = 0,
 			XBUTTON2 = 0,
 			BACK = 14,
-			TAB = 0xF,
+			TAB = 15,
 			CLEAR = 76,
 			RETURN = 28,
 			SHIFT = 42,
@@ -322,7 +311,7 @@ namespace Win32
 			KEY_A = 30,
 			KEY_B = 48,
 			KEY_C = 46,
-			KEY_D = 0x20,
+			KEY_D = 32,
 			KEY_E = 18,
 			KEY_F = 33,
 			KEY_G = 34,
@@ -335,9 +324,9 @@ namespace Win32
 			KEY_N = 49,
 			KEY_O = 24,
 			KEY_P = 25,
-			KEY_Q = 0x10,
+			KEY_Q = 16,
 			KEY_R = 19,
-			KEY_S = 0x1F,
+			KEY_S = 31,
 			KEY_T = 20,
 			KEY_U = 22,
 			KEY_V = 47,
@@ -369,8 +358,8 @@ namespace Win32
 			F2 = 60,
 			F3 = 61,
 			F4 = 62,
-			F5 = 0x3F,
-			F6 = 0x40,
+			F5 = 63,
+			F6 = 64,
 			F7 = 65,
 			F8 = 66,
 			F9 = 67,
@@ -404,11 +393,11 @@ namespace Win32
 			BROWSER_SEARCH = 101,
 			BROWSER_FAVORITES = 102,
 			BROWSER_HOME = 50,
-			VOLUME_MUTE = 0x20,
+			VOLUME_MUTE = 32,
 			VOLUME_DOWN = 46,
 			VOLUME_UP = 48,
 			MEDIA_NEXT_TRACK = 25,
-			MEDIA_PREV_TRACK = 0x10,
+			MEDIA_PREV_TRACK = 16,
 			MEDIA_STOP = 36,
 			MEDIA_PLAY_PAUSE = 34,
 			LAUNCH_MAIL = 108,
@@ -486,6 +475,6 @@ namespace Win32
 		public static extern int ScrollWindowEx(IntPtr hWnd, int dx, int dy, IntPtr prcScroll, IntPtr prcClip, IntPtr hrgnUpdate, IntPtr prcUpdate, uint flags);
 
 		[DllImport("user32.dll")]
-		public static extern uint SendInput(uint nInputs, [In] [MarshalAs(UnmanagedType.LPArray)] INPUT[] pInputs, int cbSize);
+		public static extern uint SendInput(uint nInputs, [In][MarshalAs(UnmanagedType.LPArray)] INPUT[] pInputs, int cbSize);
 	}
 }

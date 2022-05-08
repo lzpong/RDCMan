@@ -1,9 +1,14 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 14.00
+Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.29519.87
+VisualStudioVersion = 16.0.32407.337
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RDCMan", "RDCMan.csproj", "{42229548-D7D0-4164-9EC6-97CC3F79E646}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RDCMan", "RDCMan.csproj", "{C862011B-2A9C-4F7F-BE06-2E7C3F5A2E04}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DDF378ED-9D4B-45BA-BEAD-FE53B2368134}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +16,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{42229548-D7D0-4164-9EC6-97CC3F79E646}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{42229548-D7D0-4164-9EC6-97CC3F79E646}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{42229548-D7D0-4164-9EC6-97CC3F79E646}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{42229548-D7D0-4164-9EC6-97CC3F79E646}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C862011B-2A9C-4F7F-BE06-2E7C3F5A2E04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C862011B-2A9C-4F7F-BE06-2E7C3F5A2E04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C862011B-2A9C-4F7F-BE06-2E7C3F5A2E04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C862011B-2A9C-4F7F-BE06-2E7C3F5A2E04}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {7F64EBE4-FBC5-460D-8525-903F3722FB21}
+		SolutionGuid = {FE1A1A73-2A1D-4B02-88BD-C4B2A4BF9A5A}
 	EndGlobalSection
 EndGlobal

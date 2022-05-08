@@ -1,7 +1,5 @@
-namespace Win32
-{
-	public class Messages
-	{
+namespace Win32 {
+	public class Messages {
 		public const uint WM_SETREDRAW = 11u;
 
 		public const uint WM_CLOSE = 16u;
