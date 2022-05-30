@@ -64,14 +64,14 @@ namespace RdcMan {
 
 		private readonly BandwidthItem[] _bandwidthItems;
 
-		protected GlobalOptionsDialog(Form parentForm) : base("Ñ¡Ïî", "È·¶¨", parentForm) {
+		protected GlobalOptionsDialog(Form parentForm) : base("é€‰é¡¹", "ç¡®å®š", parentForm) {
 			_bandwidthItems = new BandwidthItem[5]
 			{
 				new BandwidthItem("Modem (28.8 Kbps)", 15),
 				new BandwidthItem("Modem (56 Kbps)", 7),
 				new BandwidthItem("Broadband (128 Kpbs - 1.5 Mbps)", 257),
 				new BandwidthItem("LAN (10 Mbps or higher)", 384),
-				new BandwidthItem("×Ô¶¨Òå", 0)
+				new BandwidthItem("è‡ªå®šä¹‰", 0)
 			};
 			InitializeComponent();
 		}
@@ -172,20 +172,20 @@ namespace RdcMan {
 		private TabPage CreateFullScreenPage() {
 			int rowIndex = 0;
 			int num = 0;
-			TabPage tabPage = NewTabPage("È«ÆÁ");
-			_connectionBarEnabledCheckBox = FormTools.NewCheckBox("ÏÔÊ¾È«ÆÁÁ¬½ÓÀ¸", 0, rowIndex++, num++);
+			TabPage tabPage = NewTabPage("å…¨å±");
+			_connectionBarEnabledCheckBox = FormTools.NewCheckBox("æ˜¾ç¤ºå…¨å±è¿žæŽ¥æ ", 0, rowIndex++, num++);
 			_connectionBarEnabledCheckBox.CheckedChanged += ConnectionBarEnabledCheckedChanged;
-			_connectionBarAutoHiddenCheckBox = FormTools.NewCheckBox("×Ô¶¯Òþ²ØÁ¬½ÓÀ¸", 0, rowIndex++, num++);
+			_connectionBarAutoHiddenCheckBox = FormTools.NewCheckBox("è‡ªåŠ¨éšè—è¿žæŽ¥æ ", 0, rowIndex++, num++);
 			_connectionBarAutoHiddenCheckBox.Location = new Point(_connectionBarEnabledCheckBox.Left + 24, _connectionBarAutoHiddenCheckBox.Top);
-			FormTools.AddCheckBox(tabPage, "È«ÆÁ´°¿ÚÊ¼ÖÕÎ»ÓÚ×î¶¥²ã", Program.Preferences.Settings.FullScreenWindowIsTopMost, 0, ref rowIndex, ref num);
+			FormTools.AddCheckBox(tabPage, "å…¨å±çª—å£å§‹ç»ˆä½äºŽæœ€é¡¶å±‚", Program.Preferences.Settings.FullScreenWindowIsTopMost, 0, ref rowIndex, ref num);
 			if (RdpClient.SupportsMonitorSpanning) {
-				FormTools.AddCheckBox(tabPage, "±ØÒªÊ±Ê¹ÓÃ¶àÌ¨ÏÔÊ¾Æ÷", Program.Preferences.Settings.UseMultipleMonitors, 0, ref rowIndex, ref num);
+				FormTools.AddCheckBox(tabPage, "å¿…è¦æ—¶ä½¿ç”¨å¤šå°æ˜¾ç¤ºå™¨", Program.Preferences.Settings.UseMultipleMonitors, 0, ref rowIndex, ref num);
 			}
 			if (RdpClient.SupportsPanning) {
-				_enablePanningCheckBox = FormTools.NewCheckBox("Ê¹ÓÃ»¬¶¯¶ø²»ÊÇ¹ö¶¯Ìõ", 0, rowIndex++, num++);
+				_enablePanningCheckBox = FormTools.NewCheckBox("ä½¿ç”¨æ»‘åŠ¨è€Œä¸æ˜¯æ»šåŠ¨æ¡", 0, rowIndex++, num++);
 				_enablePanningCheckBox.Setting = Program.Preferences.Settings.EnablePanning;
 				_enablePanningCheckBox.CheckedChanged += EnablePanningCheckedChanged;
-				Label label = FormTools.NewLabel("»¬¶¯ËÙ¶È", 0, rowIndex);
+				Label label = FormTools.NewLabel("æ»‘åŠ¨é€Ÿåº¦", 0, rowIndex);
 				label.Size = new Size(116, FormTools.ControlHeight);
 				label.Location = new Point(_enablePanningCheckBox.Left + 24, label.Top);
 				_panningAccelerationUpDown = new RdcNumericUpDown {
@@ -203,35 +203,35 @@ namespace RdcMan {
 		}
 
 		private TabPage CreateExperiencePage() {
-			TabPage tabPage = NewTabPage("ÌåÑé");
+			TabPage tabPage = NewTabPage("ä½“éªŒ");
 			int rowIndex = 0;
 			int num = 0;
-			_bandwidthComboBox = FormTools.AddLabeledValueDropDown(tabPage, "Á¬½ÓËÙ¶È(&S)", ref rowIndex, ref num, (BandwidthItem v) => v.Text, _bandwidthItems);
+			_bandwidthComboBox = FormTools.AddLabeledValueDropDown(tabPage, "è¿žæŽ¥é€Ÿåº¦(&S)", ref rowIndex, ref num, (BandwidthItem v) => v.Text, _bandwidthItems);
 			_bandwidthComboBox.SelectedIndexChanged += BandwidthCombo_ControlChanged;
-			Label label = FormTools.NewLabel("ÔÊÐíÒÔÏÂ:", 0, rowIndex);
-			_desktopBackgroundCheckBox = FormTools.NewCheckBox("×ÀÃæ±³¾°", 1, rowIndex++, num++);
+			Label label = FormTools.NewLabel("å…è®¸ä»¥ä¸‹:", 0, rowIndex);
+			_desktopBackgroundCheckBox = FormTools.NewCheckBox("æ¡Œé¢èƒŒæ™¯", 1, rowIndex++, num++);
 			_desktopBackgroundCheckBox.CheckedChanged += PerfCheckBox_CheckedChanged;
-			_fontSmoothingCheckBox = FormTools.NewCheckBox("×ÖÌåÆ½»¬", 1, rowIndex++, num++);
+			_fontSmoothingCheckBox = FormTools.NewCheckBox("å­—ä½“å¹³æ»‘", 1, rowIndex++, num++);
 			_fontSmoothingCheckBox.CheckedChanged += PerfCheckBox_CheckedChanged;
-			_desktopCompositionCheckBox = FormTools.NewCheckBox(" ×ÀÃæÆ´ºÏ", 1, rowIndex++, num++);
+			_desktopCompositionCheckBox = FormTools.NewCheckBox("æ¡Œé¢æ‹¼åˆ", 1, rowIndex++, num++);
 			_desktopCompositionCheckBox.CheckedChanged += PerfCheckBox_CheckedChanged;
-			_windowDragCheckBox = FormTools.NewCheckBox("ÍÏ¶¯Ê±ÏÔÊ¾´°¿ÚÄÚÈÝ", 1, rowIndex++, num++);
+			_windowDragCheckBox = FormTools.NewCheckBox("æ‹–åŠ¨æ—¶æ˜¾ç¤ºçª—å£å†…å®¹", 1, rowIndex++, num++);
 			_windowDragCheckBox.CheckedChanged += PerfCheckBox_CheckedChanged;
-			_menuAnimationCheckBox = FormTools.NewCheckBox("²Ëµ¥ºÍ´°¿Ú¶¯»­", 1, rowIndex++, num++);
+			_menuAnimationCheckBox = FormTools.NewCheckBox("èœå•å’Œçª—å£åŠ¨ç”»", 1, rowIndex++, num++);
 			_menuAnimationCheckBox.CheckedChanged += PerfCheckBox_CheckedChanged;
-			_themesCheckBox = FormTools.NewCheckBox("Ö÷Ìâ", 1, rowIndex++, num++);
+			_themesCheckBox = FormTools.NewCheckBox("ä¸»é¢˜", 1, rowIndex++, num++);
 			_themesCheckBox.CheckedChanged += PerfCheckBox_CheckedChanged;
 			rowIndex++;
-			_persistentBitmapCachingCheckBox = FormTools.NewCheckBox("³Ö¾ÃÎ»Í¼»º´æ", 1, rowIndex++, num++);
+			_persistentBitmapCachingCheckBox = FormTools.NewCheckBox("æŒä¹…ä½å›¾ç¼“å­˜", 1, rowIndex++, num++);
 			tabPage.Controls.Add(label, _desktopBackgroundCheckBox, _fontSmoothingCheckBox, _desktopCompositionCheckBox, _windowDragCheckBox, _menuAnimationCheckBox, _themesCheckBox, _persistentBitmapCachingCheckBox);
 			return tabPage;
 		}
 
 		private TabPage CreateHotKeysPage() {
 			GlobalSettings settings = Program.Preferences.Settings;
-			TabPage tabPage = NewTabPage("ÈÈ¼ü");
+			TabPage tabPage = NewTabPage("çƒ­é”®");
 			GroupBox groupBox = new GroupBox {
-				Text = "ALT ÈÈ¼ü£¨½öÔÚ Windows ×éºÏ¼üÎ´ÖØ¶¨ÏòÊ±ÓÐÐ§£©"
+				Text = "ALT çƒ­é”®ï¼ˆä»…åœ¨ Windows ç»„åˆé”®æœªé‡å®šå‘æ—¶æœ‰æ•ˆï¼‰"
 			};
 			int rowIndex = 0;
 			int num = 0;
@@ -242,14 +242,14 @@ namespace RdcMan {
 			AddHotKeyBox(groupBox, "CTRL+ESC", "ALT+", settings.HotKeyCtrlEsc, ref rowIndex, ref num);
 			groupBox.SizeAndLocate(null);
 			GroupBox groupBox2 = new GroupBox {
-				Text = "CTRL+ALT ÈÈ¼ü£¨Ê¼ÖÕÓÐÐ§£©"
+				Text = "CTRL+ALT çƒ­é”®ï¼ˆå§‹ç»ˆæœ‰æ•ˆï¼‰"
 			};
 			rowIndex = 0;
 			num = 0;
 			AddHotKeyBox(groupBox2, "CTRL+ALT+DEL", "CTRL+ALT+", settings.HotKeyCtrlAltDel, ref rowIndex, ref num);
-			AddHotKeyBox(groupBox2, "È«ÆÁ", "CTRL+ALT+", settings.HotKeyFullScreen, ref rowIndex, ref num);
-			AddHotKeyBox(groupBox2, "ÉÏÒ»¸ö»á»°", "CTRL+ALT+", settings.HotKeyFocusReleaseLeft, ref rowIndex, ref num);
-			AddHotKeyBox(groupBox2, "Ñ¡Ôñ»á»°", "CTRL+ALT+", settings.HotKeyFocusReleaseRight, ref rowIndex, ref num);
+			AddHotKeyBox(groupBox2, "å…¨å±", "CTRL+ALT+", settings.HotKeyFullScreen, ref rowIndex, ref num);
+			AddHotKeyBox(groupBox2, "ä¸Šä¸€ä¸ªä¼šè¯", "CTRL+ALT+", settings.HotKeyFocusReleaseLeft, ref rowIndex, ref num);
+			AddHotKeyBox(groupBox2, "é€‰æ‹©ä¼šè¯", "CTRL+ALT+", settings.HotKeyFocusReleaseRight, ref rowIndex, ref num);
 			groupBox2.SizeAndLocate(groupBox);
 			tabPage.Controls.Add(groupBox, groupBox2);
 			return tabPage;
@@ -268,13 +268,13 @@ namespace RdcMan {
 		}
 
 		private TabPage CreateClientAreaPage() {
-			TabPage tabPage = NewTabPage("¿Í»§Çø");
+			TabPage tabPage = NewTabPage("å®¢æˆ·åŒº");
 			_casSizeGroup = new GroupBox {
-				Text = "¿Í»§Çø´óÐ¡"
+				Text = "å®¢æˆ·åŒºå¤§å°"
 			};
 			RdcCheckBox value = new RdcCheckBox {
 				Size = new Size(480, 24),
-				Text = "Ëø¶¨´°¿Ú´óÐ¡(&L)",
+				Text = "é”å®šçª—å£å¤§å°(&L)",
 				Location = FormTools.NewLocation(0, 0),
 				TabIndex = 0,
 				TabStop = true,
@@ -284,7 +284,7 @@ namespace RdcMan {
 			_casSizeGroup.Controls.AddRange(FormTools.NewSizeRadios());
 			_casCustomRadio = new RadioButton {
 				Size = new Size(86, 24),
-				Text = "×Ô¶¨Òå(&C)"
+				Text = "è‡ªå®šä¹‰(&C)"
 			};
 			_casSizeGroup.Controls.Add(_casCustomRadio);
 			_casCustomButton = new Button {
@@ -297,15 +297,15 @@ namespace RdcMan {
 
 			GroupBox groupBox = new GroupBox {
 				Size = new Size(512, 72),
-				Text = "ËõÂÔÍ¼µ¥Î»´óÐ¡"
+				Text = "ç¼©ç•¥å›¾å•ä½å¤§å°"
 			};
 			_thumbnailPixelsRadio = new RadioButton {
 				Size = new Size(80, 24),
-				Text = "ÏñËØ(&X)"
+				Text = "åƒç´ (&X)"
 			};
 			_thumbnailPercentageRadio = new RadioButton {
 				Size = new Size(88, 24),
-				Text = "°Ù·Ö±È(&R)"
+				Text = "ç™¾åˆ†æ¯”(&R)"
 			};
 			_thumbnailPercentageRadio.CheckedChanged += ThumbnailPercentageRadioCheckedChanged;
 			groupBox.Controls.Add(_thumbnailPixelsRadio, _thumbnailPercentageRadio);
@@ -316,7 +316,7 @@ namespace RdcMan {
 				TabIndex = _thumbnailPercentageRadio.TabIndex + 1
 			};
 			_thumbnailPixelsButton.Click += CustomSizeClick;
-			_thumbnailPercentageTextBox = new NumericTextBox(1, 100, "°Ù·Ö±È±ØÐëÔÚ 1 µ½ 100 Ö®¼ä£¨º¬£©") {
+			_thumbnailPercentageTextBox = new NumericTextBox(1, 100, "ç™¾åˆ†æ¯”å¿…é¡»åœ¨ 1 åˆ° 100 ä¹‹é—´ï¼ˆå«ï¼‰") {
 				Enabled = false,
 				Location = new Point(num + 11, _thumbnailPercentageRadio.Location.Y + 2),
 				Size = new Size(72, FormTools.ControlHeight),
@@ -331,27 +331,27 @@ namespace RdcMan {
 		private TabPage CreateServerTreePage() {
 			int rowIndex = 0;
 			int num = 0;
-			TabPage tabPage = NewTabPage("Ê÷");
+			TabPage tabPage = NewTabPage("æ ‘");
 			GroupBox groupBox = new GroupBox {
-				Text = "·þÎñÆ÷Ê÷"
+				Text = "æœåŠ¡å™¨æ ‘"
 			};
-			FormTools.AddCheckBox(groupBox, "µ¥»÷ÒÔÑ¡Ôñ½«½¹µã×ªÒÆµ½Ô¶³Ì¿Í»§¶Ë", Program.Preferences.Settings.FocusOnClick, 0, ref rowIndex, ref num);
-			FormTools.AddCheckBox(groupBox, "Ê÷¿Ø¼þ´¦ÓÚ·Ç»î¶¯×´Ì¬Ê±Ê¹½Úµã±ä°µ", Program.Preferences.Settings.DimNodesWhenInactive, 0, ref rowIndex, ref num);
-			_treeLocationCombo = FormTools.AddLabeledValueDropDown(groupBox, "Î»ÖÃ", ref rowIndex, ref num, (DockStyle v) => v.ToString(), new DockStyle[2]
+			FormTools.AddCheckBox(groupBox, "å•å‡»ä»¥é€‰æ‹©å°†ç„¦ç‚¹è½¬ç§»åˆ°è¿œç¨‹å®¢æˆ·ç«¯", Program.Preferences.Settings.FocusOnClick, 0, ref rowIndex, ref num);
+			FormTools.AddCheckBox(groupBox, "æ ‘æŽ§ä»¶å¤„äºŽéžæ´»åŠ¨çŠ¶æ€æ—¶ä½¿èŠ‚ç‚¹å˜æš—", Program.Preferences.Settings.DimNodesWhenInactive, 0, ref rowIndex, ref num);
+			_treeLocationCombo = FormTools.AddLabeledValueDropDown(groupBox, "ä½ç½®", ref rowIndex, ref num, (DockStyle v) => v.ToString(), new DockStyle[2]
 			{
 				DockStyle.Left,
 				DockStyle.Right
 			});
-			_treeVisibilityCombo = FormTools.AddLabeledValueDropDown(groupBox, "¿É¼ûÐÔ", ref rowIndex, ref num, (ControlVisibility v) => v.ToString(), new ControlVisibility[3]
+			_treeVisibilityCombo = FormTools.AddLabeledValueDropDown(groupBox, "å¯è§æ€§", ref rowIndex, ref num, (ControlVisibility v) => v.ToString(), new ControlVisibility[3]
 			{
 				ControlVisibility.Dock,
 				ControlVisibility.AutoHide,
 				ControlVisibility.Hide
 			});
-			Label label = FormTools.NewLabel("µ¯³öÑÓ³Ù£º", 0, rowIndex++);
+			Label label = FormTools.NewLabel("å¼¹å‡ºå»¶è¿Ÿï¼š", 0, rowIndex++);
 			label.Left += 66;
 			label.Size = new Size(80, label.Height);
-			NumericTextBox serverTreeAutoHidePopUpDelay = new NumericTextBox(0, 1000, "×Ô¶¯Òþ²Øµ¯³öÑÓ³Ù±ØÐëÎª 0 µ½ 1000 ºÁÃë") {
+			NumericTextBox serverTreeAutoHidePopUpDelay = new NumericTextBox(0, 1000, "è‡ªåŠ¨éšè—å¼¹å‡ºå»¶è¿Ÿå¿…é¡»ä¸º 0 åˆ° 1000 æ¯«ç§’") {
 				Enabled = false,
 				Location = new Point(label.Right, label.Top),
 				Size = new Size(40, 24),
@@ -366,13 +366,13 @@ namespace RdcMan {
 			Label label2 = new Label {
 				Location = new Point(serverTreeAutoHidePopUpDelay.Right + 3, label.Top+4),
 				Size = new Size(80, 24),
-				Text = "ºÁÃë"
+				Text = "æ¯«ç§’"
 			};
 			groupBox.Controls.Add(serverTreeAutoHidePopUpDelay, label2);
 			groupBox.SizeAndLocate(null);
 			groupBox.Height -= 6;
 			_virtualGroupsGroup = new GroupBox {
-				Text = "ÐéÄâ×é"
+				Text = "è™šæ‹Ÿç»„"
 			};
 			foreach (IBuiltInVirtualGroup item in Program.BuiltInVirtualGroups.Where((IBuiltInVirtualGroup group) => group.IsVisibilityConfigurable)) {
 				_virtualGroupsGroup.Controls.Add(new CheckBox {
@@ -386,13 +386,13 @@ namespace RdcMan {
 			rowIndex = 0;
 			num = 0;
 			GroupBox groupBox2 = new GroupBox {
-				Text = "ÅÅÐò"
+				Text = "æŽ’åº"
 			};
-			FormTools.AddLabeledValueDropDown(groupBox2, "×éÅÅÐòË³Ðò", Program.Preferences.Settings.GroupSortOrder, ref rowIndex, ref num, Helpers.SortOrderToString, new SortOrder[2] {
+			FormTools.AddLabeledValueDropDown(groupBox2, "ç»„æŽ’åºé¡ºåº", Program.Preferences.Settings.GroupSortOrder, ref rowIndex, ref num, Helpers.SortOrderToString, new SortOrder[2] {
 				SortOrder.ByName,
 				SortOrder.None
 			});
-			FormTools.AddLabeledEnumDropDown(groupBox2, "·þÎñÆ÷ÅÅÐòË³Ðò", Program.Preferences.Settings.ServerSortOrder, ref rowIndex, ref num, Helpers.SortOrderToString);
+			FormTools.AddLabeledEnumDropDown(groupBox2, "æœåŠ¡å™¨æŽ’åºé¡ºåº", Program.Preferences.Settings.ServerSortOrder, ref rowIndex, ref num, Helpers.SortOrderToString);
 			FormTools.LayoutGroupBox(groupBox2, 2, _virtualGroupsGroup);
 			tabPage.Controls.Add(groupBox, _virtualGroupsGroup, groupBox2);
 			return tabPage;
@@ -401,11 +401,11 @@ namespace RdcMan {
 		private TabPage CreateGeneralPage() {
 			int rowIndex = 0;
 			int num = 0;
-			TabPage tabPage = NewTabPage("³£¹æ");
-			FormTools.AddCheckBox(tabPage, "Òþ²ØÖ÷²Ëµ¥£¬Ö±µ½°´ÏÂ ALT", Program.Preferences.Settings.HideMainMenu, 0, ref rowIndex, ref num);
-			RdcCheckBox autoSaveCheckBox = FormTools.AddCheckBox(tabPage, "×Ô¶¯±£´æ¼ä¸ô:", Program.Preferences.Settings.AutoSaveFiles, 0, ref rowIndex, ref num);
+			TabPage tabPage = NewTabPage("å¸¸è§„");
+			FormTools.AddCheckBox(tabPage, "éšè—ä¸»èœå•ï¼Œç›´åˆ°æŒ‰ä¸‹ ALT", Program.Preferences.Settings.HideMainMenu, 0, ref rowIndex, ref num);
+			RdcCheckBox autoSaveCheckBox = FormTools.AddCheckBox(tabPage, "è‡ªåŠ¨ä¿å­˜é—´éš”:", Program.Preferences.Settings.AutoSaveFiles, 0, ref rowIndex, ref num);
 			autoSaveCheckBox.Size = new Size(120, 24);
-			NumericTextBox autoSaveInterval = new NumericTextBox(0, 60, "×Ô¶¯±£´æ¼ä¸ô±ØÐëÎª 0 µ½ 60 ·ÖÖÓ£¨º¬£©") {
+			NumericTextBox autoSaveInterval = new NumericTextBox(0, 60, "è‡ªåŠ¨ä¿å­˜é—´éš”å¿…é¡»ä¸º 0 åˆ° 60 åˆ†é’Ÿï¼ˆå«ï¼‰") {
 				Location = new Point(autoSaveCheckBox.Right + 1, autoSaveCheckBox.Top + 2),
 				Size = new Size(FormTools.ControlHeight, 24),
 				TabIndex = num++,
@@ -419,13 +419,13 @@ namespace RdcMan {
 			Label label = new Label {
 				Location = new Point(autoSaveInterval.Right + 3, autoSaveCheckBox.Top + 4),
 				Size = new Size(60, 24),
-				Text = "·ÖÖÓ"
+				Text = "åˆ†é’Ÿ"
 			};
-			RdcCheckBox rdcCheckBox = FormTools.AddCheckBox(tabPage, "Æô¶¯Ê±ÌáÊ¾ÖØÐÂÁ¬½ÓÒÑÁ¬½ÓµÄ·þÎñÆ÷", Program.Preferences.Settings.ReconnectOnStartup, 0, ref rowIndex, ref num);
+			RdcCheckBox rdcCheckBox = FormTools.AddCheckBox(tabPage, "å¯åŠ¨æ—¶æç¤ºé‡æ–°è¿žæŽ¥å·²è¿žæŽ¥çš„æœåŠ¡å™¨", Program.Preferences.Settings.ReconnectOnStartup, 0, ref rowIndex, ref num);
 			Button button = new Button {
 				Location = new Point(8, rdcCheckBox.Bottom + 8),
 				TabIndex = num++,
-				Text = "Ä¬ÈÏ×éÉèÖÃ...",
+				Text = "é»˜è®¤ç»„è®¾ç½®...",
 				Width = 140
 			};
 			button.Click += delegate {
@@ -483,7 +483,7 @@ namespace RdcMan {
 			if (!_inHandler) {
 				_inHandler = true;
 				int flags = ComputeFlagsFromCheckBoxes();
-				BandwidthItem selectedValue = _bandwidthItems.Where((BandwidthItem i) => i.Flags == flags).FirstOrDefault() ?? _bandwidthItems.First((BandwidthItem i) => i.Text.Equals("×Ô¶¨Òå"));
+				BandwidthItem selectedValue = _bandwidthItems.Where((BandwidthItem i) => i.Flags == flags).FirstOrDefault() ?? _bandwidthItems.First((BandwidthItem i) => i.Text.Equals("è‡ªå®šä¹‰"));
 				_bandwidthComboBox.SelectedValue = selectedValue;
 				_inHandler = false;
 			}
