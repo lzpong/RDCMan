@@ -32,7 +32,7 @@ namespace RdcMan
 			this._profileNameTextBox.Enabled = true;
 			this._profileNameTextBox.Text = name;
 			this._profileNameTextBox.Validate = new System.Func<string>(ValidateProfileName);
-			this._locationComboBox = RdcMan.FormTools.AddLabeledValueDropDown<RdcMan.ProfileScope>(this, "Œª÷√(&L)", ref rowIndex, ref num, null, null);
+			this._locationComboBox = RdcMan.FormTools.AddLabeledValueDropDown<RdcMan.ProfileScope>(this, "Œª÷√(&L)£∫", ref rowIndex, ref num, null, null);
 			this._locationComboBox.AddItem("Global", RdcMan.ProfileScope.Global);
 			this._locationComboBox.SelectedIndex = 0;
 			if (this._file != null)

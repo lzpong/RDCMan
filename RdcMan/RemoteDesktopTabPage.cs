@@ -16,7 +16,7 @@ namespace RdcMan {
 			int num = 0;
 			int rowIndex = 0;
 			CreateInheritanceControl(ref rowIndex, ref num);
-			ValueComboBox<int> previousGroupBox = FormTools.AddLabeledValueDropDown(this, "颜色深度", settings.ColorDepth, ref rowIndex, ref num, (int v) => v.ToString(), new int[5] { 8, 15, 16, 24, 32 });
+			ValueComboBox<int> previousGroupBox = FormTools.AddLabeledValueDropDown(this, "颜色深度：", settings.ColorDepth, ref rowIndex, ref num, (int v) => v.ToString(), new int[5] { 8, 15, 16, 24, 32 });
 			RadioButton value = new RdcRadioButton {
 				Setting = settings.DesktopSizeSameAsClientAreaSize,
 				Size = new Size(140, 24),

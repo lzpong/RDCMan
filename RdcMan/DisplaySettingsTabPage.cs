@@ -22,8 +22,8 @@ namespace RdcMan {
 				TabIndex = tabIndex++
 			};
 			rdcNumericUpDown.Location = new Point(rdcNumericUpDown.Location.X, rdcNumericUpDown.Location.Y + 2);
-			FormTools.AddLabeledEnumDropDown(this, "停靠 RD 缩放(&D)", base.Settings.SmartSizeDockedWindow, ref rowIndex, ref tabIndex, RdpClient.SmartSizeMethodToString);
-			FormTools.AddLabeledEnumDropDown(this, "取消停靠 RD 缩放(&U)", base.Settings.SmartSizeUndockedWindow, ref rowIndex, ref tabIndex, RdpClient.SmartSizeMethodToString);
+			FormTools.AddLabeledEnumDropDown(this, "停靠 RD 缩放(&D)：", base.Settings.SmartSizeDockedWindow, ref rowIndex, ref tabIndex, RdpClient.SmartSizeMethodToString);
+			FormTools.AddLabeledEnumDropDown(this, "取消停靠 RD 缩放(&U)：", base.Settings.SmartSizeUndockedWindow, ref rowIndex, ref tabIndex, RdpClient.SmartSizeMethodToString);
 		}
 	}
 }

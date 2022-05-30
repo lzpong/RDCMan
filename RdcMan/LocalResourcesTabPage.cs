@@ -24,16 +24,16 @@ namespace RdcMan {
 			int num = 0;
 			int rowIndex = 0;
 			CreateInheritanceControl(ref rowIndex, ref num);
-			FormTools.AddLabeledEnumDropDown(this, "远端声音(&S)", base.Settings.AudioRedirectionMode, ref rowIndex, ref num, RdpClient.AudioRedirectionModeToString);
+			FormTools.AddLabeledEnumDropDown(this, "远端声音(&S)：", base.Settings.AudioRedirectionMode, ref rowIndex, ref num, RdpClient.AudioRedirectionModeToString);
 			if (RdpClient.SupportsAdvancedAudioVideoRedirection) {
-				FormTools.AddLabeledEnumDropDown(this, "声音质量(&Q)", base.Settings.AudioRedirectionQuality, ref rowIndex, ref num, RdpClient.AudioRedirectionQualityToString);
-				FormTools.AddLabeledEnumDropDown(this, "远端录音(&R)", base.Settings.AudioCaptureRedirectionMode, ref rowIndex, ref num, RdpClient.AudioCaptureRedirectionModeToString);
+				FormTools.AddLabeledEnumDropDown(this, "声音质量(&Q)：", base.Settings.AudioRedirectionQuality, ref rowIndex, ref num, RdpClient.AudioRedirectionQualityToString);
+				FormTools.AddLabeledEnumDropDown(this, "远端录音(&R)：", base.Settings.AudioCaptureRedirectionMode, ref rowIndex, ref num, RdpClient.AudioCaptureRedirectionModeToString);
 			}
-			FormTools.AddLabeledEnumDropDown(this, "&Windows 组合键", base.Settings.KeyboardHookMode, ref rowIndex, ref num, RdpClient.KeyboardHookModeToString);
-			Label value = FormTools.NewLabel("重定向选项", 0, rowIndex);
+			FormTools.AddLabeledEnumDropDown(this, "&Windows 组合键：", base.Settings.KeyboardHookMode, ref rowIndex, ref num, RdpClient.KeyboardHookModeToString);
+			Label value = FormTools.NewLabel("重定向选项：", 0, rowIndex);
 			TreeView treeView = new TreeView {
 				Location = FormTools.NewLocation(1, rowIndex),
-				Size = new Size(340, 140),
+				Size = new Size(340, 190),
 				CheckBoxes = true,
 				Scrollable = true,
 				ShowLines = false

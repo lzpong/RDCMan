@@ -40,7 +40,7 @@ namespace RdcMan {
 				return null;
 			};
 			_gatewayLocalBypassCheckBox = FormTools.AddCheckBox(this, "绕过本地地址(&B)", base.Settings.BypassGatewayForLocalAddresses, 1, ref rowIndex, ref num);
-			_gatewayLogonMethodCombo = FormTools.AddLabeledEnumDropDown(this, "登录方式(&L)", base.Settings.LogonMethod, ref rowIndex, ref num, RdpClient.GatewayLogonMethodToString);
+			_gatewayLogonMethodCombo = FormTools.AddLabeledEnumDropDown(this, "登录方式(&L)：", base.Settings.LogonMethod, ref rowIndex, ref num, RdpClient.GatewayLogonMethodToString);
 			_gatewayLogonMethodCombo.SelectedValueChanged += GatewayLogonMethodComboBox_SelectedValueChanged;
 			if (RdpClient.SupportsGatewayCredentials) {
 				_gatewayCredSharingCheckBox = FormTools.AddCheckBox(this, "与远程计算机共享网关凭证(&C)", base.Settings.CredentialSharing, 1, ref rowIndex, ref num);

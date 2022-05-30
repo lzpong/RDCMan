@@ -36,7 +36,7 @@ namespace RdcMan {
 			_vmIdLabel = new Label {
 				Location = FormTools.NewLocation(1, rowIndex++),
 				Size = new Size(30, FormTools.ControlHeight),
-				Text = "&ID:",
+				Text = "&ID£º",
 				TextAlign = ContentAlignment.MiddleLeft
 			};
 			_vmIdTextBox = new RdcTextBox {

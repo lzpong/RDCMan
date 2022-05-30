@@ -61,7 +61,7 @@ namespace RdcMan {
 
 		public void AddControlsToParent(Control parent, LogonCredentialsDialogOptions options, ref int rowIndex, ref int tabIndex) {
 			if ((options & LogonCredentialsDialogOptions.ShowProfiles) != 0) {
-				ProfileComboBox = FormTools.AddLabeledValueDropDown<CredentialsProfile>(parent, "配置文件", ref rowIndex, ref tabIndex, null, null);
+				ProfileComboBox = FormTools.AddLabeledValueDropDown<CredentialsProfile>(parent, "配置文件：", ref rowIndex, ref tabIndex, null, null);
 				ProfileComboBox.SelectedIndexChanged += OnProfileChanged;
 				ProfileComboBox.VisibleChanged += OnProfileVisible;
 				_saveProfileButton = new Button {

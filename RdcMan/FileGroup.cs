@@ -120,7 +120,7 @@ namespace RdcMan {
 				.AppendLine();
 			foreach (KeyValuePair<string, List<string>> item in missingProfiles) {
 				stringBuilder.AppendLine("配置文件名称：" + item.Key);
-				stringBuilder.AppendFormat("引用于： ");
+				stringBuilder.AppendFormat("引用于：");
 				foreach (string item2 in item.Value) {
 					stringBuilder.Append(" " + item2);
 				}

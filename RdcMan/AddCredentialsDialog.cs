@@ -25,7 +25,7 @@ namespace RdcMan {
 			_file = node.FileGroup;
 			int rowIndex = 0;
 			int num = 0;
-			_profileNameTextBox = FormTools.AddLabeledTextBox(this, "配置文件名称(&N):", ref rowIndex, ref num);
+			_profileNameTextBox = FormTools.AddLabeledTextBox(this, "配置文件名称(&N)：", ref rowIndex, ref num);
 			_profileNameTextBox.Enabled = true;
 			_profileNameTextBox.TextChanged += delegate {
 				_profileNameUserCreated = true;
@@ -53,7 +53,7 @@ namespace RdcMan {
 				text = _file.Text;
 			}
 			if (credentialsProfiles.Contains(ProfileName)) {
-				DialogResult dialogResult = FormTools.YesNoDialog(ProfileName + " 已经存在于 " + text + Environment.NewLine + "是否更新?", MessageBoxDefaultButton.Button2);
+				DialogResult dialogResult = FormTools.YesNoDialog(ProfileName + " 已经存在于 " + text + Environment.NewLine + "是否更新？", MessageBoxDefaultButton.Button2);
 				if (dialogResult != DialogResult.Yes) {
 					return "配置文件存在";
 				}
