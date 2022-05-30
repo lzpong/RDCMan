@@ -1,6 +1,6 @@
-# RDCMan
-Remote Desktop Connection Manager
-微软远程桌面管理工具
+# RDCMan v2.90.1420.0
+Remote Desktop Connection Manager  
+微软远程桌面管理工具  
 reflect base on v2.90.1420.0 [Official download link 发布时间： 2022 年 1 月 27 日](https://docs.microsoft.com/zh-cn/sysinternals/downloads/rdcman)
 
 汉化,及本土优化
