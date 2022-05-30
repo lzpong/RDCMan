@@ -14,7 +14,7 @@ namespace RdcMan {
 			};
 			Label value = label;
 			Label value2 = new Label {
-				Location = new Point(53, 29),
+				Location = new Point(53, 31),
 				Width = num2 - FormTools.LabelWidth,
 				AutoSize = true,
 				Text = "Copyright © 2022 Microsoft. By Julian Burger, lzp 汉化"
