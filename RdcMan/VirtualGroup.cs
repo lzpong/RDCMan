@@ -1,25 +1,32 @@
-namespace RdcMan {
-	internal abstract class VirtualGroup : GroupBase {
+namespace RdcMan
+{
+	internal abstract class VirtualGroup : GroupBase
+	{
 		protected IServerRefFactory ServerRefFactory => this as IServerRefFactory;
 
-		protected VirtualGroup() {
+		protected VirtualGroup()
+		{
 			ChangeImageIndex(ImageConstants.Group);
 		}
 
-		protected override void InitSettings() {
+		protected override void InitSettings()
+		{
 			base.Properties = new GroupSettings();
 			base.InitSettings();
 		}
 
-		public sealed override bool CanAddServers() {
+		public sealed override bool CanAddServers()
+		{
 			return false;
 		}
 
-		public sealed override bool CanAddGroups() {
+		public sealed override bool CanAddGroups()
+		{
 			return false;
 		}
 
-		public sealed override bool CanDropGroups() {
+		public sealed override bool CanDropGroups()
+		{
 			return false;
 		}
 	}

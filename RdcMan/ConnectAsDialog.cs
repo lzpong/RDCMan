@@ -19,11 +19,13 @@ namespace RdcMan
 			connectAsDialog.LogonCredentials = new LogonCredentials();
 			connectAsDialog.ConnectionSettings = new ConnectionSettings();
 			if (node.LogonCredentials != null)
+			{
 				connectAsDialog.LogonCredentials.Copy(node.LogonCredentials);
-
+			}
 			if (node.ConnectionSettings != null)
+			{
 				connectAsDialog.ConnectionSettings.Copy(node.ConnectionSettings);
-
+			}
 			connectAsDialog.CreateControls(inputServerName: false, connectAsDialog.LogonCredentials, connectAsDialog.ConnectionSettings, node.FileGroup);
 			return connectAsDialog;
 		}

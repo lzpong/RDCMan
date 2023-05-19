@@ -56,7 +56,7 @@ namespace RdcMan
 				return "“{0}” 是保留的配置文件名称".InvariantFormat("Custom");
 			}
 			CredentialsStore credentialsProfiles = Program.CredentialsProfiles;
-			string text = "Global";//Global
+			string text = "Global";
 			if (ProfileScope == ProfileScope.File)
 			{
 				credentialsProfiles = _file.CredentialsProfiles;

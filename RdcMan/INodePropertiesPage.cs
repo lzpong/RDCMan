@@ -1,7 +1,9 @@
 using System;
 
-namespace RdcMan {
-	public interface INodePropertiesPage {
+namespace RdcMan
+{
+	public interface INodePropertiesPage
+	{
 		GroupBase ParentGroup { get; }
 
 		event Action<GroupBase> ParentGroupChanged;

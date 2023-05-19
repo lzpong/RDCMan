@@ -3,8 +3,10 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace RdcMan {
-	public class RemoteDesktopTabPage : SettingsTabPage<RemoteDesktopSettings> {
+namespace RdcMan
+{
+	public class RemoteDesktopTabPage : SettingsTabPage<RemoteDesktopSettings>
+	{
 		private readonly GroupBox _rdsSizeGroup;
 
 		private readonly RadioButton _rdsCustomRadio;
@@ -12,7 +14,8 @@ namespace RdcMan {
 		private readonly Button _rdsCustomButton;
 
 		public RemoteDesktopTabPage(TabbedSettingsDialog dialog, RemoteDesktopSettings settings)
-			: base(dialog, settings) {
+			: base(dialog, settings)
+		{
 			int num = 0;
 			int rowIndex = 0;
 			CreateInheritanceControl(ref rowIndex, ref num);
@@ -46,48 +49,62 @@ namespace RdcMan {
 			base.Controls.Add(_rdsSizeGroup);
 		}
 
-		protected override void UpdateControls() {
+		protected override void UpdateControls()
+		{
 			base.UpdateControls();
 			Size size = base.Settings.DesktopSize.Value;
-			if (!base.Settings.DesktopSizeSameAsClientAreaSize.Value && !base.Settings.DesktopSizeFullScreen.Value) {
-				RadioButton radioButton = _rdsSizeGroup.Controls.OfType<RadioButton>().Where(delegate (RadioButton r) {
+			if (!base.Settings.DesktopSizeSameAsClientAreaSize.Value && !base.Settings.DesktopSizeFullScreen.Value)
+			{
+				RadioButton radioButton = _rdsSizeGroup.Controls.OfType<RadioButton>().Where(delegate(RadioButton r)
+				{
 					Size? size2 = (Size?)r.Tag;
 					Size size3 = size;
 					if (!size2.HasValue)
+					{
 						return false;
-
+					}
 					return !size2.HasValue || size2.GetValueOrDefault() == size3;
 				}).FirstOrDefault();
 				if (radioButton != null)
+				{
 					radioButton.Checked = true;
+				}
 				else
+				{
 					_rdsCustomRadio.Checked = true;
+				}
 			}
 			_rdsCustomButton.Text = size.ToFormattedString();
 		}
 
-		protected override void UpdateSettings() {
+		protected override void UpdateSettings()
+		{
 			base.UpdateSettings();
 			if (base.Settings.DesktopSizeSameAsClientAreaSize.Value || base.Settings.DesktopSizeFullScreen.Value)
+			{
 				return;
-
+			}
 			string dim = _rdsCustomButton.Text;
-			if (!_rdsCustomRadio.Checked) {
+			if (!_rdsCustomRadio.Checked)
+			{
 				dim = (from r in _rdsSizeGroup.Controls.OfType<RadioButton>()
-					   where r.Checked
-					   select r).First().Text;
+					where r.Checked
+					select r).First().Text;
 			}
 			base.Settings.DesktopSize.Value = SizeHelper.Parse(dim);
 		}
 
-		private void CustomSizeClick(object sender, EventArgs e) {
+		private void CustomSizeClick(object sender, EventArgs e)
+		{
 			Button button = sender as Button;
 			RadioButton radioButton = button.Parent.GetNextControl(button, forward: false) as RadioButton;
 			radioButton.Checked = true;
 			Size size = SizeHelper.Parse(button.Text);
 			using CustomSizeDialog customSizeDialog = new CustomSizeDialog(size);
 			if (customSizeDialog.ShowDialog() == DialogResult.OK)
+			{
 				button.Text = customSizeDialog.WidthText + SizeHelper.Separator + customSizeDialog.HeightText;
+			}
 		}
 	}
 }

@@ -1,5 +1,7 @@
-namespace RdcMan {
-	public enum MenuNames {
+namespace RdcMan
+{
+	public enum MenuNames
+	{
 		None,
 		File,
 		FileNew,

@@ -1,7 +1,9 @@
 using Microsoft.Win32;
 
-namespace RdcMan {
-	public class Policies {
+namespace RdcMan
+{
+	public class Policies
+	{
 		public const string PolicyRegKey = "RDCMan";
 
 		public static bool DisableLogOff;
@@ -12,7 +14,7 @@ namespace RdcMan {
 					.OpenSubKey("Software", writable: true)
 					.OpenSubKey("Policies", writable: true)
 					.OpenSubKey("Microsoft", writable: true)
-					.CreateSubKey(PolicyRegKey, RegistryKeyPermissionCheck.ReadSubTree);
+					.CreateSubKey("RDCMan", RegistryKeyPermissionCheck.ReadSubTree);
 				if (registryKey != null)
 					DisableLogOff = (int)registryKey.GetValue("DisableLogOff", 0) == 1;
 			}

@@ -1,8 +1,10 @@
 using System;
 
-namespace RdcMan {
+namespace RdcMan
+{
 	[Flags]
-	internal enum OperationBehavior {
+	internal enum OperationBehavior
+	{
 		None = 0,
 		SuspendSelect = 1,
 		SuspendSort = 2,

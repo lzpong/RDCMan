@@ -1,13 +1,17 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace RdcMan {
-	public abstract class DisplaySettingsTabPage<TSettingsGroup> : SettingsTabPage<TSettingsGroup> where TSettingsGroup : CommonDisplaySettings {
+namespace RdcMan
+{
+	public abstract class DisplaySettingsTabPage<TSettingsGroup> : SettingsTabPage<TSettingsGroup> where TSettingsGroup : CommonDisplaySettings
+	{
 		protected DisplaySettingsTabPage(TabbedSettingsDialog dialog, TSettingsGroup settings)
-			: base(dialog, settings) {
+			: base(dialog, settings)
+		{
 		}
 
-		protected void Create(out int rowIndex, out int tabIndex) {
+		protected void Create(out int rowIndex, out int tabIndex)
+		{
 			tabIndex = 0;
 			rowIndex = 0;
 			CreateInheritanceControl(ref rowIndex, ref tabIndex);
@@ -15,8 +19,8 @@ namespace RdcMan {
 			label.Size = new Size(140, 20);
 			RdcNumericUpDown rdcNumericUpDown = new RdcNumericUpDown {
 				Location = FormTools.NewLocation(1, rowIndex++),
-				Minimum = 1m,
-				Maximum = 9m,
+				Minimum = 1,
+				Maximum = 9,
 				Setting = base.Settings.ThumbnailScale,
 				Size = new Size(40, 20),
 				TabIndex = tabIndex++

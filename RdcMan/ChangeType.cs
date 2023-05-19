@@ -1,8 +1,10 @@
 using System;
 
-namespace RdcMan {
+namespace RdcMan
+{
 	[Flags]
-	public enum ChangeType {
+	public enum ChangeType
+	{
 		InvalidateUI = 1,
 		TreeChanged = 3,
 		PropertyChanged = 5

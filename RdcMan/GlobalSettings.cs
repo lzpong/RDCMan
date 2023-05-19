@@ -4,8 +4,10 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Xml;
 
-namespace RdcMan {
-	public sealed class GlobalSettings : SettingsGroup {
+namespace RdcMan
+{
+	public sealed class GlobalSettings : SettingsGroup
+	{
 		//public const string TabName = "Preferences";
 
 		private static Dictionary<string, SettingProperty> _settingProperties;
@@ -156,7 +158,8 @@ namespace RdcMan {
 		[Setting("WindowSize")]
 		public SizeSetting WindowSize { get; private set; }
 
-		static GlobalSettings() {
+		static GlobalSettings()
+		{
 			typeof(GlobalSettings).GetSettingProperties(out _settingProperties);
 			_settingProperties["ThumbnailSize"].Attribute.DefaultValue = new Size(160, 120);
 			_settingProperties["WindowPosition"].Attribute.DefaultValue = new Point(200, 200);
@@ -164,13 +167,17 @@ namespace RdcMan {
 		}
 
 		public GlobalSettings()
-			: base("首选项", "Settings") {
+			: base("首选项", "Settings")
+		{
 			base.InheritSettingsType.Mode = InheritanceMode.Disabled;
 		}
 
-		public void TransferPreferences(Preferences prefs) {
-			foreach (string key in _settingProperties.Keys) {
-				try {
+		public void TransferPreferences(Preferences prefs)
+		{
+			foreach (string key in _settingProperties.Keys)
+			{
+				try
+				{
 					object transferValue = prefs.GetTransferValue(key);
 					SetValue(key, transferValue);
 				}
@@ -178,26 +185,31 @@ namespace RdcMan {
 			}
 		}
 
-		public object GetValue(string name) {
+		public object GetValue(string name)
+		{
 			object value = _settingProperties[name].Property.GetValue(this, null);
 			return value.GetType().GetProperty("Value").GetValue(value, null);
 		}
 
-		public void SetValue(string name, object value) {
+		public void SetValue(string name, object value)
+		{
 			object value2 = _settingProperties[name].Property.GetValue(this, null);
 			value2.GetType().GetProperty("Value").SetValue(value2, value, null);
 		}
 
-		public override TabPage CreateTabPage(TabbedSettingsDialog dialog) {
+		public override TabPage CreateTabPage(TabbedSettingsDialog dialog)
+		{
 			throw new NotImplementedException();
 		}
 
-		protected override void WriteSettings(XmlTextWriter tw, RdcTreeNode node) {
+		protected override void WriteSettings(XmlTextWriter tw, RdcTreeNode node)
+		{
 			tw.WriteAttributeString("programVersion", Program.TheForm.VersionText);
 			base.WriteSettings(tw, node);
 		}
 
-		protected override void Copy(RdcTreeNode node) {
+		protected override void Copy(RdcTreeNode node)
+		{
 			throw new InvalidOperationException("GlobalSettings should never be copied");
 		}
 	}

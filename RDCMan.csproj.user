@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <Compile Update="RdcMan\About.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RdcMan\AddCredentialsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RdcMan\BuiltInVirtualGroupCheckedMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\CheckedMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\ClientPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\ClientSizeCheckedMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\ConnectAsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RdcMan\ConnectionSettingsTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\ConnectServersDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RdcMan\ConnectToDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RdcMan\CredentialsTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\CustomClientSizeCheckedMenuIte.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\CustomSizeDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RdcMan\DefaultGroupPropertiesDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RdcMan\DelegateCheckedMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\DelegateMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\DisplaySettingsTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\EncryptionSettingsTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\EnumMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\FileGroupPropertiesDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RdcMan\FileGroupPropertiesTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\FileRequiredMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\FindServersDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RdcMan\GatewaySettingsTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\GlobalOptionsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RdcMan\GroupBasePropertiesDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RdcMan\GroupBasePropertiesTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\GroupDisplaySettingsTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\GroupPropertiesDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RdcMan\GroupPropertiesTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\HotKeyBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\ImportServersPropertiesPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\ListSessionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RdcMan\LocalResourcesTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\LogonCredentialsTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\LogonSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RdcMan\LongRunningActionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RdcMan\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RdcMan\NodePropertiesDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RdcMan\NodePropertiesPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\NumericTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\QuickConnectDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RdcMan\QuickConnectTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\RdcBaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RdcMan\RdcCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\RdcDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RdcMan\RdcListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\RdcMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\RdcMenuStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\RdcNumericUpDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\RdcRadioButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\RdcTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\RdpClient10.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\RdpClient5.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\RdpClient6.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\RdpClient7.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\RdpClient8.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\RdpClient9.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\RemoteDesktopsMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\RemoteDesktopTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\SaveCredentialsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RdcMan\SecuritySettingsTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\SelectActiveServerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RdcMan\SelectedNodeMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\SelectServersDialogBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RdcMan\SendKeysMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\ServerBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\ServerDisplaySettingsTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\ServerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RdcMan\ServerLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\ServerMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\ServerPropertiesDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RdcMan\ServerPropertiesTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\ServerTree.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\ServerTreeLocationMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\ServerTreeVisibilityMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\SettingsTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\SmartGroupPropertiesDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RdcMan\SmartGroupPropertiesTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\SortGroupsCheckedMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\SortServersCheckedMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="RdcMan\TabbedSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RdcMan\ValueComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>

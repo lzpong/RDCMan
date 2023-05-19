@@ -1,5 +1,7 @@
-namespace RdcMan {
-	public enum ProfileScope {
+namespace RdcMan
+{
+	public enum ProfileScope
+	{
 		Global,
 		File,
 		Local

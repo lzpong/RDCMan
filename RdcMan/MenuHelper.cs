@@ -4,9 +4,12 @@ using System.Linq;
 using System.Windows.Forms;
 using MSTSCLib;
 
-namespace RdcMan {
-	public static class MenuHelper {
-		public static void AddSessionMenuItems(ContextMenuStrip menu, ServerBase server) {
+namespace RdcMan
+{
+	public static class MenuHelper
+	{
+		public static void AddSessionMenuItems(ContextMenuStrip menu, ServerBase server)
+		{
 			bool isConnected = server.IsConnected;
 			ToolStripMenuItem toolStripMenuItem = new DelegateMenuItem("连接(&C)", MenuNames.SessionConnect, server.Connect);
 			toolStripMenuItem.Enabled = !isConnected;
@@ -14,7 +17,7 @@ namespace RdcMan {
 			toolStripMenuItem = new DelegateMenuItem("连接为(&A)...", MenuNames.SessionConnectAs, server.DoConnectAs);
 			toolStripMenuItem.Enabled = !isConnected;
 			menu.Items.Add(toolStripMenuItem);
-			toolStripMenuItem = new DelegateMenuItem("重新连接(&R)", MenuNames.SessionReconnect, server.Reconnect);
+			toolStripMenuItem = new DelegateMenuItem("重新连接(&C)", MenuNames.SessionReconnect, server.Reconnect);
 			toolStripMenuItem.Enabled = isConnected;
 			menu.Items.Add(toolStripMenuItem);
 			menu.Items.Add("-");
@@ -39,7 +42,8 @@ namespace RdcMan {
 			}));
 		}
 
-		public static void AddSendKeysMenuItems(ToolStripMenuItem parentItem, Func<ServerBase> getServer) {
+		public static void AddSendKeysMenuItems(ToolStripMenuItem parentItem, Func<ServerBase> getServer)
+		{
 			List<SendKeysMenuItem> list = new List<SendKeysMenuItem>(new SendKeysMenuItem[4] {
 				new SendKeysMenuItem("安全对话框", new Keys[3] {
 					Keys.ControlKey,
@@ -60,41 +64,53 @@ namespace RdcMan {
 					Keys.Escape
 				})
 			});
-			foreach (SendKeysMenuItem item in list) {
-				item.Click += delegate (object sender, EventArgs e) {
+			foreach (SendKeysMenuItem item in list)
+			{
+				item.Click += delegate(object sender, EventArgs e)
+				{
 					SendKeys.Send((sender as SendKeysMenuItem).KeyCodes, getServer());
 				};
 				parentItem.DropDownItems.Add(item);
 			}
 		}
 
-		public static void AddRemoteActionsMenuItems(ToolStripMenuItem parentItem, Func<ServerBase> getServer) {
-			List<ToolStripMenuItem> list = new List<ToolStripMenuItem>(new ToolStripMenuItem[5] {
-				new ToolStripMenuItem("App commands") {
+		public static void AddRemoteActionsMenuItems(ToolStripMenuItem parentItem, Func<ServerBase> getServer)
+		{
+			List<ToolStripMenuItem> list = new List<ToolStripMenuItem>(new ToolStripMenuItem[5]
+			{
+				new ToolStripMenuItem("App commands")
+				{
 					Tag = RemoteSessionActionType.RemoteSessionActionAppbar
 				},
-				new ToolStripMenuItem("Charms") {
+				new ToolStripMenuItem("Charms")
+				{
 					Tag = RemoteSessionActionType.RemoteSessionActionCharms
 				},
-				new ToolStripMenuItem("Snap") {
+				new ToolStripMenuItem("Snap")
+				{
 					Tag = RemoteSessionActionType.RemoteSessionActionSnap
 				},
-				new ToolStripMenuItem("Switch apps") {
+				new ToolStripMenuItem("Switch apps")
+				{
 					Tag = RemoteSessionActionType.RemoteSessionActionAppSwitch
 				},
-				new ToolStripMenuItem("Start") {
+				new ToolStripMenuItem("Start")
+				{
 					Tag = RemoteSessionActionType.RemoteSessionActionStartScreen
 				}
 			});
-			foreach (ToolStripMenuItem item in list) {
-				item.Click += delegate (object sender, EventArgs e) {
+			foreach (ToolStripMenuItem item in list)
+			{
+				item.Click += delegate(object sender, EventArgs e)
+				{
 					getServer().ServerNode.SendRemoteAction((RemoteSessionActionType)(sender as ToolStripMenuItem).Tag);
 				};
 				parentItem.DropDownItems.Add(item);
 			}
 		}
 
-		public static void AddDockingMenuItems(ContextMenuStrip menu, ServerBase server) {
+		public static void AddDockingMenuItems(ContextMenuStrip menu, ServerBase server)
+		{
 			bool isConnected = server.IsConnected;
 			bool isClientFullScreen = server.IsClientFullScreen;
 			ToolStripMenuItem toolStripMenuItem = new DelegateMenuItem("全屏(&F)", MenuNames.SessionFullScreen, delegate {
@@ -117,7 +133,8 @@ namespace RdcMan {
 			menu.Items.Add(toolStripMenuItem);
 		}
 
-		public static void AddMaintenanceMenuItems(ContextMenuStrip menu, ServerBase server) {
+		public static void AddMaintenanceMenuItems(ContextMenuStrip menu, ServerBase server)
+		{
 			ToolStripMenuItem toolStripMenuItem = new DelegateMenuItem("删除服务器(&V)", MenuNames.EditRemove, delegate {
 				ServerTree.Instance.ConfirmRemove(server, askUser: true);
 			});
@@ -137,32 +154,43 @@ namespace RdcMan {
 			menu.Items.Add(toolStripMenuItem);
 		}
 
-		public static void ConnectTo() {
+		public static void ConnectTo()
+		{
 			using ConnectToDialog connectToDialog = ConnectToDialog.NewConnectToDialog(Program.TheForm);
-			if (connectToDialog.ShowDialog() == DialogResult.OK) {
+			if (connectToDialog.ShowDialog() == DialogResult.OK)
+			{
 				Server server = TemporaryServer.Create(connectToDialog);
 				server.Connect();
 				ServerTree.Instance.SelectedNode = server;
 			}
 		}
 
-		public static void FindServers() {
+		public static void FindServers()
+		{
 			using FindServersDialog findServersDialog = new FindServersDialog();
-			if (findServersDialog.ShowDialog() == DialogResult.OK) {
+			if (findServersDialog.ShowDialog() == DialogResult.OK)
+			{
 				ServerBase serverBase = findServersDialog.SelectedServers.FirstOrDefault();
 				if (serverBase != null)
+				{
 					ServerTree.Instance.SelectedNode = serverBase;
+				}
 			}
 		}
 
-		public static void AddFavorite(RdcTreeNode node) {
+		public static void AddFavorite(RdcTreeNode node)
+		{
 			if (node is ServerBase serverBase)
+			{
 				FavoritesGroup.Instance.AddReference(serverBase);
+			}
 		}
 
-		public static void ShowGlobalOptionsDialog() {
+		public static void ShowGlobalOptionsDialog()
+		{
 			using GlobalOptionsDialog globalOptionsDialog = GlobalOptionsDialog.New();
-			if (globalOptionsDialog.ShowDialog() == DialogResult.OK) {
+			if (globalOptionsDialog.ShowDialog() == DialogResult.OK)
+			{
 				globalOptionsDialog.UpdatePreferences();
 				Program.Preferences.NeedToSave = true;
 				Program.Preferences.Save();

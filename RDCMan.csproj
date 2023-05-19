@@ -5,6 +5,7 @@
     <OutputType>WinExe</OutputType>
     <UseWindowsForms>True</UseWindowsForms>
     <TargetFramework>net48</TargetFramework>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
   <PropertyGroup>
     <LangVersion>9.0</LangVersion>
@@ -14,31 +15,42 @@
     <ApplicationIcon>Resources\app.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <RootNamespace />
+    <StartupObject></StartupObject>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="RdcMan\RdpClient10.cs" />
+    <Compile Remove="AxMSTSCLib\**" />
+    <Compile Remove="MSTSCLib\**" />
+    <EmbeddedResource Remove="AxMSTSCLib\**" />
+    <EmbeddedResource Remove="MSTSCLib\**" />
+    <None Remove="AxMSTSCLib\**" />
+    <None Remove="MSTSCLib\**" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\app.ico" />
     <EmbeddedResource Include="Resources\connected.ico" />
-    <EmbeddedResource Include="Resources\connectedselected.ico" />
     <EmbeddedResource Include="Resources\connecting.ico" />
-    <EmbeddedResource Include="Resources\connectingselected.ico" />
     <EmbeddedResource Include="Resources\disconnected.ico" />
     <EmbeddedResource Include="Resources\group.ico" />
+    <EmbeddedResource Include="Resources\connectedselected.ico" />
+    <EmbeddedResource Include="Resources\connectingselected.ico" />
     <EmbeddedResource Include="Resources\smartgroup.ico" />
+    <EmbeddedResource Include="Resources\default.ico" />
+    <EmbeddedResource Include="app.config" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="AxInterop.MSTSCLib">
+      <HintPath>RdcLib\AxInterop.MSTSCLib.dll</HintPath>
+      <Aliases></Aliases>
+    </Reference>
+    <Reference Include="Interop.MSTSCLib">
+      <HintPath>RdcLib\Interop.MSTSCLib.dll</HintPath>
+      <Aliases></Aliases>
+    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Security" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Configuration" />
-    <Reference Include="AxMSTSCLib">
-      <HintPath>RdcLib\AxMSTSCLib.dll</HintPath>
-    </Reference>
-    <Reference Include="MSTSCLib">
-      <HintPath>RdcLib\MSTSCLib.dll</HintPath>
-    </Reference>
   </ItemGroup>
 </Project>

@@ -1,5 +1,7 @@
-namespace RdcMan {
-	public enum InheritanceMode {
+namespace RdcMan
+{
+	public enum InheritanceMode
+	{
 		FromParent,
 		None,
 		Disabled

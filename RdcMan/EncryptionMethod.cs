@@ -1,5 +1,7 @@
-namespace RdcMan {
-	public enum EncryptionMethod {
+namespace RdcMan
+{
+	public enum EncryptionMethod
+	{
 		LogonCredentials,
 		Certificate
 	}

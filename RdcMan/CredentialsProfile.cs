@@ -1,16 +1,18 @@
-namespace RdcMan {
-	public class CredentialsProfile : ILogonCredentials, IDeferDecryption {
+namespace RdcMan
+{
+	public class CredentialsProfile : ILogonCredentials, IDeferDecryption
+	{
 		public const string CustomProfileName = "Custom";
 
 		private readonly string _profileName;
 
 		private readonly ProfileScope _profileScope;
 
-		private readonly string _userName;
+		private string _userName;
 
-		private readonly PasswordSetting _password;
+		private PasswordSetting _password;
 
-		private readonly string _domain;
+		private string _domain;
 
 		public string ProfileName => _profileName;
 
@@ -22,24 +24,34 @@ namespace RdcMan {
 
 		public string Domain => _domain;
 
-		public bool IsDecrypted {
-			get => _password.IsDecrypted;
-			set => _password.IsDecrypted = value;
+		public bool IsDecrypted
+		{
+			get
+			{
+				return _password.IsDecrypted;
+			}
+			set
+			{
+				_password.IsDecrypted = value;
+			}
 		}
 
 		public string QualifiedName => LogonCredentials.ConstructQualifiedName(this);
 
-		public CredentialsProfile(string profileName, ProfileScope profileScope, string userName, string password, string domain) {
+		public CredentialsProfile(string profileName, ProfileScope profileScope, string userName, string password, string domain)
+		{
 			_profileName = profileName;
 			_profileScope = profileScope;
 			_userName = userName;
-			_password = new PasswordSetting(password) {
+			_password = new PasswordSetting(password)
+			{
 				IsDecrypted = true
 			};
 			_domain = domain;
 		}
 
-		public CredentialsProfile(string profileName, ProfileScope profileScope, string userName, PasswordSetting password, string domain) {
+		public CredentialsProfile(string profileName, ProfileScope profileScope, string userName, PasswordSetting password, string domain)
+		{
 			_profileName = profileName;
 			_profileScope = profileScope;
 			_userName = userName;
@@ -47,11 +59,13 @@ namespace RdcMan {
 			_domain = domain;
 		}
 
-		public void Decrypt(EncryptionSettings settings) {
+		public void Decrypt(EncryptionSettings settings)
+		{
 			_password.Decrypt(settings);
 		}
 
-		public override string ToString() {
+		public override string ToString()
+		{
 			return ProfileName;
 		}
 	}

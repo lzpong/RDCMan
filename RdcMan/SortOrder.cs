@@ -1,5 +1,7 @@
-namespace RdcMan {
-	public enum SortOrder {
+namespace RdcMan
+{
+	public enum SortOrder
+	{
 		ByStatus,
 		ByName,
 		None

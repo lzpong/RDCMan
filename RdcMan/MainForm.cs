@@ -6,8 +6,10 @@ using System.Reflection;
 using System.Windows.Forms;
 using Win32;
 
-namespace RdcMan {
-	internal class MainForm : RdcBaseForm, IMainForm {
+namespace RdcMan
+{
+	internal class MainForm : RdcBaseForm, IMainForm
+	{
 		private const int MinimumRemoteDesktopPanelHeight = 200;
 
 		private const int AutoHideIntervalInMilliseconds = 250;
@@ -78,22 +80,22 @@ namespace RdcMan {
 
 		public bool IsInternalVersion { get; private set; }
 
-		public DockStyle ServerTreeLocation {
-			get {
-				return Program.Preferences.ServerTreeLocation;
-			}
-			set {
+		public DockStyle ServerTreeLocation
+		{
+			get => Program.Preferences.ServerTreeLocation;
+			set
+			{
 				Program.Preferences.ServerTreeLocation = value;
 				_treeSplitter.Dock = value;
 				ServerTree.Instance.Dock = value;
 			}
 		}
 
-		public ControlVisibility ServerTreeVisibility {
-			get {
-				return Program.Preferences.ServerTreeVisibility;
-			}
-			set {
+		public ControlVisibility ServerTreeVisibility
+		{
+			get => Program.Preferences.ServerTreeVisibility;
+			set
+			{
 				Program.Preferences.ServerTreeVisibility = value;
 				Size clientSize = GetClientSize();
 				UpdateServerTreeVisibility(value);
@@ -103,115 +105,143 @@ namespace RdcMan {
 
 		MenuStrip IMainForm.MainMenuStrip => _menuStrip;
 
-		private MainForm() {
-			Shortcuts = new Dictionary<Keys, Action> {
+		private MainForm()
+		{
+			Shortcuts = new Dictionary<Keys, Action>
+			{
 				{
 					Keys.N | Keys.Control,
-					delegate {
+					delegate
+					{
 						OnFileNew();
 					}
 				},
 				{
 					Keys.O | Keys.Control,
-					delegate {
+					delegate
+					{
 						OnFileOpen();
 					}
 				},
 				{
 					Keys.S | Keys.Control,
-					delegate {
+					delegate
+					{
 						OnFileSave();
 					}
 				},
 				{
 					Keys.A | Keys.Control,
-					delegate {
+					delegate
+					{
 						AddNodeDialogHelper.AddServersDialog();
 					}
 				},
 				{
 					Keys.G | Keys.Control,
-					delegate {
+					delegate
+					{
 						AddNodeDialogHelper.AddGroupDialog();
 					}
 				},
 				{
 					Keys.F | Keys.Control,
-					delegate {
+					delegate
+					{
 						MenuHelper.FindServers();
 					}
 				},
 				{
 					Keys.Q | Keys.Control,
-					delegate {
+					delegate
+					{
 						MenuHelper.ConnectTo();
 					}
 				}
 			};
-			SelectedNodeShortcuts = new Dictionary<Keys, Action<RdcTreeNode>> {
+			SelectedNodeShortcuts = new Dictionary<Keys, Action<RdcTreeNode>>
+			{
 				{
 					Keys.Delete,
-					delegate(RdcTreeNode node) {
+					delegate(RdcTreeNode node)
+					{
 						ServerTree.Instance.ConfirmRemove(node, askUser: true);
 					}
 				},
 				{
 					Keys.Delete | Keys.Shift,
-					delegate(RdcTreeNode node) {
+					delegate(RdcTreeNode node)
+					{
 						ServerTree.Instance.ConfirmRemove(node, askUser: false);
 					}
 				},
 				{
 					Keys.Return,
-					delegate(RdcTreeNode node) {
+					delegate(RdcTreeNode node)
+					{
 						node.Connect();
 					}
 				},
 				{
 					Keys.Return | Keys.Shift,
-					delegate(RdcTreeNode node) {
+					delegate(RdcTreeNode node)
+					{
 						bool allConnected;
 						if (node is ServerBase serverBase)
+						{
 							allConnected = serverBase.IsConnected;
+						}
 						else
+						{
 							(node as GroupBase).AnyOrAllConnected(out var _, out allConnected);
-
+						}
 						if (!allConnected)
+						{
 							node.DoConnectAs();
+						}
 					}
 				},
 				{
 					Keys.Return | Keys.Alt,
-					delegate(RdcTreeNode node) {
+					delegate(RdcTreeNode node)
+					{
 						if (node.HasProperties)
+						{
 							node.DoPropertiesDialog();
+						}
 					}
 				},
 				{
 					Keys.D | Keys.Control,
-					delegate(RdcTreeNode node) {
+					delegate(RdcTreeNode node)
+					{
 						MenuHelper.AddFavorite(node);
 					}
 				}
 			};
 		}
 
-		public static MainForm Create() {
+		public static MainForm Create()
+		{
 			MainForm mainForm2 = (Program.TheForm = new MainForm());
 			if (mainForm2.Initialize())
+			{
 				return mainForm2;
-
+			}
 			return null;
 		}
 
-		private bool Initialize() {
+		private bool Initialize()
+		{
 			_allowSizeChanged = true;
 			SuspendLayout();
 			InitComp();
-			try {
+			try
+			{
 				RdpClient.Initialize(this);
 			}
-			catch {
+			catch
+			{
 				FormTools.ErrorDialog("RDCMan 在初始化期间遇到错误。这有两个可能的原因：注册了不兼容的 mstscax.dll 版本，或者根本没有注册。有关详细信息，请参阅帮助文件。");
 				return false;
 			}
@@ -223,43 +253,63 @@ namespace RdcMan {
 			return true;
 		}
 
-		public void SetTitle() {
+		protected override void OnResizeBegin(EventArgs e)
+		{
+			_clientPanel.Resizing = true;
+		}
+
+		protected override void OnResizeEnd(EventArgs e)
+		{
+			_clientPanel.Resizing = false;
+		}
+
+		public void SetTitle()
+		{
 			TreeNode selectedNode = ServerTree.Instance.SelectedNode;
 			string text = DescriptionText + " v" + VersionText + " - Sysinternals: www.sysinternals.com";
-			if (selectedNode != null) {
+			if (selectedNode != null)
+			{
 				string qualifiedNameForUI;
-				if (selectedNode is ServerBase serverBase) {
+				if (selectedNode is ServerBase serverBase)
+				{
 					Server serverNode = serverBase.ServerNode;
 					qualifiedNameForUI = serverNode.GetQualifiedNameForUI();
 				}
 				else
+				{
 					qualifiedNameForUI = selectedNode.Text;
-
+				}
 				text = qualifiedNameForUI + " - " + text;
 			}
 			Text = text;
 		}
 
-		public void RecordLastFocusedServerLabel(ServerLabel label) {
+		public void RecordLastFocusedServerLabel(ServerLabel label)
+		{
 			_clientPanel.RecordLastFocusedServerLabel(label);
 		}
 
-		public void AddToClientPanel(Control client) {
+		public void AddToClientPanel(Control client)
+		{
 			_clientPanel.Controls.Add(client);
 		}
 
-		public void RemoveFromClientPanel(Control client) {
+		public void RemoveFromClientPanel(Control client)
+		{
 			_clientPanel.Controls.Remove(client);
 		}
 
-		public void GoToServerTree() {
+		public void GoToServerTree()
+		{
 			Program.TheForm.LeaveFullScreen();
 			Program.TheForm.EnsureServerTreeVisible();
 			ServerTree.Instance.Focus();
 		}
 
-		public override void GoFullScreenClient(Server server, bool isTopMostWindow) {
-			if (!IsFullScreen) {
+		public override void GoFullScreenClient(Server server, bool isTopMostWindow)
+		{
+			if (!IsFullScreen)
+			{
 				LockWindowSize(isLocked: false);
 				_fullScreenServer = server;
 				RemoveFromClientPanel(server.Client.Control);
@@ -271,12 +321,16 @@ namespace RdcMan {
 			}
 		}
 
-		public override bool SwitchFullScreenClient(Server server) {
+		public override bool SwitchFullScreenClient(Server server)
+		{
 			if (!IsFullScreen || !server.IsClientDocked)
+			{
 				return false;
+			}
 			if (server == _fullScreenServer)
+			{
 				return true;
-
+			}
 			RdpClient client = _fullScreenServer.Client;
 			RdpClient client2 = server.Client;
 			_fullScreenServer.SuspendFullScreenBehavior();
@@ -299,13 +353,18 @@ namespace RdcMan {
 			return true;
 		}
 
-		public void LeaveFullScreen() {
+		public void LeaveFullScreen()
+		{
 			if (_fullScreenServer != null)
+			{
 				_fullScreenServer.LeaveFullScreen();
+			}
 		}
 
-		public override void LeaveFullScreenClient(Server server) {
-			if (IsFullScreen) {
+		public override void LeaveFullScreenClient(Server server)
+		{
+			if (IsFullScreen)
+			{
 				base.Controls.Clear();
 				base.Controls.AddRange(_savedControls);
 				_savedControls = null;
@@ -316,14 +375,17 @@ namespace RdcMan {
 			}
 		}
 
-		public void EnsureServerTreeVisible() {
+		public void EnsureServerTreeVisible()
+		{
 			UpdateServerTreeVisibility(ControlVisibility.Dock);
 		}
 
-		private void InitComp() {
+		private void InitComp()
+		{
 			bool lockWindowSize = Program.Preferences.LockWindowSize;
 			Program.Preferences.LockWindowSize = false;
-			_remoteDesktopPanel = new Panel {
+			_remoteDesktopPanel = new Panel
+			{
 				Dock = DockStyle.None
 			};
 			ServerTree.Instance.HideSelection = false;
@@ -334,7 +396,8 @@ namespace RdcMan {
 			ServerTree.Instance.LostFocus += AutoHideServerTree;
 			ServerTree.Instance.AfterSelect += ServerTree_AfterSelect;
 			Server.ConnectionStateChanged += Server_ConnectionStateChange;
-			_treeSplitter = new Splitter {
+			_treeSplitter = new Splitter
+			{
 				Dock = DockStyle.Left,
 				Width = 4,
 				MinSize = 10,
@@ -348,15 +411,20 @@ namespace RdcMan {
 			_autoSaveTimer.Tick += AutoSaveTimerTickHandler;
 			SetMainMenuVisibility();
 			if (Program.Preferences.ServerTreeWidth > Screen.PrimaryScreen.Bounds.Width)
+			{
 				ServerTree.Instance.Width = MinimumRemoteDesktopPanelHeight;
+			}
 			else
+			{
 				ServerTree.Instance.Width = Program.Preferences.ServerTreeWidth;
-
+			}
 			ServerTreeLocation = Program.Preferences.ServerTreeLocation;
 			ServerTreeVisibility = Program.Preferences.ServerTreeVisibility;
-			if (!Program.Preferences.WindowPosition.IsEmpty) {
+			if (!Program.Preferences.WindowPosition.IsEmpty)
+			{
 				Screen screen = Screen.FromPoint(Program.Preferences.WindowPosition);
-				if (screen.Bounds.Contains(Program.Preferences.WindowPosition)) {
+				if (screen.Bounds.Contains(Program.Preferences.WindowPosition))
+				{
 					base.StartPosition = FormStartPosition.Manual;
 					base.Location = Program.Preferences.WindowPosition;
 				}
@@ -364,8 +432,9 @@ namespace RdcMan {
 			base.Controls.Add(_remoteDesktopPanel);
 			base.Size = Program.Preferences.WindowSize;
 			if (Program.Preferences.WindowIsMaximized)
+			{
 				base.WindowState = FormWindowState.Maximized;
-
+			}
 			Program.Preferences.LockWindowSize = lockWindowSize;
 			LockWindowSize();
 			Assembly executingAssembly = Assembly.GetExecutingAssembly();
@@ -373,14 +442,16 @@ namespace RdcMan {
 			AssemblyName name = executingAssembly.GetName();
 			VersionText = name.Version.Major + "." + name.Version.Minor;
 			BuildText = name.Version.Build + "." + name.Version.Revision;
-			if (!WinTrust.VerifyEmbeddedSignature(executingAssembly.Location)) {
+			if (!WinTrust.VerifyEmbeddedSignature(executingAssembly.Location))
+			{
 				BuildText += "    FOR INTERNAL MICROSOFT USE ONLY";
 				IsInternalVersion = true;
 			}
 			object[] customAttributes = executingAssembly.GetCustomAttributes(typeof(AssemblyConfigurationAttribute), inherit: false);
 			if (customAttributes.Length != 0)
+			{
 				VersionText += (customAttributes[0] as AssemblyConfigurationAttribute).Configuration;
-
+			}
 			customAttributes = executingAssembly.GetCustomAttributes(typeof(AssemblyDescriptionAttribute), inherit: false);
 			DescriptionText = (customAttributes[0] as AssemblyDescriptionAttribute).Description;
 			ServerTree.Instance.Init(executingAssembly);
@@ -388,11 +459,16 @@ namespace RdcMan {
 			_serverTreeAutoHideTimer.Tick += ServerTreeAutoHideTimerTick;
 		}
 
-		private void Server_ConnectionStateChange(ConnectionStateChangedEventArgs args) { }
+		private void Server_ConnectionStateChange(ConnectionStateChangedEventArgs args)
+		{
+		}
 
-		private void ServerTree_AfterSelect(object sender, TreeViewEventArgs e) { }
+		private void ServerTree_AfterSelect(object sender, TreeViewEventArgs e)
+		{
+		}
 
-		protected override void LayoutContent() {
+		protected override void LayoutContent()
+		{
 			int num = base.ClientSize.Width;
 			int num2 = base.ClientSize.Height;
 			int num3 = ((!Program.Preferences.HideMainMenu) ? _menuPanel.Height : 0);
@@ -402,52 +478,69 @@ namespace RdcMan {
 			_remoteDesktopPanel.Bounds = new Rectangle(0, num3, num, num2);
 		}
 
-		private void AutoSaveTimerTickHandler(object sender, EventArgs e) {
-			if (!_areShuttingDown) {
+		private void AutoSaveTimerTickHandler(object sender, EventArgs e)
+		{
+			if (!_areShuttingDown)
+			{
 				RdgFile.AutoSave();
 				Program.Preferences.Save();
 			}
 		}
 
-		private void ServerTreeAutoHideTimerTick(object sender, EventArgs e) {
-			if (Program.Preferences.ServerTreeVisibility == ControlVisibility.AutoHide) {
-				if (!ServerTree.Instance.Visible) {
+		private void ServerTreeAutoHideTimerTick(object sender, EventArgs e)
+		{
+			if (Program.Preferences.ServerTreeVisibility == ControlVisibility.AutoHide)
+			{
+				if (!ServerTree.Instance.Visible)
+				{
 					_serverTreeAutoHideTimer.Stop();
 					UpdateServerTreeVisibility(ControlVisibility.Dock);
 					return;
 				}
 				Rectangle rectangle = ServerTree.Instance.RectangleToScreen(ServerTree.Instance.ClientRectangle);
 				rectangle.Inflate(48, 48);
-				if (!rectangle.Contains(Control.MousePosition)) {
+				if (!rectangle.Contains(Control.MousePosition))
+				{
 					_serverTreeAutoHideTimer.Stop();
 					UpdateServerTreeVisibility(ControlVisibility.Hide);
 				}
 			}
 			else
+			{
 				_serverTreeAutoHideTimer.Stop();
+			}
 		}
 
-		private void AutoHideServerTree(object sender, EventArgs e) {
-			if (Program.Preferences.ServerTreeVisibility != 0 && ServerTree.Instance.Visible) {
+		private void AutoHideServerTree(object sender, EventArgs e)
+		{
+			if (Program.Preferences.ServerTreeVisibility != 0 && ServerTree.Instance.Visible)
+			{
 				_serverTreeAutoHideTimer.Stop();
 				UpdateServerTreeVisibility(ControlVisibility.Hide);
 			}
 		}
 
-		private void SetAutoShowServerTreeTimer(object sender, EventArgs e) {
-			if (Program.Preferences.ServerTreeVisibility == ControlVisibility.AutoHide && !ServerTree.Instance.Visible) {
+		private void SetAutoShowServerTreeTimer(object sender, EventArgs e)
+		{
+			if (Program.Preferences.ServerTreeVisibility == ControlVisibility.AutoHide && !ServerTree.Instance.Visible)
+			{
 				_serverTreeAutoHideTimer.Interval = Program.Preferences.ServerTreeAutoHidePopUpDelay + 1;
 				_serverTreeAutoHideTimer.Start();
 			}
 		}
 
-		private void DisableAutoShowTimer(object sender, EventArgs e) {
+		private void DisableAutoShowTimer(object sender, EventArgs e)
+		{
 			if (Program.Preferences.ServerTreeVisibility == ControlVisibility.AutoHide && !ServerTree.Instance.Visible)
+			{
 				_serverTreeAutoHideTimer.Stop();
+			}
 		}
 
-		private void SetAutoHideServerTreeTimer(object sender, EventArgs e) {
-			if (Program.Preferences.ServerTreeVisibility == ControlVisibility.AutoHide && ServerTree.Instance.Visible) {
+		private void SetAutoHideServerTreeTimer(object sender, EventArgs e)
+		{
+			if (Program.Preferences.ServerTreeVisibility == ControlVisibility.AutoHide && ServerTree.Instance.Visible)
+			{
 				_serverTreeAutoHideTimer.Interval = AutoHideIntervalInMilliseconds;
 				_serverTreeAutoHideTimer.Start();
 			}
@@ -628,14 +721,18 @@ namespace RdcMan {
 			}));
 		}
 
-		protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
-			if (!_menuStrip.IsActive) {
-				if (Shortcuts.TryGetValue(keyData, out var value)) {
+		protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+		{
+			if (!_menuStrip.IsActive)
+			{
+				if (Shortcuts.TryGetValue(keyData, out var value))
+				{
 					value();
 					return true;
 				}
 				RdcTreeNode selectedNode = GetSelectedNode();
-				if (selectedNode != null && SelectedNodeShortcuts.TryGetValue(keyData, out var value2)) {
+				if (selectedNode != null && SelectedNodeShortcuts.TryGetValue(keyData, out var value2))
+				{
 					value2(selectedNode);
 					return true;
 				}
@@ -643,21 +740,25 @@ namespace RdcMan {
 			return base.ProcessCmdKey(ref msg, keyData);
 		}
 
-		public RdcTreeNode GetSelectedNode() {
+		public RdcTreeNode GetSelectedNode()
+		{
 			return _clientPanel.GetSelectedNode(base.ActiveControl) ?? (ServerTree.Instance.SelectedNode as RdcTreeNode);
 		}
 
-		public override Size GetClientSize() {
+		public override Size GetClientSize()
+		{
 			Size result = new Size(_clientPanel.Width, base.ClientSize.Height);
 			result.Height -= ((!Program.Preferences.HideMainMenu) ? _menuPanel.Height : 0);
 			return result;
 		}
 
-		public void ShowGroup(GroupBase group) {
+		public void ShowGroup(GroupBase group)
+		{
 			_clientPanel.ShowGroup(group);
 		}
 
-		public void HideGroup(GroupBase group) {
+		public void HideGroup(GroupBase group)
+		{
 			_clientPanel.HideGroup(group);
 		}
 
@@ -665,25 +766,34 @@ namespace RdcMan {
 			return ConnectedGroup.Instance.Nodes.Count > 0 && FormTools.YesNoDialog("存在活动连接。确定吗？") != DialogResult.Yes;
 		}
 
-		private SaveResult DoExit() {
+		private SaveResult DoExit()
+		{
 			if (_areShuttingDown)
+			{
 				return SaveResult.Save;
+			}
 			if (AnyActive())
+			{
 				return SaveResult.Cancel;
-
-			foreach (TreeNode node in ServerTree.Instance.Nodes) {
+			}
+			foreach (TreeNode node in ServerTree.Instance.Nodes)
+			{
 				if (!(node is FileGroup file))
+				{
 					continue;
-
+				}
 				SaveResult saveResult = RdgFile.ShouldSaveFile(file);
-				switch (saveResult) {
-					case SaveResult.Cancel:
-						return saveResult;
-					case SaveResult.NoSave:
-						continue;
+				switch (saveResult)
+				{
+				case SaveResult.Cancel:
+					return saveResult;
+				case SaveResult.NoSave:
+					continue;
 				}
 				if (RdgFile.DoSaveWithRetry(file) == SaveResult.Cancel)
+				{
 					return SaveResult.Cancel;
+				}
 			}
 			_areShuttingDown = true;
 			_serverTreeAutoHideTimer.Stop();
@@ -696,18 +806,27 @@ namespace RdcMan {
 			Program.Preferences.ServerTreeWidth = ServerTree.Instance.Width;
 			Program.Preferences.NeedToSave = true;
 			Program.Preferences.Save();
-			Program.PluginAction(delegate (IPlugin p) {
+			Program.PluginAction(delegate(IPlugin p)
+			{
 				p.Shutdown();
 			});
-			using (Helpers.Timer("destroying sessions")) {
+			using (Helpers.Timer("destroying sessions"))
+			{
 				ServerTree.Instance.SelectedNode = null;
-				ServerTree.Instance.Operation(OperationBehavior.SuspendSelect | OperationBehavior.SuspendSort | OperationBehavior.SuspendUpdate | OperationBehavior.SuspendGroupChanged, delegate {
-					ServerTree.Instance.Nodes.VisitNodes(delegate (RdcTreeNode node) {
-						try {
+				ServerTree.Instance.Operation(OperationBehavior.SuspendSelect | OperationBehavior.SuspendSort | OperationBehavior.SuspendUpdate | OperationBehavior.SuspendGroupChanged, delegate
+				{
+					ServerTree.Instance.Nodes.VisitNodes(delegate(RdcTreeNode node)
+					{
+						try
+						{
 							if (node is Server server)
+							{
 								server.OnRemoving();
+							}
 						}
-						catch { }
+						catch
+						{
+						}
 					});
 					ServerTree.Instance.Nodes.Clear();
 				});
@@ -715,82 +834,106 @@ namespace RdcMan {
 			return SaveResult.Save;
 		}
 
-		public override void SetClientSize(Size size) {
+		public override void SetClientSize(Size size)
+		{
 			LockWindowSize(isLocked: false);
 			int num = size.Width;
 			int num2 = size.Height;
 			if (ServerTreeVisibility == ControlVisibility.Dock)
+			{
 				num += ServerTree.Instance.Width + _treeSplitter.Width;
+			}
 			else if (ServerTreeVisibility == ControlVisibility.AutoHide)
+			{
 				num += _treeSplitter.Width;
-
+			}
 			num2 += ((!Program.Preferences.HideMainMenu) ? _menuPanel.Height : 0);
 			base.ClientSize = new Size(num, num2);
 			LockWindowSize();
 		}
 
-		public void LockWindowSize() {
+		public void LockWindowSize()
+		{
 			LockWindowSize(Program.Preferences.LockWindowSize);
 		}
 
-		protected override void OnSizeChanged(EventArgs e) {
+		protected override void OnSizeChanged(EventArgs e)
+		{
 			base.OnSizeChanged(e);
-			if (_allowSizeChanged) {
+			if (_allowSizeChanged)
+			{
 				LayoutContent();
 				Program.Preferences.NeedToSave = true;
 			}
 		}
 
-		protected override void OnClosing(CancelEventArgs e) {
+		protected override void OnClosing(CancelEventArgs e)
+		{
 			e.Cancel = DoExit() == SaveResult.Cancel;
 		}
 
-		private void OnFileNew() {
+		private void OnFileNew()
+		{
 			FileGroup fileGroup = RdgFile.NewFile();
-			if (fileGroup != null) {
+			if (fileGroup != null)
+			{
 				ServerTree.Instance.SelectedNode = fileGroup;
 				Program.Preferences.NeedToSave = true;
 			}
 		}
 
-		private void OnFileClose() {
+		private void OnFileClose()
+		{
 			FileGroup selectedFile = ServerTree.Instance.GetSelectedFile();
 			if (selectedFile != null)
+			{
 				DoFileClose(selectedFile);
+			}
 		}
 
-		public void DoFileClose(FileGroup file) {
+		public void DoFileClose(FileGroup file)
+		{
 			RdgFile.CloseFileGroup(file);
 			Program.Preferences.NeedToSave = true;
 			Program.Preferences.Save();
 		}
 
-		private void OnFileOpen() {
+		private void OnFileOpen()
+		{
 			FileGroup fileGroup = RdgFile.OpenFile();
-			if (fileGroup != null) {
+			if (fileGroup != null)
+			{
 				ServerTree.Instance.SelectedNode = fileGroup;
 				Program.Preferences.NeedToSave = true;
 				Program.Preferences.Save();
 			}
 		}
 
-		private void OnFileSave() {
+		private void OnFileSave()
+		{
 			FileGroup selectedFile = ServerTree.Instance.GetSelectedFile();
 			if (selectedFile != null)
+			{
 				DoFileSave(selectedFile);
+			}
 		}
 
-		public void DoFileSave(FileGroup file) {
+		public void DoFileSave(FileGroup file)
+		{
 			RdgFile.SaveFileGroup(file);
 		}
 
-		private void OnFileSaveAs() {
+		private void OnFileSaveAs()
+		{
 			FileGroup selectedFile = ServerTree.Instance.GetSelectedFile();
 			if (selectedFile != null)
+			{
 				RdgFile.SaveAs(selectedFile);
+			}
 		}
 
-		protected override void UpdateMainMenu() {
+		protected override void UpdateMainMenu()
+		{
 			UpdateMenuItems(_menuStrip.Items);
 			RdcTreeNode selectedNode = GetSelectedNode();
 			FileGroup fileGroup = ((selectedNode != null && !(selectedNode is ServerRef)) ? selectedNode.FileGroup : null);
@@ -811,7 +954,8 @@ namespace RdcMan {
 				_fileCloseMenuItem.Enabled = true;
 			}
 			_editPropertiesMenuItem.Enabled = selectedNode?.HasProperties ?? false;
-			if (selectedNode is ServerBase serverBase) {
+			if (selectedNode is ServerBase serverBase)
+			{
 				bool isConnected = serverBase.IsConnected;
 				bool isClientFullScreen = serverBase.IsClientFullScreen;
 				_sessionConnectMenuItem.Enabled = !isConnected;
@@ -821,8 +965,9 @@ namespace RdcMan {
 				_sessionLogOffMenuItem.Enabled = !Policies.DisableLogOff && isConnected;
 				_sessionSendKeysMenuItem.Enabled = isConnected;
 				if (RdpClient.SupportsRemoteSessionActions)
+				{
 					_sessionRemoteActionsMenuItem.Enabled = isConnected;
-
+				}
 				_sessionListSessionsMenuItem.Enabled = true;
 				_sessionFullScreenMenuItem.Enabled = isConnected && !isClientFullScreen;
 				_sessionUndockMenuItem.Enabled = serverBase.IsClientDocked && !isClientFullScreen;
@@ -832,7 +977,8 @@ namespace RdcMan {
 				_sessionScreenCaptureMenuItem.Enabled = serverNode.ConnectionState == RdpClient.ConnectionState.Connected && serverNode.IsClientDocked && serverNode.Client.Control.Visible;
 				return;
 			}
-			if (selectedNode is GroupBase groupBase) {
+			if (selectedNode is GroupBase groupBase)
+			{
 				groupBase.AnyOrAllConnected(out var anyConnected, out var allConnected);
 				_sessionConnectMenuItem.Enabled = !allConnected;
 				_sessionConnectAsMenuItem.Enabled = !allConnected;
@@ -840,7 +986,8 @@ namespace RdcMan {
 				_sessionDisconnectMenuItem.Enabled = anyConnected;
 				_sessionLogOffMenuItem.Enabled = !Policies.DisableLogOff && anyConnected;
 			}
-			else {
+			else
+			{
 				_sessionConnectMenuItem.Enabled = false;
 				_sessionConnectAsMenuItem.Enabled = false;
 				_sessionReconnectMenuItem.Enabled = false;
@@ -848,7 +995,8 @@ namespace RdcMan {
 				_sessionLogOffMenuItem.Enabled = false;
 			}
 			_sessionSendKeysMenuItem.Enabled = false;
-			if (RdpClient.SupportsRemoteSessionActions) {
+			if (RdpClient.SupportsRemoteSessionActions)
+			{
 				_sessionRemoteActionsMenuItem.Enabled = false;
 			}
 			_sessionListSessionsMenuItem.Enabled = false;
@@ -859,68 +1007,91 @@ namespace RdcMan {
 			_sessionScreenCaptureMenuItem.Enabled = false;
 		}
 
-		private void LockWindowSize(bool isLocked) {
-			if (isLocked) {
+		private void LockWindowSize(bool isLocked)
+		{
+			if (isLocked)
+			{
 				MinimumSize = base.Size;
 				MaximumSize = base.Size;
 			}
-			else {
+			else
+			{
 				MinimumSize = new Size(400, 300);
 				MaximumSize = new Size(0, 0);
 			}
 		}
 
-		private void OnHelpAbout() {
+		private void OnHelpAbout()
+		{
 			using About about = new About(IsInternalVersion);
 			about.ShowDialog();
 		}
 
-		public void UpdateAutoSaveTimer() {
-			if (Program.Preferences.AutoSaveFiles && Program.Preferences.AutoSaveInterval > 0) {
+		public void UpdateAutoSaveTimer()
+		{
+			if (Program.Preferences.AutoSaveFiles && Program.Preferences.AutoSaveInterval > 0)
+			{
 				_autoSaveTimer.Interval = Program.Preferences.AutoSaveInterval * 60 * 1000;
 				_autoSaveTimer.Start();
 			}
 			else
+			{
 				_autoSaveTimer.Stop();
+			}
 		}
 
-		private void UpdateServerTreeVisibility(ControlVisibility value) {
+		private void UpdateServerTreeVisibility(ControlVisibility value)
+		{
 			SuspendLayout();
-			if (value == ControlVisibility.Dock) {
+			if (value == ControlVisibility.Dock)
+			{
 				ServerTree.Instance.Enabled = true;
 				ServerTree.Instance.Show();
-				if (Program.Preferences.ServerTreeVisibility != 0) {
+				if (Program.Preferences.ServerTreeVisibility != 0)
+				{
 					ServerTree.Instance.BringToFront();
 					if (Program.Preferences.ServerTreeLocation == DockStyle.Right)
+					{
 						_treeSplitter.Hide();
+					}
 				}
-				else {
+				else
+				{
 					_treeSplitter.SendToBack();
 					ServerTree.Instance.SendToBack();
 					_treeSplitter.Show();
 				}
 			}
-			else {
+			else
+			{
 				ServerTree.Instance.Hide();
 				ServerTree.Instance.Enabled = false;
 				if (Program.Preferences.ServerTreeVisibility != ControlVisibility.AutoHide)
+				{
 					_treeSplitter.Hide();
+				}
 				else
+				{
 					_treeSplitter.Show();
+				}
 			}
 			ResumeLayout();
 		}
 
-		private void OnVisibleChanged(object sender, EventArgs e) {
+		private void OnVisibleChanged(object sender, EventArgs e)
+		{
 			Program.InitializedEvent.Set();
 		}
 
-		bool IMainForm.RegisterShortcut(Keys shortcutKey, Action action) {
-			try {
+		bool IMainForm.RegisterShortcut(Keys shortcutKey, Action action)
+		{
+			try
+			{
 				Shortcuts.Add(shortcutKey, action);
 				return true;
 			}
-			catch {
+			catch
+			{
 				return false;
 			}
 		}

@@ -3,19 +3,23 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Win32;
 
-namespace RdcMan {
-	public class RdcListView : ListView {
+namespace RdcMan
+{
+	public class RdcListView : ListView
+	{
 		public static bool SupportsHeaderCheckBoxes { get; private set; }
 
 		private IntPtr HeaderHandle => User.SendMessage(base.Handle, 4127u, (IntPtr)0, (IntPtr)0);
 
 		public event HeaderColumnClickEventHandler HeaderCheckBoxClick;
 
-		static RdcListView() {
+		static RdcListView()
+		{
 			SupportsHeaderCheckBoxes = Kernel.MajorVersion >= 6;
 		}
 
-		public unsafe void SetColumnHeaderToCheckBox(int index) {
+		public unsafe void SetColumnHeaderToCheckBox(int index)
+		{
 			if (!SupportsHeaderCheckBoxes)
 				throw new InvalidOperationException("此操作系统版本不支持标题复选框");
 			if (base.Parent == null)
@@ -36,24 +40,31 @@ namespace RdcMan {
 			User.SendMessage(headerHandle, 4620u, (IntPtr)index, (IntPtr)ptr);
 		}
 
-		public unsafe void SetColumnHeaderChecked(int index, bool isChecked) {
+		public unsafe void SetColumnHeaderChecked(int index, bool isChecked)
+		{
 			IntPtr headerHandle = HeaderHandle;
 			Structs.HDITEM hDITEM = default(Structs.HDITEM);
 			hDITEM.mask = 4u;
 			Structs.HDITEM* ptr = &hDITEM;
 			User.SendMessage(headerHandle, 4619u, (IntPtr)index, (IntPtr)ptr);
 			if (isChecked)
+			{
 				hDITEM.fmt |= 128;
+			}
 			else
+			{
 				hDITEM.fmt &= -129;
-
+			}
 			User.SendMessage(headerHandle, 4620u, (IntPtr)index, (IntPtr)ptr);
 		}
 
-		protected unsafe override void WndProc(ref Message m) {
-			if ((long)m.Msg == 78 && this.HeaderCheckBoxClick != null) {
+		protected unsafe override void WndProc(ref Message m)
+		{
+			if ((long)m.Msg == 78 && this.HeaderCheckBoxClick != null)
+			{
 				Structs.NMHEADER nMHEADER = (Structs.NMHEADER)Marshal.PtrToStructure(m.LParam, typeof(Structs.NMHEADER));
-				if (nMHEADER.hdr.code == 4294966980u) {
+				if (nMHEADER.hdr.code == 4294966980u)
+				{
 					Structs.HDITEM hDITEM = default(Structs.HDITEM);
 					hDITEM.mask = 4u;
 					Structs.HDITEM* ptr = &hDITEM;

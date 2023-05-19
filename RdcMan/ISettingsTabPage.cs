@@ -1,7 +1,9 @@
 using System.Windows.Forms;
 
-namespace RdcMan {
-	public interface ISettingsTabPage {
+namespace RdcMan
+{
+	public interface ISettingsTabPage
+	{
 		InheritanceControl InheritanceControl { get; }
 
 		Control FocusControl { get; }

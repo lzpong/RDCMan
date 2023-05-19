@@ -10,34 +10,38 @@ using AxMSTSCLib;
 using MSTSCLib;
 using Win32;
 
-namespace RdcMan {
-	public class Server : ServerBase {
-		private class DisconnectionReason {
+namespace RdcMan
+{
+	public class Server : ServerBase
+	{
+		private class DisconnectionReason
+		{
 			public readonly int Code;
 
 			public readonly string Text;
 
-			public DisconnectionReason(int code, string text) {
+			public DisconnectionReason(int code, string text)
+			{
 				Code = code;
 				Text = text;
 			}
 		}
 
-		//public const string XmlNodeName = "server";
+		public const string XmlNodeName = "server";
 
-		//internal const string XmlDisplayNameTag = "displayName";
+		internal const string XmlDisplayNameTag = "displayName";
 
-		//internal const string XmlServerNameTag = "name";
+		internal const string XmlServerNameTag = "name";
 
-		//internal const string XmlCommentTag = "comment";
+		internal const string XmlCommentTag = "comment";
 
-		//internal const string ConnectionTypeTag = "connectionType";
+		internal const string ConnectionTypeTag = "connectionType";
 
-		//internal const string VirtualMachineIdTag = "vmId";
+		internal const string VirtualMachineIdTag = "vmId";
 
 		private RdpClient.ConnectionState _connectionState;
 
-		//private const bool SimulateConnections = false;
+		private const bool SimulateConnections = false;
 
 		private static readonly Dictionary<string, Helpers.ReadXmlDelegate> PropertyActions;
 
@@ -59,13 +63,20 @@ namespace RdcMan {
 
 		private static readonly DisconnectionReason[] ExtendedDisconnectionReasons;
 
-		public RdpClient.ConnectionState ConnectionState {
-			get => _connectionState;
-			private set {
-				if (_connectionState != value) {
+		public RdpClient.ConnectionState ConnectionState
+		{
+			get
+			{
+				return _connectionState;
+			}
+			private set
+			{
+				if (_connectionState != value)
+				{
 					_connectionState = value;
 					Action<ConnectionStateChangedEventArgs> connectionStateChanged = Server.ConnectionStateChanged;
-					if (connectionStateChanged != null) {
+					if (connectionStateChanged != null)
+					{
 						ConnectionStateChangedEventArgs obj = new ConnectionStateChangedEventArgs(this, _connectionState);
 						connectionStateChanged(obj);
 					}
@@ -81,12 +92,19 @@ namespace RdcMan {
 
 		public override CommonDisplaySettings DisplaySettings => ((RdcTreeNode)this).DisplaySettings;
 
-		public override DisplayStates DisplayState {
-			get => _displayState;
-			set {
-				if (value != _displayState) {
+		public override DisplayStates DisplayState
+		{
+			get
+			{
+				return _displayState;
+			}
+			set
+			{
+				if (value != _displayState)
+				{
 					_displayState = value;
-					if (value != 0) {
+					if (value != 0)
+					{
 						SetText();
 						SetClientSizeProperties();
 					}
@@ -94,62 +112,140 @@ namespace RdcMan {
 			}
 		}
 
-		public override bool IsClientDocked {
-			get => !IsClientInitialized || ServerForm == null;
+		public override bool IsClientDocked
+		{
+			get
+			{
+				if (IsClientInitialized)
+				{
+					return ServerForm == null;
+				}
+				return true;
+			}
 		}
 
-		public override bool IsClientUndocked {
-			get => IsClientInitialized && ServerForm != null;
+		public override bool IsClientUndocked
+		{
+			get
+			{
+				if (IsClientInitialized)
+				{
+					return ServerForm != null;
+				}
+				return false;
+			}
 		}
 
-		public override RdcBaseForm ParentForm {
-			get => IsClientUndocked ? ServerForm : base.ParentForm;
+		public override RdcBaseForm ParentForm
+		{
+			get
+			{
+				if (IsClientUndocked)
+				{
+					return ServerForm;
+				}
+				return base.ParentForm;
+			}
 		}
 
 		private ServerForm ServerForm => Client.Control.Parent as ServerForm;
 
-		public override Size Size {
-			get => UseServerBox ? _serverBox.Size : _client.Control.Size;
-			set {
+		public override Size Size
+		{
+			get
+			{
 				if (!UseServerBox)
+				{
+					return _client.Control.Size;
+				}
+				return _serverBox.Size;
+			}
+			set
+			{
+				if (!UseServerBox)
+				{
 					_client.Control.Size = value;
+				}
 				_serverBox.Size = value;
 			}
 		}
 
-		private bool IsClientInPanel {
-			get => IsClientInitialized && IsClientDocked;
+		private bool IsClientInPanel
+		{
+			get
+			{
+				if (IsClientInitialized)
+				{
+					return IsClientDocked;
+				}
+				return false;
+			}
 		}
 
-		public override Point Location {
-			get => !UseServerBox ? _client.Control.Location : _serverBox.Location;
-			set {
+		public override Point Location
+		{
+			get
+			{
 				if (!UseServerBox)
+				{
+					return _client.Control.Location;
+				}
+				return _serverBox.Location;
+			}
+			set
+			{
+				if (!UseServerBox)
+				{
 					_client.Control.Location = value;
+				}
 				_serverBox.Location = value;
 			}
 		}
 
-		public string ConnectedText {
-			get => base.IsThumbnail ? "已连接" : "连接到 " + GetQualifiedNameForUI();
+		public string ConnectedText
+		{
+			get
+			{
+				if (base.IsThumbnail)
+				{
+					return "已连接";
+				}
+				return "连接到 " + GetQualifiedNameForUI();
+			}
 		}
 
-		public string ConnectingText {
-			get => base.IsThumbnail ? "连接中" : "连接到 " + GetQualifiedNameForUI();
+		public string ConnectingText
+		{
+			get
+			{
+				if (base.IsThumbnail)
+				{
+					return "连接中";
+				}
+				return "连接到 " + GetQualifiedNameForUI();
+			}
 		}
 
-		public string DisconnectedText {
-			get {
+		public string DisconnectedText
+		{
+			get
+			{
 				string text;
-				if (base.IsThumbnail) {
+				if (base.IsThumbnail)
+				{
 					text = "断开连接";
 					if (!string.IsNullOrEmpty(_disconnectionReason))
+					{
 						text += " [error]";
+					}
 				}
-				else {
+				else
+				{
 					text = "未连接 " + GetQualifiedNameForUI();
 					if (!string.IsNullOrEmpty(_disconnectionReason))
+					{
 						text = text + Environment.NewLine + "[" + _disconnectionReason + "]";
+					}
 				}
 				return text;
 			}
@@ -159,12 +255,16 @@ namespace RdcMan {
 
 		private bool IsClientInitialized => Client != null;
 
-		private bool UseServerBox {
-			get {
-				if (IsClientInPanel) {
+		private bool UseServerBox
+		{
+			get
+			{
+				if (IsClientInPanel)
+				{
 					if (base.IsThumbnail)
+					{
 						return !(ServerNode.Parent as GroupBase).DisplaySettings.SessionThumbnailPreview.Value;
-
+					}
 					return false;
 				}
 				return true;
@@ -173,51 +273,69 @@ namespace RdcMan {
 
 		public override bool IsConnected => ConnectionState != RdpClient.ConnectionState.Disconnected;
 
-		public override bool IsClientFullScreen {
-			get => IsClientInitialized && Client.MsRdpClient.FullScreen;
+		public override bool IsClientFullScreen
+		{
+			get
+			{
+				if (IsClientInitialized)
+				{
+					return Client.MsRdpClient.FullScreen;
+				}
+				return false;
+			}
 		}
 
 		public static event Action<ConnectionStateChangedEventArgs> ConnectionStateChanged;
 
 		public static event Action<Server> FocusReceived;
 
-		static Server() {
-			PropertyActions = new Dictionary<string, Helpers.ReadXmlDelegate> {
+		static Server()
+		{
+			PropertyActions = new Dictionary<string, Helpers.ReadXmlDelegate>
+			{
 				{
 					"name",
-					delegate(XmlNode childNode, RdcTreeNode node, ICollection<string> errors) {
+					delegate(XmlNode childNode, RdcTreeNode node, ICollection<string> errors)
+					{
 						(node as Server).Properties.ServerName.Value = childNode.InnerText;
 					}
 				},
 				{
 					"connectionType",
-					delegate(XmlNode childNode, RdcTreeNode node, ICollection<string> errors) {
+					delegate(XmlNode childNode, RdcTreeNode node, ICollection<string> errors)
+					{
 						Enum.TryParse<ConnectionType>(childNode.InnerText, out var result);
 						(node as Server).Properties.ConnectionType.Value = result;
 					}
 				},
 				{
 					"vmId",
-					delegate(XmlNode childNode, RdcTreeNode node, ICollection<string> errors) {
+					delegate(XmlNode childNode, RdcTreeNode node, ICollection<string> errors)
+					{
 						(node as Server).Properties.VirtualMachineId.Value = childNode.InnerText;
 					}
 				},
 				{
 					"displayName",
-					delegate(XmlNode childNode, RdcTreeNode node, ICollection<string> errors) {
+					delegate(XmlNode childNode, RdcTreeNode node, ICollection<string> errors)
+					{
 						(node as Server).Properties.DisplayName.Value = childNode.InnerText;
 					}
 				},
 				{
 					"comment",
-					delegate(XmlNode childNode, RdcTreeNode node, ICollection<string> errors) {
+					delegate(XmlNode childNode, RdcTreeNode node, ICollection<string> errors)
+					{
 						XmlNode firstChild = childNode.FirstChild;
 						if (firstChild != null)
+						{
 							(node as Server).Properties.Comment.Value = childNode.InnerText;
+						}
 					}
 				}
 			};
-			DisconnectionReasons = new DisconnectionReason[31] {
+			DisconnectionReasons = new DisconnectionReason[31]
+			{
 				new DisconnectionReason(1, ""),
 				new DisconnectionReason(2, ""),
 				new DisconnectionReason(3, ""),
@@ -250,7 +368,8 @@ namespace RdcMan {
 				new DisconnectionReason(50331678, ""),
 				new DisconnectionReason(50331686, "未输入智能卡 PIN")
 			};
-			ExtendedDisconnectionReasons = new DisconnectionReason[26] {
+			ExtendedDisconnectionReasons = new DisconnectionReason[26]
+			{
 				new DisconnectionReason(0, "没有可用的附加信息"),
 				new DisconnectionReason(1, ""),
 				new DisconnectionReason(2, ""),
@@ -281,94 +400,127 @@ namespace RdcMan {
 			ServerTree.Instance.ServerChanged += OnServerChanged;
 		}
 
-		protected Server() {
+		protected Server()
+		{
 			_serverRefList = new List<ServerRef>();
 			ChangeImageIndex(ImageConstants.DisconnectedServer);
 		}
 
-		private static void OnServerChanged(ServerChangedEventArgs e) {
-			if (!e.ChangeType.HasFlag(ChangeType.PropertyChanged) || e.Server is not Server server)
+		private static void OnServerChanged(ServerChangedEventArgs e)
+		{
+			if (!e.ChangeType.HasFlag(ChangeType.PropertyChanged) || !(e.Server is Server server))
+			{
 				return;
-
-			server.VisitServerRefs(delegate (ServerRef r) {
+			}
+			server.VisitServerRefs(delegate(ServerRef r)
+			{
 				GroupBase group = r.Parent as GroupBase;
 				if (ServerTree.Instance.SortGroup(group))
+				{
 					ServerTree.Instance.OnGroupChanged(group, ChangeType.InvalidateUI);
+				}
 			});
 		}
 
-		public void SuspendFullScreenBehavior() {
+        public void SuspendFullScreenBehavior()
+		{
 			Interlocked.Increment(ref _noFullScreenBehavior);
 		}
 
-		public void ResumeFullScreenBehavior() {
+		public void ResumeFullScreenBehavior()
+		{
 			Interlocked.Decrement(ref _noFullScreenBehavior);
 		}
 
-		public string GetQualifiedNameForUI() {
+		public string GetQualifiedNameForUI()
+		{
 			SplitName(base.ServerName, out var serverName, out var _);
 			if (base.DisplayName.Equals(serverName, StringComparison.OrdinalIgnoreCase))
+			{
 				return base.DisplayName;
-
+			}
 			return $"{base.DisplayName} ({serverName})";
 		}
 
-		private void SetText() {
+		private void SetText()
+		{
 			_serverBox.SetText();
 			if (IsClientInitialized)
+			{
 				_client.SetText();
+			}
 		}
 
-		public string GetConnectionStateText() {
-			return ConnectionState switch {
-				RdpClient.ConnectionState.Disconnected => DisconnectedText,
-				RdpClient.ConnectionState.Connecting => ConnectingText,
-				RdpClient.ConnectionState.Connected => ConnectedText,
+		public string GetConnectionStateText()
+		{
+			return ConnectionState switch
+			{
+				RdpClient.ConnectionState.Disconnected => DisconnectedText, 
+				RdpClient.ConnectionState.Connecting => ConnectingText, 
+				RdpClient.ConnectionState.Connected => ConnectedText, 
 				_ => "<获取文本错误>",
 			};
 		}
 
-		protected override void InitSettings() {
+		protected override void InitSettings()
+		{
 			((RdcTreeNode)this).Properties = new ServerSettings();
 			((RdcTreeNode)this).DisplaySettings = new ServerDisplaySettings();
 			base.InitSettings();
 		}
 
-		internal override void Focus() {
+		internal override void Focus()
+		{
 			if (!IsClientUndocked && UseServerBox)
+			{
 				_serverBox.Focus();
+			}
 			else
+			{
 				_client.Control.Focus();
+			}
 		}
 
-		internal override void FocusConnectedClient() {
+		internal override void FocusConnectedClient()
+		{
 			if (IsConnected && IsClientInitialized)
+			{
 				_client.Control.Focus();
+			}
 		}
 
-		internal void SetNormalView() {
+		internal void SetNormalView()
+		{
 			DisplayState = DisplayStates.Normal;
 			Size = Program.TheForm.GetClientSize();
 			Location = new Point(0, 0);
 			EnableDisableClient();
 		}
 
-		internal bool Resize() {
+		internal bool Resize()
+		{
 			bool flag = (IsClientDocked && DisplaySettings.SmartSizeDockedWindow.Value == RdpClient.SmartSizeMethod.Reconnect) || (!IsClientDocked && DisplaySettings.SmartSizeUndockedWindow.Value == RdpClient.SmartSizeMethod.Reconnect);
-			return IsClientInitialized && flag && _client.Resize((uint)Size.Width, (uint)Size.Height);
+			if (IsClientInitialized && flag)
+			{
+				return _client.Resize((uint)Size.Width, (uint)Size.Height);
+			}
+			return false;
 		}
 
-		internal void SetThumbnailView(int left, int top, int width, int height) {
+		internal void SetThumbnailView(int left, int top, int width, int height)
+		{
 			DisplayState = DisplayStates.Thumbnail;
 			Size = new Size(width, height);
 			Location = new Point(left, top);
 			EnableDisableClient();
 		}
 
-		internal override void ScreenCapture() {
+		internal override void ScreenCapture()
+		{
 			Control control = Client.Control;
 			Graphics graphics = null;
-			try {
+			try
+			{
 				Point point = control.PointToScreen(control.Location);
 				Size size = control.Size;
 				Bitmap bitmap = new Bitmap(size.Width, size.Height);
@@ -376,30 +528,41 @@ namespace RdcMan {
 				graphics.CopyFromScreen(point.X, point.Y, 0, 0, bitmap.Size);
 				Clipboard.SetDataObject(bitmap);
 			}
-			catch (Exception ex) {
+			catch (Exception ex)
+			{
 				FormTools.ErrorDialog("捕获会话屏幕时出错：" + ex.Message);
 			}
-			finally {
+			finally
+			{
 				graphics?.Dispose();
 			}
 		}
 
-		protected void InitRequiredForDisplay() {
+		protected void InitRequiredForDisplay()
+		{
 			_serverBox = new ServerBox(this);
 		}
 
-		private void AddToClientPanel() {
+		private void AddToClientPanel()
+		{
 			if (_serverBox.Parent == null)
+			{
 				Program.TheForm.AddToClientPanel(_serverBox);
+			}
 		}
 
-		private void RemoveFromClientPanel() {
+		private void RemoveFromClientPanel()
+		{
 			if (_serverBox.Parent != null)
+			{
 				Program.TheForm.RemoveFromClientPanel(_serverBox);
+			}
 		}
 
-		private void InitClient() {
-			if (!IsClientInitialized) {
+		private void InitClient()
+		{
+			if (!IsClientInitialized)
+			{
 				_client = RdpClient.AllocClient(this, Program.TheForm);
 				_client.ConnectConnectionHandlers(OnConnected, OnConnecting, OnDisconnected, OnAutoReconnecting, OnAutoReconnecting2, OnAutoReconnected, OnFocusReleased);
 				_client.ConnectContainerHandlers(OnRequestGoFullScreen, OnRequestLeaveFullScreen, OnRequestContainerMinimize, OnConfirmClose, OnFatalError);
@@ -410,15 +573,18 @@ namespace RdcMan {
 				_client.Control.Location = _serverBox.Location;
 				SetClientSizeProperties();
 				SetText();
-				if (!UseServerBox && _serverBox.Visible) {
+				if (!UseServerBox && _serverBox.Visible)
+				{
 					_client.Control.Show();
 					_serverBox.Hide();
 				}
 			}
 		}
 
-		private void DestroyClient() {
-			if (IsClientInitialized) {
+		private void DestroyClient()
+		{
+			if (IsClientInitialized)
+			{
 				_client.DisconnectConnectionHandlers(OnConnected, OnConnecting, OnDisconnected, OnAutoReconnecting, OnAutoReconnecting2, OnAutoReconnected, OnFocusReleased);
 				_client.DisconnectContainerHandlers(OnRequestGoFullScreen, OnRequestLeaveFullScreen, OnRequestContainerMinimize, OnConfirmClose, OnFatalError);
 				RdpClient client = _client;
@@ -427,11 +593,13 @@ namespace RdcMan {
 			}
 		}
 
-		internal static Server CreateForAddDialog() {
+		internal static Server CreateForAddDialog()
+		{
 			return new Server();
 		}
 
-		public static Server Create(string serverName, string displayName, GroupBase group) {
+		public static Server Create(string serverName, string displayName, GroupBase group)
+		{
 			Server server = new Server();
 			server.Properties.ServerName.Value = serverName;
 			server.Properties.DisplayName.Value = displayName;
@@ -439,13 +607,15 @@ namespace RdcMan {
 			return server;
 		}
 
-		internal static Server Create(ServerPropertiesDialog dlg) {
+		internal static Server Create(ServerPropertiesDialog dlg)
+		{
 			Server server = dlg.AssociatedNode as Server;
 			server.FinishConstruction(dlg.PropertiesPage.ParentGroup);
 			return server;
 		}
 
-		internal static Server Create(string name, ServerPropertiesDialog dlg) {
+		internal static Server Create(string name, ServerPropertiesDialog dlg)
+		{
 			Server node = dlg.AssociatedNode as Server;
 			Server server = new Server();
 			server.CopySettings(node, null);
@@ -455,115 +625,152 @@ namespace RdcMan {
 			return server;
 		}
 
-		internal static Server Create(XmlNode xmlNode, GroupBase group, ICollection<string> errors) {
+		internal static Server Create(XmlNode xmlNode, GroupBase group, ICollection<string> errors)
+		{
 			Server server = new Server();
 			server.ReadXml(xmlNode, errors);
 			server.FinishConstruction(group);
 			return server;
 		}
 
-		protected void FinishConstruction(GroupBase group) {
+		protected void FinishConstruction(GroupBase group)
+		{
 			if (string.IsNullOrEmpty(base.DisplayName))
+			{
 				Properties.DisplayName.Value = base.ServerName;
-
+			}
 			base.Text = base.DisplayName;
 			InitRequiredForDisplay();
 			ServerTree.Instance.AddNode(this, group);
 		}
 
-		private void ReadXml(XmlNode xmlNode, ICollection<string> errors) {
+		private void ReadXml(XmlNode xmlNode, ICollection<string> errors)
+		{
 			ReadXml(PropertyActions, xmlNode, errors);
 		}
 
-		public override void OnRemoving() {
-			VisitServerRefs(delegate (ServerRef r) {
+		public override void OnRemoving()
+		{
+			VisitServerRefs(delegate(ServerRef r)
+			{
 				r.OnRemoveServer();
 			});
 			_serverRefList.Clear();
 			if (IsClientUndocked)
+			{
 				ServerForm.Close();
-
+			}
 			Hide();
 			_serverBox.Dispose();
 			_serverBox = null;
 			DestroyClient();
 		}
 
-		internal override void Show() {
+		internal override void Show()
+		{
 			AddToClientPanel();
 			if (UseServerBox)
+			{
 				_serverBox.Show();
+			}
 			else
+			{
 				_client.Control.Show();
+			}
 		}
 
-		internal override void Hide() {
-			if (DisplayState != 0) {
+		internal override void Hide()
+		{
+			if (DisplayState != 0)
+			{
 				DisplayState = DisplayStates.Invalid;
 				_serverBox.Hide();
 				RemoveFromClientPanel();
 				if (IsClientInPanel)
+				{
 					_client.Control.Hide();
+				}
 			}
 		}
 
-		public override void Connect() {
+		public override void Connect()
+		{
 			ConnectAs(null, null);
 		}
 
-		public override void ConnectAs(LogonCredentials logonCredentials, ConnectionSettings connectionSettings) {
+		public override void ConnectAs(LogonCredentials logonCredentials, ConnectionSettings connectionSettings)
+		{
 			InitClient();
-			lock (_connectionStateLock) {
+			lock (_connectionStateLock)
+			{
 				if (IsConnected)
+				{
 					return;
-
+				}
 				InheritSettings();
 				ResolveCredentials();
 				if (logonCredentials == null)
+				{
 					logonCredentials = base.LogonCredentials;
+				}
 				else
+				{
 					ResolveCredentials(logonCredentials);
-
+				}
 				if (connectionSettings == null)
+				{
 					connectionSettings = base.ConnectionSettings;
-
+				}
 				string text = "(无)";
-				try {
+				try
+				{
 					IMsRdpClientAdvancedSettings advancedSettings = _client.AdvancedSettings2;
 					IMsRdpClientAdvancedSettings6 advancedSettings2 = _client.AdvancedSettings7;
 					IMsRdpClientAdvancedSettings7 advancedSettings3 = _client.AdvancedSettings8;
 					IMsRdpClientNonScriptable4 msRdpClientNonScriptable = (IMsRdpClientNonScriptable4)_client.GetOcx();
 					SplitName(base.ServerName, out var serverName, out var port);
 					if (port == -1)
+					{
 						port = base.ConnectionSettings.Port.Value;
-
+					}
 					text = "服务器名";
 					_client.MsRdpClient.Server = serverName;
 					string userName = CredentialsUI.GetUserName(logonCredentials.UserName.Value);
 					string value = logonCredentials.Domain.Value;
-					if (!string.IsNullOrEmpty(userName)) {
+					if (!string.IsNullOrEmpty(userName))
+					{
 						text = "用户名";
 						_client.MsRdpClient.UserName = userName;
 					}
 					else
+					{
 						_client.MsRdpClient.UserName = null;
-
-					if (!string.IsNullOrEmpty(value)) {
+					}
+					if (!string.IsNullOrEmpty(value))
+					{
 						text = "域名";
 						if (value.Equals("[server]", StringComparison.OrdinalIgnoreCase))
+						{
 							_client.MsRdpClient.Domain = base.ServerName;
+						}
 						else if (value.Equals("[display]", StringComparison.OrdinalIgnoreCase))
+						{
 							_client.MsRdpClient.Domain = base.DisplayName;
+						}
 						else
+						{
 							_client.MsRdpClient.Domain = value;
+						}
 					}
 					else
+					{
 						_client.MsRdpClient.Domain = null;
-
+					}
 					text = "密码";
 					if (logonCredentials.Password.IsDecrypted && !string.IsNullOrEmpty(logonCredentials.Password.Value))
+					{
 						advancedSettings.ClearTextPassword = logonCredentials.Password.Value;
-
+					}
 					advancedSettings.keepAliveInterval = 60000;
 					advancedSettings2.HotKeyAltEsc = (int)Program.Preferences.HotKeyAltEsc;
 					advancedSettings2.HotKeyAltSpace = (int)Program.Preferences.HotKeyAltSpace;
@@ -577,8 +784,11 @@ namespace RdcMan {
 					_client.SecuredSettings2.KeyboardHookMode = (int)base.LocalResourceSettings.KeyboardHookMode.Value;
 					RdpClient.ConnectionBarState connectionBarState = Program.Preferences.ConnectionBarState;
 					if (connectionBarState == RdpClient.ConnectionBarState.Off)
+					{
 						advancedSettings.DisplayConnectionBar = false;
-					else {
+					}
+					else
+					{
 						advancedSettings.DisplayConnectionBar = true;
 						advancedSettings.PinConnectionBar = connectionBarState == RdpClient.ConnectionBarState.Pinned;
 					}
@@ -587,7 +797,8 @@ namespace RdcMan {
 					advancedSettings.GrabFocusOnConnect = false;
 					text = "网关设置";
 					ConfigureGateway();
-					if (Properties.ConnectionType.Value == ConnectionType.VirtualMachineConsoleConnect) {
+					if (Properties.ConnectionType.Value == ConnectionType.VirtualMachineConsoleConnect)
+					{
 						advancedSettings3.PCB = Properties.VirtualMachineId.Value;
 						advancedSettings.RDPPort = 2179;
 						advancedSettings.ConnectToServerConsole = true;
@@ -596,24 +807,28 @@ namespace RdcMan {
 						advancedSettings2.EnableCredSspSupport = true;
 						advancedSettings3.NegotiateSecurityLayer = false;
 					}
-					else {
+					else
+					{
 						text = "端口";
 						advancedSettings.RDPPort = port;
 						advancedSettings.BitmapPeristence = (Program.Preferences.PersistentBitmapCaching ? 1 : 0);
 						text = "负载均衡信息";
 						string text2 = base.ConnectionSettings.LoadBalanceInfo.Value;
-						if (!string.IsNullOrEmpty(text2)) {
+						if (!string.IsNullOrEmpty(text2))
+						{
 							if (text2.Length % 2 == 1)
+							{
 								text2 += " ";
-
+							}
 							text2 += Environment.NewLine;
 							byte[] bytes = Encoding.UTF8.GetBytes(text2);
 							advancedSettings.LoadBalanceInfo = Encoding.Unicode.GetString(bytes);
 						}
 						text = "连接到控制台";
 						if (advancedSettings2 != null)
+						{
 							advancedSettings2.ConnectToAdministerServer = connectionSettings.ConnectToConsole.Value;
-
+						}
 						advancedSettings.ConnectToServerConsole = connectionSettings.ConnectToConsole.Value;
 						text = "启动程序";
 						_client.SecuredSettings.StartProgram = base.ConnectionSettings.StartProgram.Value;
@@ -623,23 +838,28 @@ namespace RdcMan {
 						advancedSettings.EnableWindowsKey = 1;
 						text = "本地资源";
 						_client.SecuredSettings2.AudioRedirectionMode = (int)base.LocalResourceSettings.AudioRedirectionMode.Value;
-						if (advancedSettings3 != null) {
+						if (advancedSettings3 != null)
+						{
 							advancedSettings3.AudioQualityMode = (uint)base.LocalResourceSettings.AudioRedirectionQuality.Value;
 							advancedSettings3.AudioCaptureRedirectionMode = base.LocalResourceSettings.AudioCaptureRedirectionMode.Value == RdpClient.AudioCaptureRedirectionMode.Record;
-							if (RdpClient.SupportsPanning) {
+							if (RdpClient.SupportsPanning)
+							{
 								advancedSettings3.EnableSuperPan = Program.Preferences.EnablePanning;
 								advancedSettings3.SuperPanAccelerationFactor = (uint)Program.Preferences.PanningAcceleration;
 							}
 						}
-						if (RdpClient.SupportsFineGrainedRedirection) {
+						if (RdpClient.SupportsFineGrainedRedirection)
+						{
 							IMsRdpDriveCollection driveCollection = _client.ClientNonScriptable3.DriveCollection;
-							for (uint num = 0u; num < driveCollection.DriveCount; num++) {
+							for (uint num = 0u; num < driveCollection.DriveCount; num++)
+							{
 								IMsRdpDrive msRdpDrive = driveCollection.get_DriveByIndex(num);
 								string item = msRdpDrive.Name.Substring(0, msRdpDrive.Name.Length - 1);
 								msRdpDrive.RedirectionState = base.LocalResourceSettings.RedirectDrivesList.Value.Contains(item);
 							}
 						}
-						else {
+						else
+						{
 							advancedSettings.RedirectDrives = base.LocalResourceSettings.RedirectDrives.Value;
 						}
 						advancedSettings.RedirectPorts = base.LocalResourceSettings.RedirectPorts.Value;
@@ -652,11 +872,13 @@ namespace RdcMan {
 						_client.MsRdpClient.ColorDepth = base.RemoteDesktopSettings.ColorDepth.Value;
 						text = "安全设置";
 						_client.AdvancedSettings5.AuthenticationLevel = (uint)base.SecuritySettings.AuthenticationLevel.Value;
-						if (advancedSettings2 != null) {
+						if (advancedSettings2 != null)
+						{
 							advancedSettings2.EnableCredSspSupport = true;
 							msRdpClientNonScriptable.PromptForCredentials = false;
 							msRdpClientNonScriptable.NegotiateSecurityLayer = true;
-							if (base.SecuritySettings.RemoteGuard.Value) {
+							if (base.SecuritySettings.RemoteGuard.Value)
+							{
 								text = "安全设置 - 远程凭据保护";
 								IMsRdpExtendedSettings msRdpExtendedSettings = (IMsRdpExtendedSettings)_client.GetOcx();
 								object pValue = true;
@@ -664,7 +886,8 @@ namespace RdcMan {
 								pValue = true;
 								msRdpExtendedSettings.set_Property("DisableCredentialsDelegation", ref pValue);
 							}
-							else if (base.SecuritySettings.RestrictedAdmin.Value) {
+							else if (base.SecuritySettings.RestrictedAdmin.Value)
+							{
 								text = "安全设置 - 受限管理员";
 								IMsRdpExtendedSettings msRdpExtendedSettings2 = (IMsRdpExtendedSettings)_client.GetOcx();
 								object pValue = true;
@@ -676,11 +899,13 @@ namespace RdcMan {
 					}
 					text = "客户端连接";
 					_disconnectionReason = string.Empty;
-					using (Helpers.Timer("invoking connect on {0} client", base.DisplayName)) {
+					using (Helpers.Timer("invoking connect on {0} client", base.DisplayName))
+					{
 						_client.MsRdpClient.Connect();
 					}
 				}
-				catch (Exception ex) {
+				catch (Exception ex)
+				{
 					ConnectionState = RdpClient.ConnectionState.Disconnected;
 					_disconnectionReason = "设置连接属性时出错";
 					FormTools.ErrorDialog("可能涉及的错误 '" + text + "':\n" + ex.Message);
@@ -689,93 +914,116 @@ namespace RdcMan {
 			}
 		}
 
-		internal void DumpSessionState() {
-			using (Helpers.Timer("dumping session state of {0}", base.DisplayName)) {
+		internal void DumpSessionState()
+		{
+			using (Helpers.Timer("dumping session state of {0}", base.DisplayName))
+			{
 				_client.Dump();
 			}
 		}
 
-		internal static void SplitName(string qualifiedName, out string serverName, out int port) {
+		internal static void SplitName(string qualifiedName, out string serverName, out int port)
+		{
 			string[] array = qualifiedName.Split(new char[1] { ':' }, StringSplitOptions.RemoveEmptyEntries);
 			serverName = ((array.Length != 0) ? array[0] : string.Empty);
 			if (array.Length != 2 || !int.TryParse(array[1], out port))
+			{
 				port = -1;
+			}
 		}
 
-		private void ConfigureGateway() {
+		private void ConfigureGateway()
+		{
 			IMsRdpClientTransportSettings transportSettings = _client.TransportSettings;
-			if (base.GatewaySettings.UseGatewayServer.Value) {
+			if (base.GatewaySettings.UseGatewayServer.Value)
+			{
 				uint gatewayUsageMethod = ((!base.GatewaySettings.BypassGatewayForLocalAddresses.Value) ? 1u : 2u);
 				transportSettings.GatewayProfileUsageMethod = 1u;
 				transportSettings.GatewayUsageMethod = gatewayUsageMethod;
-				uint num = (transportSettings.GatewayCredsSource = (uint)base.GatewaySettings.LogonMethod.Value);
+				transportSettings.GatewayCredsSource = (uint)base.GatewaySettings.LogonMethod.Value;
 				transportSettings.GatewayHostname = base.GatewaySettings.HostName.Value;
 				IMsRdpClientTransportSettings2 transportSettings2 = _client.TransportSettings2;
-				if (transportSettings2 != null) {
+				if (transportSettings2 != null)
+				{
 					transportSettings2.GatewayCredSharing = (base.GatewaySettings.CredentialSharing.Value ? 1u : 0u);
-					if (base.GatewaySettings.LogonMethod.Value == RdpClient.GatewayLogonMethod.NTLM) {
+					if (base.GatewaySettings.LogonMethod.Value == RdpClient.GatewayLogonMethod.NTLM)
+					{
 						transportSettings2.GatewayUsername = base.GatewaySettings.UserName.Value;
 						transportSettings2.GatewayDomain = base.GatewaySettings.Domain.Value;
 						transportSettings2.GatewayPassword = base.GatewaySettings.Password.Value;
 					}
 				}
 			}
-			else {
+			else
+			{
 				transportSettings.GatewayProfileUsageMethod = 0u;
 				transportSettings.GatewayUsageMethod = 0u;
 			}
 		}
 
-		public override void Reconnect() {
+		public override void Reconnect()
+		{
 			Log.Write("Begin reconnect to {0}", base.DisplayName);
 			ReconnectServerRef reconnectServerRef = ReconnectGroup.Instance.AddReference(this);
 			reconnectServerRef.Start(removeAfterConnection: true);
 		}
 
-		public override void Disconnect() {
-			using (Helpers.Timer("invoking disconnect on the {0} client", base.DisplayName)) {
+		public override void Disconnect()
+		{
+			using (Helpers.Timer("invoking disconnect on the {0} client", base.DisplayName))
+			{
 				if (!IsConnected)
+				{
 					return;
-
-				try {
+				}
+				try
+				{
 					_client.MsRdpClient.Disconnect();
 				}
-				catch (Exception ex) {
+				catch (Exception ex)
+				{
 					Log.Write("Error disconnection: {0}", ex.Message);
 				}
 			}
 		}
 
-		public override void LogOff() {
+		public override void LogOff()
+		{
 			Log.Write("Begin logoff from {0}", base.DisplayName);
 			if (IsConnected)
+			{
 				ThreadPool.QueueUserWorkItem(LogOffWorkerProc, this);
+			}
 		}
 
-		private static void LogOffWorkerProc(object o) {
+		private static void LogOffWorkerProc(object o)
+		{
 			Server server = o as Server;
 			RemoteSessions remoteSessions = new RemoteSessions(server);
 			bool success = true;
 			string reason = string.Empty;
-			try {
-				if (!remoteSessions.OpenServer()) {
+			try
+			{
+				if (!remoteSessions.OpenServer())
+				{
 					success = false;
 					reason = "无法访问远程会话";
 					return;
 				}
 				IList<RemoteSessionInfo> list = remoteSessions.QuerySessions();
-				if (list == null) {
+				if (list == null)
+				{
 					success = false;
 					reason = "无法枚举远程会话";
 					return;
 				}
 				int num = -1;
-				foreach (RemoteSessionInfo item in list) {
-					if (item.State == Wts.ConnectstateClass.Active 
-						&& item.ClientName.Equals(Environment.MachineName, StringComparison.OrdinalIgnoreCase)
-						&& item.UserName.Equals(server._client.MsRdpClient.UserName, StringComparison.OrdinalIgnoreCase)
-						&& item.DomainName.Equals(server._client.MsRdpClient.Domain, StringComparison.OrdinalIgnoreCase)) {
-						if (num != -1) {
+				foreach (RemoteSessionInfo item in list)
+				{
+					if (item.State == Wts.ConnectstateClass.Active && item.ClientName.Equals(Environment.MachineName, StringComparison.OrdinalIgnoreCase) && item.UserName.Equals(server._client.MsRdpClient.UserName, StringComparison.OrdinalIgnoreCase) && item.DomainName.Equals(server._client.MsRdpClient.Domain, StringComparison.OrdinalIgnoreCase))
+					{
+						if (num != -1)
+						{
 							success = false;
 							reason = "多个活动会话，无法确定要注销的会话";
 							return;
@@ -783,226 +1031,300 @@ namespace RdcMan {
 						num = item.SessionId;
 					}
 				}
-				if (success) {
+				if (success)
+				{
 					success = remoteSessions.LogOffSession(num);
 					reason = "注销会话 API 失败";
 				}
 			}
-			catch {
+			catch
+			{
 				success = false;
 				reason = "内部错误";
 			}
-			finally {
+			finally
+			{
 				remoteSessions.CloseServer();
-				Program.TheForm.Invoke((MethodInvoker)delegate {
+				Program.TheForm.Invoke((MethodInvoker)delegate
+				{
 					server.LogOffResultCallback(success, reason);
 				});
 			}
 		}
 
-		private void LogOffResultCallback(bool success, string text) {
+		private void LogOffResultCallback(bool success, string text)
+		{
 			Log.Write("End logoff from {0}", base.DisplayName);
 			if (!success)
+			{
 				FormTools.ErrorDialog("无法从 " + base.DisplayName + " 中注销 \r\n原因：" + text);
+			}
 		}
 
-		private void OnConnecting(object sender, EventArgs e) {
-			lock (_connectionStateLock) {
+		private void OnConnecting(object sender, EventArgs e)
+		{
+			lock (_connectionStateLock)
+			{
 				Log.Write("OnConnecting {0}", base.DisplayName);
 				UpdateOnConnectionStateChange(ImageConstants.ConnectingServer, RdpClient.ConnectionState.Connecting);
 			}
 		}
 
-		private void OnConnected(object sender, EventArgs e) {
-			lock (_connectionStateLock) {
+		private void OnConnected(object sender, EventArgs e)
+		{
+			lock (_connectionStateLock)
+			{
 				Log.Write("OnConnected {0}", base.DisplayName);
 				Location = new Point(Location.X, Location.Y);
 				UpdateOnConnectionStateChange(ImageConstants.ConnectedServer, RdpClient.ConnectionState.Connected);
 				if (ServerTree.Instance.SelectedNode is ServerBase serverBase && serverBase.ServerNode == this)
+				{
 					Focus();
+				}
 			}
 		}
 
-		private void OnDisconnected(object sender, IMsTscAxEvents_OnDisconnectedEvent e) {
-			lock (_connectionStateLock) {
+		private void OnDisconnected(object sender, IMsTscAxEvents_OnDisconnectedEvent e)
+		{
+			lock (_connectionStateLock)
+			{
 				Log.Write("OnDisconnected {0}: discReason={1} extendedDisconnectReason={2}", base.DisplayName, e.discReason, _client.MsRdpClient.ExtendedDisconnectReason);
 				_disconnectionReason = string.Empty;
 				DisconnectionReason disconnectionReason = null;
-				if (_client.MsRdpClient.ExtendedDisconnectReason != 0) {
+				if (_client.MsRdpClient.ExtendedDisconnectReason != 0)
+				{
 					disconnectionReason = ExtendedDisconnectionReasons.SingleOrDefault((DisconnectionReason r) => r.Code == (int)_client.MsRdpClient.ExtendedDisconnectReason);
 					if (disconnectionReason == null)
+					{
 						_disconnectionReason = $"未知的扩展断开原因 {_client.MsRdpClient.ExtendedDisconnectReason}";
+					}
 				}
-				else if (e != null) {
+				else if (e != null)
+				{
 					disconnectionReason = DisconnectionReasons.SingleOrDefault((DisconnectionReason r) => r.Code == e.discReason);
 					if (disconnectionReason == null)
+					{
 						_disconnectionReason = $"断线原因不明 {e.discReason}";
+					}
 				}
 				if (disconnectionReason != null)
+				{
 					_disconnectionReason = disconnectionReason.Text;
-
-				if (_client.MsRdpClient.FullScreen) {
+				}
+				if (_client.MsRdpClient.FullScreen)
+				{
 					ParentForm.LeaveFullScreenClient(this);
 					_client.MsRdpClient.FullScreen = false;
 				}
-				if (IsClientDocked) {
+				if (IsClientDocked)
+				{
 					if (_client.Control.Visible)
+					{
 						_serverBox.Show();
-
+					}
 					DestroyClient();
 				}
 				UpdateOnConnectionStateChange(ImageConstants.DisconnectedServer, RdpClient.ConnectionState.Disconnected);
 			}
 		}
 
-		private void OnAutoReconnecting(object sender, IMsTscAxEvents_OnAutoReconnectingEvent e) {
+		private AutoReconnectContinueState OnAutoReconnecting(object sender, IMsTscAxEvents_OnAutoReconnectingEvent e)
+		{
 			Log.Write("OnAutoReconnecting {0}: disconnectReason={1} attemptCount={2}", base.DisplayName, e.disconnectReason, e.attemptCount);
-		}
+			return AutoReconnectContinueState.autoReconnectContinueAutomatic;
 
-		private void OnAutoReconnecting2(object sender, IMsTscAxEvents_OnAutoReconnecting2Event e) {
+        }
+
+		private void OnAutoReconnecting2(object sender, IMsTscAxEvents_OnAutoReconnecting2Event e)
+		{
 			Log.Write("OnAutoReconnecting2 {0}: disconnectReason={1} networkAvailable={2} attemptCount={3} maxAttemptCount={4}", base.DisplayName, e.disconnectReason, e.networkAvailable, e.attemptCount, e.maxAttemptCount);
 		}
 
-		private void OnAutoReconnected(object sender, EventArgs e) {
+		private void OnAutoReconnected(object sender, EventArgs e)
+		{
 			Log.Write("OnAutoReconnected {0}", base.DisplayName);
 		}
 
-		private void UpdateOnConnectionStateChange(ImageConstants image, RdpClient.ConnectionState state) {
-			using (Helpers.Timer("changing connection state of {0} to {1}", base.DisplayName, state)) {
+		private void UpdateOnConnectionStateChange(ImageConstants image, RdpClient.ConnectionState state)
+		{
+			using (Helpers.Timer("changing connection state of {0} to {1}", base.DisplayName, state))
+			{
 				ChangeImageIndex(image);
 				ConnectionState = state;
 				if (_serverBox != null)
+				{
 					_serverBox.SetText();
+				}
 			}
 		}
 
-		private void OnFocusReleased(object sender, IMsTscAxEvents_OnFocusReleasedEvent e) {
+		private void OnFocusReleased(object sender, IMsTscAxEvents_OnFocusReleasedEvent e)
+		{
 			Log.Write("OnFocusReleased {0}: direction={1}", base.DisplayName, e.iDirection);
 			NodeHelper.SelectNewActiveConnection(e.iDirection == -1);
 		}
 
-		private void OnConfirmClose(object sender, IMsTscAxEvents_OnConfirmCloseEvent e) {
-			e.pfAllowClose = true;
+		private bool OnConfirmClose(object sender, IMsTscAxEvents_OnConfirmCloseEvent e)
+		{
+			//e.pfAllowClose = true;
+			return true;
 		}
 
-		private void OnRequestContainerMinimize(object sender, EventArgs e) {
+		private void OnRequestContainerMinimize(object sender, EventArgs e)
+		{
 			Log.Write("OnRequestContainerMinimize {0}", base.DisplayName);
 			ParentForm.WindowState = FormWindowState.Minimized;
 		}
 
-		private void OnRequestGoFullScreen(object sender, EventArgs e) {
+		private void OnRequestGoFullScreen(object sender, EventArgs e)
+		{
 			Log.Write("OnRequestGoFullScreen {0}", base.DisplayName);
 			if (_noFullScreenBehavior <= 0)
+			{
 				ParentForm.GoFullScreenClient(this, Program.Preferences.FullScreenWindowIsTopMost);
+			}
 		}
 
-		public void SetClientSizeProperties() {
-			if (IsClientFullScreen) {
+		public void SetClientSizeProperties()
+		{
+			if (IsClientFullScreen)
+			{
 				Client.AdvancedSettings2.SmartSizing = false;
 				return;
 			}
 			InheritSettings();
 			if (IsClientInPanel)
+			{
 				Client.AdvancedSettings2.SmartSizing = base.IsThumbnail || DisplaySettings.SmartSizeDockedWindow.Value == RdpClient.SmartSizeMethod.Scale;
+			}
 			else if (IsClientInitialized)
+			{
 				Client.AdvancedSettings2.SmartSizing = DisplaySettings.SmartSizeUndockedWindow.Value == RdpClient.SmartSizeMethod.Scale;
-		}
-
-		private void OnRequestLeaveFullScreen(object sender, EventArgs e) {
-			Log.Write("OnRequestLeaveFullScreen {0}", base.DisplayName);
-			if (_noFullScreenBehavior <= 0) {
-				ParentForm.LeaveFullScreenClient(this);
-				if (!base.IsThumbnail)
-					SetNormalView();
 			}
 		}
 
-		private void OnFatalError(object sender, IMsTscAxEvents_OnFatalErrorEvent e) {
+		private void OnRequestLeaveFullScreen(object sender, EventArgs e)
+		{
+			Log.Write("OnRequestLeaveFullScreen {0}", base.DisplayName);
+			if (_noFullScreenBehavior <= 0)
+			{
+				ParentForm.LeaveFullScreenClient(this);
+				if (!base.IsThumbnail)
+				{
+					SetNormalView();
+				}
+			}
+		}
+
+		private void OnFatalError(object sender, IMsTscAxEvents_OnFatalErrorEvent e)
+		{
 			Log.Write("OnFatalError {0}: errorCode={1}", base.DisplayName, e.errorCode);
 		}
 
-		public void AddServerRef(ServerRef serverRef) {
+		public void AddServerRef(ServerRef serverRef)
+		{
 			_serverRefList.Add(serverRef);
 		}
 
-		public TServerRef FindServerRef<TServerRef>() where TServerRef : ServerRef {
+		public TServerRef FindServerRef<TServerRef>() where TServerRef : ServerRef
+		{
 			return _serverRefList.FirstOrDefault((ServerRef r) => r is TServerRef) as TServerRef;
 		}
 
-		public TServerRef FindServerRef<TServerRef>(GroupBase parent) where TServerRef : ServerRef {
+		public TServerRef FindServerRef<TServerRef>(GroupBase parent) where TServerRef : ServerRef
+		{
 			return _serverRefList.FirstOrDefault((ServerRef r) => r is TServerRef && r.Parent == parent) as TServerRef;
 		}
 
-		public void RemoveServerRef(ServerRef serverRef) {
+		public void RemoveServerRef(ServerRef serverRef)
+		{
 			_serverRefList.Remove(serverRef);
 		}
 
-		public void VisitServerRefs(Action<ServerRef> action) {
+		public void VisitServerRefs(Action<ServerRef> action)
+		{
 			ServerRef[] array = new ServerRef[_serverRefList.Count];
 			_serverRefList.CopyTo(array);
 			array.ForEach(action);
 		}
 
-		public override void ChangeImageIndex(ImageConstants index) {
+		public override void ChangeImageIndex(ImageConstants index)
+		{
 			base.ChangeImageIndex(index);
-			VisitServerRefs(delegate (ServerRef r) {
+			VisitServerRefs(delegate(ServerRef r)
+			{
 				r.ChangeImageIndex(index);
 			});
 		}
 
-		public void SendRemoteAction(RemoteSessionActionType action) {
+		public void SendRemoteAction(RemoteSessionActionType action)
+		{
 			IMsRdpClient8 msRdpClient = _client.MsRdpClient8;
 			msRdpClient.SendRemoteAction(action);
 		}
 
-		internal override void UpdateSettings(NodePropertiesDialog nodeDialog) {
+		internal override void UpdateSettings(NodePropertiesDialog nodeDialog)
+		{
 			base.UpdateSettings(nodeDialog);
 			if (!(nodeDialog is ServerPropertiesDialog))
+			{
 				return;
-
+			}
 			base.Text = base.DisplayName;
-			if (base.TreeView != null) {
+			if (base.TreeView != null)
+			{
 				SetText();
-				VisitServerRefs(delegate (ServerRef r) {
+				VisitServerRefs(delegate(ServerRef r)
+				{
 					r.Text = base.Text;
 				});
 			}
 		}
 
-		internal void UpdateFromTemplate(Server template) {
+		internal void UpdateFromTemplate(Server template)
+		{
 			CopySettings(template, typeof(ServerSettings));
 		}
 
-		public override void DoPropertiesDialog(Form parentForm, string activeTabName) {
+		public override void DoPropertiesDialog(Form parentForm, string activeTabName)
+		{
 			using ServerPropertiesDialog serverPropertiesDialog = ServerPropertiesDialog.NewPropertiesDialog(this, parentForm);
 			serverPropertiesDialog.SetActiveTab(activeTabName);
-			if (serverPropertiesDialog.ShowDialog() == DialogResult.OK) {
+			if (serverPropertiesDialog.ShowDialog() == DialogResult.OK)
+			{
 				UpdateSettings(serverPropertiesDialog);
 				ServerTree.Instance.OnNodeChanged(this, ChangeType.PropertyChanged);
 				ServerTree.Instance.OnGroupChanged(base.Parent as GroupBase, ChangeType.InvalidateUI);
 			}
 		}
 
-		public override void CollectNodesToInvalidate(bool recurseChildren, HashSet<RdcTreeNode> set) {
+		public override void CollectNodesToInvalidate(bool recurseChildren, HashSet<RdcTreeNode> set)
+		{
 			set.Add(this);
-			_serverRefList.ForEach(delegate (ServerRef r) {
+			_serverRefList.ForEach(delegate(ServerRef r)
+			{
 				r.CollectNodesToInvalidate(recurseChildren, set);
 			});
 		}
 
-		internal override void WriteXml(XmlTextWriter tw) {
+		internal override void WriteXml(XmlTextWriter tw)
+		{
 			tw.WriteStartElement("server");
 			WriteXmlSettingsGroups(tw);
 			tw.WriteEndElement();
 		}
 
-		public override bool CanDropOnTarget(RdcTreeNode targetNode) {
+		public override bool CanDropOnTarget(RdcTreeNode targetNode)
+		{
 			GroupBase groupBase = (targetNode as GroupBase) ?? (targetNode.Parent as GroupBase);
-			if (groupBase != null) {
-				if (groupBase.CanDropServers()) {
+			if (groupBase != null)
+			{
+				if (groupBase.CanDropServers())
+				{
 					if (groupBase.DropBehavior() != DragDropEffects.Copy)
+					{
 						return AllowEdit(popUI: false);
-
+					}
 					return true;
 				}
 				return false;
@@ -1010,15 +1332,18 @@ namespace RdcMan {
 			return false;
 		}
 
-		public override bool ConfirmRemove(bool askUser) {
-			if (IsConnected) {
-				FormTools.InformationDialog(base.Text + " 上有一个活动会话。删除服务器之前要先断开连接。");
+		public override bool ConfirmRemove(bool askUser)
+		{
+			if (IsConnected)
+			{
+				FormTools.InformationDialog(base.Text + "上有一个活动会话。删除服务器之前要先断开连接。");
 				return false;
 			}
 			return base.ConfirmRemove(askUser);
 		}
 
-		private Size GetRemoteDesktopSize() {
+		private Size GetRemoteDesktopSize()
+		{
 			if (base.RemoteDesktopSettings.DesktopSizeSameAsClientAreaSize.Value)
 				return IsClientDocked ? Program.TheForm.GetClientSize() : ServerForm.ClientSize;
 
@@ -1028,70 +1353,89 @@ namespace RdcMan {
 			return base.RemoteDesktopSettings.DesktopSize.Value;
 		}
 
-		internal override void GoFullScreen() {
-			if (IsConnected) {
+		internal override void GoFullScreen()
+		{
+			if (IsConnected)
+			{
 				RdpClient client = Client;
-				if (client != null) {
+				if (client != null)
+				{
 					client.Control.Enabled = true;
 					client.MsRdpClient.FullScreen = true;
 				}
 			}
 		}
 
-		internal override void LeaveFullScreen() {
-			if (IsConnected) {
-				RdpClient client = Client;
-				if (client != null)
-					client.MsRdpClient.FullScreen = false;
+		internal override void LeaveFullScreen()
+		{
+			if (IsConnected)
+			{
+				if (Client != null)
+				{
+					Client.MsRdpClient.FullScreen = false;
+				}
 			}
 		}
 
-		internal override void Undock() {
-			if (IsClientDocked) {
+		internal override void Undock()
+		{
+			if (IsClientDocked)
+			{
 				InitClient();
 				Program.TheForm.RemoveFromClientPanel(_client.Control);
 				bool visible = _client.Control.Visible;
 				_client.Control.Enabled = true;
 				ServerForm form = new ServerForm(this);
-				Program.PluginAction(delegate (IPlugin p) {
+				Program.PluginAction(delegate(IPlugin p)
+				{
 					p.OnUndockServer(form);
 				});
 				Program.ShowForm(form);
 				_serverBox.SetText();
 				if (visible)
+				{
 					_serverBox.Show();
+				}
 			}
 		}
 
-		internal override void Dock() {
-			if (IsClientUndocked) {
+		internal override void Dock()
+		{
+			if (IsClientUndocked)
+			{
 				ServerForm.Close();
 				return;
 			}
 			_serverBox.SetText();
-			if (!IsConnected) {
+			if (!IsConnected)
+			{
 				DestroyClient();
 				return;
 			}
 			Program.TheForm.AddToClientPanel(_client.Control);
 			SetClientSizeProperties();
-			if (_serverBox.Visible && !UseServerBox) {
+			if (_serverBox.Visible && !UseServerBox)
+			{
 				_client.Control.Size = _serverBox.Size;
 				_client.Control.Location = _serverBox.Location;
 				_serverBox.Hide();
 			}
 			else
+			{
 				_client.Control.Hide();
-
+			}
 			EnableDisableClient();
 		}
 
-		private void ClientGotFocus(object sender, EventArgs args) {
+		private void ClientGotFocus(object sender, EventArgs args)
+		{
 			Server.FocusReceived?.Invoke(this);
 		}
 
-		internal void EnableDisableClient() {
-			if (IsClientInitialized && IsClientDocked) {
+		internal void EnableDisableClient()
+		{
+			if (IsClientInitialized && IsClientDocked)
+			{
 				GroupBase groupBase = base.Parent as GroupBase;
 				groupBase.InheritSettings();
 				Client.Control.Enabled = !base.IsThumbnail || groupBase.DisplaySettings.AllowThumbnailSessionInteraction.Value;

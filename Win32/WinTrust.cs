@@ -12,7 +12,7 @@ namespace Win32 {
 
 		public static bool VerifyEmbeddedSignature(string fileName) {
 			WinTrustData pWVTData = new WinTrustData(fileName);
-			WinVerifyTrustResult winVerifyTrustResult = WinVerifyTrust(pgActionID: new Guid(WINTRUST_ACTION_GENERIC_VERIFY_V2), hwnd: INVALID_HANDLE_VALUE, pWVTData: pWVTData);
+			WinVerifyTrustResult winVerifyTrustResult = WinVerifyTrust(pgActionID: new Guid("{00AAC56B-CD44-11d0-8CC2-00C04FC295EE}"), hwnd: INVALID_HANDLE_VALUE, pWVTData: pWVTData);
 			return winVerifyTrustResult == WinVerifyTrustResult.Success;
 		}
 

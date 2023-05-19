@@ -1,5 +1,7 @@
-namespace RdcMan {
-	public abstract class CommonDisplaySettings : SettingsGroup {
+namespace RdcMan
+{
+	public abstract class CommonDisplaySettings : SettingsGroup
+	{
 		//public const string TabName = "显示设置";
 
 		[Setting("thumbnailScale", DefaultValue = 1)]
@@ -12,10 +14,12 @@ namespace RdcMan {
 		public EnumSetting<RdpClient.SmartSizeMethod> SmartSizeUndockedWindow { get; protected set; }
 
 		protected CommonDisplaySettings()
-			: base("显示设置", "displaySettings") {
+			: base("显示设置", "displaySettings")
+		{
 		}
 
-		protected override void Copy(RdcTreeNode node) {
+		protected override void Copy(RdcTreeNode node)
+		{
 			Copy(node.DisplaySettings);
 		}
 	}

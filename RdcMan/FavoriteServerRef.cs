@@ -1,10 +1,14 @@
-namespace RdcMan {
-	internal class FavoriteServerRef : ServerRef {
+namespace RdcMan
+{
+	internal class FavoriteServerRef : ServerRef
+	{
 		public FavoriteServerRef(Server server)
-			: base(server) {
+			: base(server)
+		{
 		}
 
-		public override bool CanRemove(bool popUI) {
+		public override bool CanRemove(bool popUI)
+		{
 			return AllowEdit(popUI);
 		}
 	}

@@ -5,9 +5,11 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace RdcMan {
-	internal class SelectServersDialogBase : RdcDialog {
-		protected const int DialogWidth = 500;
+namespace RdcMan
+{
+	internal class SelectServersDialogBase : RdcDialog
+	{
+		protected const int DialogWidth = 680;
 
 		private int _suspendItemChecked;
 
@@ -24,32 +26,37 @@ namespace RdcMan {
 
 		public SelectServersDialogBase(string dialogTitle, string acceptButtonText)
 			: base(dialogTitle, acceptButtonText) {
+			Width = DialogWidth;
 		}
 
-		protected void AddLabel(string text, ref int rowIndex, ref int tabIndex) {
-			Label value = new Label {
+		protected void AddLabel(string text, ref int rowIndex, ref int tabIndex)
+		{
+			Label value = new Label
+			{
 				Location = FormTools.NewLocation(0, rowIndex++),
 				Text = text,
 				TextAlign = ContentAlignment.MiddleLeft,
-				Size = new Size(500, 20)
+				Size = new Size(DialogWidth, 20)
 			};
 			base.Controls.Add(value);
 		}
 
-		protected void AddListView(ref int rowIndex, ref int tabIndex) {
-			ListView = new RdcListView {
+		protected void AddListView(ref int rowIndex, ref int tabIndex)
+		{
+			ListView = new RdcListView
+			{
 				CheckBoxes = true,
 				FullRowSelect = true,
 				Location = FormTools.NewLocation(0, rowIndex++),
 				MultiSelect = false,
-				Size = new Size(500, 300),
+				Size = new Size(DialogWidth, 300),
 				TabIndex = tabIndex++,
 				View = View.Details
 			};
 			ListView.KeyDown += List_KeyDownHandler;
 			ListView.MouseDoubleClick += List_MouseDoubleClick;
 			ListView.ItemChecked += ListView_ItemChecked;
-			ListView.Columns.AddRange(new ColumnHeader[3]
+			ListView.Columns.AddRange(new ColumnHeader[4]
 			{
 				new ColumnHeader {
 					Text = string.Empty,
@@ -60,37 +67,50 @@ namespace RdcMan {
 					Width = 130
 				},
 				new ColumnHeader {
+					Text = "IPµØÖ·",
+					Width = 130
+				},
+				new ColumnHeader {
 					Text = "×é",
 					Width = 349
 				}
 			});
 			base.Controls.Add(ListView);
-			if (RdcListView.SupportsHeaderCheckBoxes) {
+			if (RdcListView.SupportsHeaderCheckBoxes)
+			{
 				ListView.SetColumnHeaderToCheckBox(0);
 				ListView.HeaderCheckBoxClick += ListView_HeaderCheckBoxClick;
 			}
 		}
 
-		public void SuspendItemChecked() {
+		public void SuspendItemChecked()
+		{
 			Interlocked.Increment(ref _suspendItemChecked);
 		}
 
-		public void ResumeItemChecked() {
+		public void ResumeItemChecked()
+		{
 			if (Interlocked.Decrement(ref _suspendItemChecked) == 0)
+			{
 				SetHeaderCheckFromItems();
+			}
 		}
 
-		protected ListViewItem CreateListViewItem(ServerBase server) {
-			return new ListViewItem(new string[3] {
+		protected ListViewItem CreateListViewItem(ServerBase server)
+		{
+			return new ListViewItem(new string[4]
+			{
 				"",
 				server.DisplayName,
+				server.ServerName,
 				server.Parent.FullPath
 			}) {
 				Tag = server
 			};
 		}
 
-		public override void InitButtons() {
+		public override void InitButtons()
+		{
 			base.InitButtons();
 			if (!RdcListView.SupportsHeaderCheckBoxes) {
 				Button button = new Button {
@@ -103,45 +123,58 @@ namespace RdcMan {
 			}
 		}
 
-		private void List_MouseDoubleClick(object sender, MouseEventArgs e) {
+		private void List_MouseDoubleClick(object sender, MouseEventArgs e)
+		{
 			if (e.Button == MouseButtons.Left)
 				OK();
 		}
 
-		private void List_KeyDownHandler(object sender, KeyEventArgs e) {
-			if (e.KeyData == (Keys.A | Keys.Control)) {
+		private void List_KeyDownHandler(object sender, KeyEventArgs e)
+		{
+			if (e.KeyData == (Keys.A | Keys.Control))
+			{
 				e.Handled = true;
 				SelectAllItems(isChecked: true);
 			}
 		}
 
-		private void SelectAll_Click(object sender, EventArgs e) {
+		private void SelectAll_Click(object sender, EventArgs e)
+		{
 			SelectAllItems(isChecked: true);
 		}
 
-		private void SelectAllItems(bool isChecked) {
-			try {
+		private void SelectAllItems(bool isChecked)
+		{
+			try
+			{
 				SuspendItemChecked();
-				foreach (ListViewItem item in ListView.Items) {
+				foreach (ListViewItem item in ListView.Items)
+				{
 					item.Checked = isChecked;
 				}
 			}
-			finally {
+			finally
+			{
 				ResumeItemChecked();
 			}
 		}
 
-		private void ListView_ItemChecked(object sender, ItemCheckedEventArgs e) {
+		private void ListView_ItemChecked(object sender, ItemCheckedEventArgs e)
+		{
 			if (_suspendItemChecked == 0)
+			{
 				SetHeaderCheckFromItems();
+			}
 		}
 
-		private void SetHeaderCheckFromItems() {
+		private void SetHeaderCheckFromItems()
+		{
 			bool isChecked = ListView.Items.OfType<ListViewItem>().All((ListViewItem i) => i.Checked);
 			ListView.SetColumnHeaderChecked(0, isChecked);
 		}
 
-		private void ListView_HeaderCheckBoxClick(object sender, HeaderColumnClickEventArgs e) {
+		private void ListView_HeaderCheckBoxClick(object sender, HeaderColumnClickEventArgs e)
+		{
 			SelectAllItems(e.IsChecked);
 		}
 	}

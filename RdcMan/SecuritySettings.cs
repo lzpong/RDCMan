@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace RdcMan {
-	public class SecuritySettings : SettingsGroup {
+namespace RdcMan
+{
+	public class SecuritySettings : SettingsGroup
+	{
 		//internal const string TabName = "Security Settings";
 
 		private static Dictionary<string, SettingProperty> _settingProperties;
@@ -18,18 +20,21 @@ namespace RdcMan {
 		[Setting("remoteGuard")]
 		public BoolSetting RemoteGuard { get; private set; }
 
-		static SecuritySettings() {
+		static SecuritySettings()
+		{
 			typeof(SecuritySettings).GetSettingProperties(out _settingProperties);
 		}
 
 		public SecuritySettings()
 			: base("∞≤»´…Ë÷√", "securitySettings") { }
 
-		public override TabPage CreateTabPage(TabbedSettingsDialog dialog) {
+		public override TabPage CreateTabPage(TabbedSettingsDialog dialog)
+		{
 			return new SecuritySettingsTabPage(dialog, this);
 		}
 
-		protected override void Copy(RdcTreeNode node) {
+		protected override void Copy(RdcTreeNode node)
+		{
 			Copy(node.SecuritySettings);
 		}
 	}

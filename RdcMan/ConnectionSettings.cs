@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace RdcMan {
-	public class ConnectionSettings : SettingsGroup {
+namespace RdcMan
+{
+	public class ConnectionSettings : SettingsGroup
+	{
 		//internal const string TabName = "连接设置";
 
 		private static Dictionary<string, SettingProperty> _settingProperties;
@@ -24,12 +26,14 @@ namespace RdcMan {
 		[Setting("loadBalanceInfo")]
 		public StringSetting LoadBalanceInfo { get; private set; }
 
-		static ConnectionSettings() {
+		static ConnectionSettings()
+		{
 			typeof(ConnectionSettings).GetSettingProperties(out _settingProperties);
 		}
 
 		public ConnectionSettings()
-			: base("连接设置", "connectionSettings") {
+			: base("连接设置", "connectionSettings")
+		{
 		}
 
 		public override TabPage CreateTabPage(TabbedSettingsDialog dialog) => new ConnectionSettingsTabPage(dialog, this);

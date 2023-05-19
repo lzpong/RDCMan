@@ -17,7 +17,7 @@ namespace RdcMan {
 				Location = new Point(53, 31),
 				Width = num2 - FormTools.LabelWidth,
 				AutoSize = true,
-				Text = "Copyright © 2022 Microsoft. By Julian Burger, lzp 汉化"
+				Text = "Copyright © 2023 Microsoft. By Julian Burger"
 			};
 			LinkLabel linkLabel = new LinkLabel {
 				Location = new Point(53, 48),

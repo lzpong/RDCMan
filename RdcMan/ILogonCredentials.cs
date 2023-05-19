@@ -1,5 +1,7 @@
-namespace RdcMan {
-	public interface ILogonCredentials {
+namespace RdcMan
+{
+	public interface ILogonCredentials
+	{
 		string ProfileName { get; }
 
 		ProfileScope ProfileScope { get; }

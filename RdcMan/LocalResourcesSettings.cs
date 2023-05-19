@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace RdcMan {
-	public class LocalResourcesSettings : SettingsGroup {
+namespace RdcMan
+{
+	public class LocalResourcesSettings : SettingsGroup
+	{
 		//internal const string TabName = "Local Resources";
 
-		private static readonly Dictionary<string, SettingProperty> _settingProperties;
+		private static Dictionary<string, SettingProperty> _settingProperties;
 
 		protected override Dictionary<string, SettingProperty> SettingProperties => _settingProperties;
 
@@ -42,17 +44,23 @@ namespace RdcMan {
 		[Setting("redirectPnpDevices")]
 		public BoolSetting RedirectPnpDevices { get; private set; }
 
-		static LocalResourcesSettings() {
+		static LocalResourcesSettings()
+		{
 			typeof(LocalResourcesSettings).GetSettingProperties(out _settingProperties);
 		}
 
-		public LocalResourcesSettings() : base("本地资源", "localResources") { }
+		public LocalResourcesSettings()
+			: base("本地资源", "localResources")
+		{
+		}
 
-		public override TabPage CreateTabPage(TabbedSettingsDialog dialog) {
+		public override TabPage CreateTabPage(TabbedSettingsDialog dialog)
+		{
 			return new LocalResourcesTabPage(dialog, this);
 		}
 
-		protected override void Copy(RdcTreeNode node) {
+		protected override void Copy(RdcTreeNode node)
+		{
 			Copy(node.LocalResourceSettings);
 		}
 	}

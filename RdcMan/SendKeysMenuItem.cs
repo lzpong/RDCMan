@@ -15,8 +15,9 @@ namespace RdcMan
 			{
 				Keys keys = keyCodes[i];
 				if (stringBuilder.Length > 0)
+				{
 					stringBuilder.Append("+");
-
+				}
 				switch (keys)
 				{
 				case Keys.ControlKey:
@@ -34,9 +35,13 @@ namespace RdcMan
 				}
 			}
 			if (name != null)
+			{
 				Text = name + " (" + stringBuilder.ToString() + ")";
+			}
 			else
+			{
 				Text = stringBuilder.ToString();
+			}
 		}
 	}
 }

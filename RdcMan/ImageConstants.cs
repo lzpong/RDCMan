@@ -1,5 +1,7 @@
-namespace RdcMan {
-	public enum ImageConstants {
+namespace RdcMan
+{
+	public enum ImageConstants
+	{
 		DisconnectedServer,
 		ConnectingServer,
 		ConnectingSelectedServer,

@@ -7,38 +7,51 @@ using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace RdcMan {
-	internal class ServerTree : TreeView, IServerTree {
-		private class RootNodeGroup : GroupBase {
-			public RootNodeGroup() {
+namespace RdcMan
+{
+	internal class ServerTree : TreeView, IServerTree
+	{
+		private class RootNodeGroup : GroupBase
+		{
+			public RootNodeGroup()
+			{
 				base.Text = "[root]";
 			}
 
-			public override void OnRemoving() {
+			public override void OnRemoving()
+			{
 				throw new NotImplementedException();
 			}
 
-			public override void DoPropertiesDialog(Form parentForm, string activeTabName) {
+			public override void DoPropertiesDialog(Form parentForm, string activeTabName)
+			{
 				throw new NotImplementedException();
 			}
 
-			protected override void InitSettings() { }
+			protected override void InitSettings()
+			{
+			}
 		}
 
-		private class InvalidateComparer : IComparer<RdcTreeNode> {
-			public int Compare(RdcTreeNode x, RdcTreeNode y) {
+		private class InvalidateComparer : IComparer<RdcTreeNode>
+		{
+			public int Compare(RdcTreeNode x, RdcTreeNode y)
+			{
 				int ordinal = GetOrdinal(x);
 				int ordinal2 = GetOrdinal(y);
 				return ordinal - ordinal2;
 			}
 
-			private int GetOrdinal(RdcTreeNode node) {
+			private int GetOrdinal(RdcTreeNode node)
+			{
 				if (node is Server)
+				{
 					return 9999;
-
+				}
 				if (node is ServerRef)
+				{
 					return 8888;
-
+				}
 				return node.GetPathLength();
 			}
 		}
@@ -85,13 +98,15 @@ namespace RdcMan {
 
 		internal event Action<GroupChangedEventArgs> GroupChanged;
 
-		static ServerTree() {
+		static ServerTree()
+		{
 			NotFocusedForeColor = Color.FromKnownColor(KnownColor.ControlDark);
 			NotFocusedBackColor = Color.White;
 			FocusedForeColor = Color.Black;
 			FocusedBackColor = Color.White;
 			ImageConstantLookup = new ImageConstants[2, 9];
-			foreach (ImageConstants item in Helpers.EnumValues<ImageConstants>()) {
+			foreach (ImageConstants item in Helpers.EnumValues<ImageConstants>())
+			{
 				ImageConstantLookup[0, (int)item] = item;
 				ImageConstantLookup[1, (int)item] = item;
 			}
@@ -102,84 +117,108 @@ namespace RdcMan {
 			Instance = new ServerTree();
 		}
 
-		private ServerTree() {
+		private ServerTree()
+		{
 			base.BorderStyle = BorderStyle.None;
 			AllowDrop = true;
 			base.Scrollable = true;
 			base.HideSelection = false;
-			_delayedFocusTimer = new System.Threading.Timer(delegate {
+			_delayedFocusTimer = new System.Threading.Timer(delegate
+			{
 				CheckDelayedFocusServer();
 			}, null, -1, -1);
 		}
 
-		internal FileGroup GetSelectedFile() {
+		internal FileGroup GetSelectedFile()
+		{
 			FileGroup result = null;
 			TreeNode treeNode = base.SelectedNode;
 			if (treeNode != null)
+			{
 				result = (treeNode as RdcTreeNode).FileGroup;
-
+			}
 			return result;
 		}
 
-		internal void Operation(OperationBehavior behavior, Action operation) {
+		internal void Operation(OperationBehavior behavior, Action operation)
+		{
 			RdcTreeNode rdcTreeNode = base.SelectedNode as RdcTreeNode;
-			try {
+			try
+			{
 				if (behavior.HasFlag(OperationBehavior.SuspendUpdate))
+				{
 					BeginUpdate();
-
+				}
 				if (behavior.HasFlag(OperationBehavior.SuspendSort))
+				{
 					SuspendSort();
-
+				}
 				if (behavior.HasFlag(OperationBehavior.SuspendSelect))
+				{
 					SuspendSelect();
-
+				}
 				if (behavior.HasFlag(OperationBehavior.SuspendGroupChanged))
+				{
 					SuspendGroupChanged();
-
+				}
 				if (behavior.HasFlag(OperationBehavior.RestoreSelected))
+				{
 					base.SelectedNode = null;
-
+				}
 				operation();
 			}
-			finally {
-				if (behavior.HasFlag(OperationBehavior.RestoreSelected)) {
+			finally
+			{
+				if (behavior.HasFlag(OperationBehavior.RestoreSelected))
+				{
 					base.SelectedNode = rdcTreeNode;
 					Program.TheForm.SetTitle();
 				}
 				if (behavior.HasFlag(OperationBehavior.SuspendGroupChanged))
+				{
 					ResumeGroupChanged();
-
+				}
 				if (behavior.HasFlag(OperationBehavior.SuspendSelect))
+				{
 					ResumeSelect();
-
+				}
 				if (behavior.HasFlag(OperationBehavior.SuspendSort))
+				{
 					ResumeSort();
-
+				}
 				if (behavior.HasFlag(OperationBehavior.SuspendUpdate))
+				{
 					EndUpdate();
+				}
 			}
 		}
 
-		internal void UpdateColors() {
-			if (Program.Preferences.DimNodesWhenInactive) {
-				if (Focused) {
+		internal void UpdateColors()
+		{
+			if (Program.Preferences.DimNodesWhenInactive)
+			{
+				if (Focused)
+				{
 					ForeColor = FocusedForeColor;
 					BackColor = FocusedBackColor;
 				}
-				else {
+				else
+				{
 					ForeColor = NotFocusedForeColor;
 					BackColor = NotFocusedBackColor;
 				}
 			}
-			else {
+			else
+			{
 				ForeColor = FocusedForeColor;
 				BackColor = FocusedBackColor;
 			}
 		}
 
-		internal void Init(Assembly myAssembly) {
+		internal void Init(Assembly myAssembly)
+		{
 			base.ImageList = new ImageList();
-			base.ImageList.ColorDepth = ColorDepth.Depth8Bit;
+			base.ImageList.ColorDepth = ColorDepth.Depth32Bit;
 			base.ImageList.ImageSize = new Size(16, 16);
 			base.ImageList.Images.Add(new Icon(myAssembly.GetManifestResourceStream("Resources.disconnected.ico")));
 			base.ImageList.Images.Add(new Icon(myAssembly.GetManifestResourceStream("Resources.connecting.ico")));
@@ -188,64 +227,85 @@ namespace RdcMan {
 			base.ImageList.Images.Add(new Icon(myAssembly.GetManifestResourceStream("Resources.connectedselected.ico")));
 			base.ImageList.Images.Add(new Icon(myAssembly.GetManifestResourceStream("Resources.group.ico")));
 			base.ImageList.Images.Add(new Icon(myAssembly.GetManifestResourceStream("Resources.smartgroup.ico")));
-			base.ImageList.Images.Add(new Icon(myAssembly.GetManifestResourceStream("Resources.app.ico")));
+			base.ImageList.Images.Add(new Icon(myAssembly.GetManifestResourceStream("Resources.default.ico")));
 			ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
 			contextMenuStrip.Opening += OnContextMenu;
 			ContextMenuStrip = contextMenuStrip;
 		}
 
-		public void AddNode(RdcTreeNode node, GroupBase parent) {
+		public void AddNode(RdcTreeNode node, GroupBase parent)
+		{
 			if (node == null)
+			{
 				throw new ArgumentNullException("node");
-
+			}
 			if (!(node is ServerBase) && !(node is GroupBase))
+			{
 				throw new ArgumentOutOfRangeException("node", "节点必须从 ServerBase 或 GroupBase 派生");
-
+			}
 			if (parent == null)
+			{
 				throw new ArgumentNullException("parent");
-
+			}
 			if (parent == RootNode)
+			{
 				base.Nodes.Add(node);
-			else {
+			}
+			else
+			{
 				parent.Nodes.Add(node);
 				this.SortGroup(parent);
 			}
 			OnGroupChanged(parent, ChangeType.TreeChanged);
 		}
 
-		public void RemoveNode(RdcTreeNode node) {
+		public void RemoveNode(RdcTreeNode node)
+		{
 			if (node == null)
+			{
 				throw new ArgumentNullException("node");
-
+			}
 			TreeNode treeNode = base.SelectedNode;
 			TreeNodeCollection parentNodes = ((node.Parent != null) ? node.Parent.Nodes : base.Nodes);
-			if (treeNode != null) {
+			if (treeNode != null)
+			{
 				bool inSelectedPath = false;
-				(treeNode as RdcTreeNode).VisitNodeAndParents(delegate (RdcTreeNode n) {
+				(treeNode as RdcTreeNode).VisitNodeAndParents(delegate(RdcTreeNode n)
+				{
 					if (n == node)
+					{
 						inSelectedPath = true;
+					}
 				});
-				if (inSelectedPath) {
+				if (inSelectedPath)
+				{
 					(treeNode as RdcTreeNode).Hide();
 					node.Hide();
 					treeNode = ((node.Index > 0) ? parentNodes[node.Index - 1] : ((node.Index >= parentNodes.Count - 1) ? node.Parent : parentNodes[node.Index + 1]));
 					base.SelectedNode = null;
 				}
 			}
-			Operation(OperationBehavior.RestoreSelected, delegate {
+			Operation(OperationBehavior.RestoreSelected, delegate
+			{
 				GroupBase groupBase = node.Parent as GroupBase;
 				node.OnRemoving();
 				parentNodes.Remove(node);
 				if (groupBase != null)
+				{
 					OnGroupChanged(groupBase, ChangeType.TreeChanged);
+				}
 			});
 			base.SelectedNode = treeNode;
 		}
 
-		private void CheckDelayedFocusServer() {
-			lock (_delayedFocusSyncObject) {
-				if (_delayedFocusServer != null) {
-					Program.TheForm.Invoke((MethodInvoker)delegate {
+		private void CheckDelayedFocusServer()
+		{
+			lock (_delayedFocusSyncObject)
+			{
+				if (_delayedFocusServer != null)
+				{
+					Program.TheForm.Invoke((MethodInvoker)delegate
+					{
 						_delayedFocusServer.FocusConnectedClient();
 					});
 				}
@@ -253,90 +313,120 @@ namespace RdcMan {
 			}
 		}
 
-		private void SetDelayedFocusServer(ServerBase server) {
-			lock (_delayedFocusSyncObject) {
+		private void SetDelayedFocusServer(ServerBase server)
+		{
+			lock (_delayedFocusSyncObject)
+			{
 				_delayedFocusServer = server;
 				_delayedFocusTimer.Change(100, -1);
 			}
 		}
 
-		protected override void OnGotFocus(EventArgs e) {
+		protected override void OnGotFocus(EventArgs e)
+		{
 			base.OnGotFocus(e);
 			UpdateColors();
 		}
 
-		protected override void OnLostFocus(EventArgs e) {
+		protected override void OnLostFocus(EventArgs e)
+		{
 			base.OnLostFocus(e);
 			UpdateColors();
 		}
 
-		protected override void OnMouseDown(MouseEventArgs e) {
+		protected override void OnMouseDown(MouseEventArgs e)
+		{
 			if (e.Button == MouseButtons.Right)
+			{
 				_contextViaMouse = true;
+			}
 			else
+			{
 				base.OnMouseDown(e);
-		}
-
-		protected override void OnBeforeSelect(TreeViewCancelEventArgs e) {
-			base.OnBeforeSelect(e);
-			if (_noSelectCounter <= 0 && base.SelectedNode != null) {
-				RdcTreeNode rdcTreeNode = base.SelectedNode as RdcTreeNode;
-				if (!(rdcTreeNode is ServerBase serverBase) || serverBase.IsClientUndocked || !serverBase.IsClientFullScreen)
-					rdcTreeNode.Hide();
 			}
 		}
 
-		protected override void OnAfterSelect(TreeViewEventArgs e) {
-			if (_noSelectCounter > 0)
-				return;
+		protected override void OnBeforeSelect(TreeViewCancelEventArgs e)
+		{
+			base.OnBeforeSelect(e);
+			if (_noSelectCounter <= 0 && base.SelectedNode != null)
+			{
+				RdcTreeNode rdcTreeNode = base.SelectedNode as RdcTreeNode;
+				if (!(rdcTreeNode is ServerBase serverBase) || serverBase.IsClientUndocked || !serverBase.IsClientFullScreen)
+				{
+					rdcTreeNode.Hide();
+				}
+			}
+		}
 
-			if (base.SelectedNode is RdcTreeNode rdcTreeNode) {
-				if (rdcTreeNode is ServerBase serverBase) {
+		protected override void OnAfterSelect(TreeViewEventArgs e)
+		{
+			if (_noSelectCounter > 0)
+			{
+				return;
+			}
+			if (base.SelectedNode is RdcTreeNode rdcTreeNode)
+			{
+				if (rdcTreeNode is ServerBase serverBase)
+				{
 					if (serverBase.IsClientUndocked || !serverBase.IsClientFullScreen)
+					{
 						serverBase.ServerNode.SetNormalView();
+					}
 					if (!Helpers.IsControlKeyPressed && Program.Preferences.FocusOnClick && e.Action == TreeViewAction.ByMouse && serverBase.IsConnected)
+					{
 						SetDelayedFocusServer(serverBase);
+					}
 				}
 				if (!rdcTreeNode.IsVisible)
+				{
 					rdcTreeNode.EnsureVisible();
-
+				}
 				rdcTreeNode.Show();
 			}
 			Program.TheForm.SetTitle();
 			base.OnAfterSelect(e);
 		}
 
-		private void OnContextMenu(object sender, CancelEventArgs e) {
+		private void OnContextMenu(object sender, CancelEventArgs e)
+		{
 			RdcTreeNode contextNode = base.SelectedNode as RdcTreeNode;
-			if (_contextViaMouse) {
+			if (_contextViaMouse)
+			{
 				Point point = PointToClient(Control.MousePosition);
 				contextNode = GetNodeAt(point.X, point.Y) as RdcTreeNode;
 				_contextViaMouse = false;
 				this.SelectedNode = contextNode; //右键点击选中
 			}
 			PopulateNodeContextMenu(ContextMenuStrip, contextNode);
-			Program.PluginAction(delegate (IPlugin p) {
+			Program.PluginAction(delegate(IPlugin p)
+			{
 				p.OnContextMenu(ContextMenuStrip, contextNode);
 			});
 			e.Cancel = false;
 		}
 
-		private void PopulateNodeContextMenu(ContextMenuStrip menu, RdcTreeNode node) {
+		private void PopulateNodeContextMenu(ContextMenuStrip menu, RdcTreeNode node)
+		{
 			menu.Items.Clear();
-			if (node == null) {
-				if (AnyOpenedEditableFiles()) {
+			if (node == null)
+			{
+				if (AnyOpenedEditableFiles())
+				{
 					menu.Items.Add(new DelegateMenuItem("添加服务器(&A)...", MenuNames.EditAddServer, AddNodeDialogHelper.AddServersDialog));
 					menu.Items.Add(new DelegateMenuItem("导入服务器(&I)...", MenuNames.EditImportServers, AddNodeDialogHelper.ImportServersDialog));
 					menu.Items.Add("-");
 					menu.Items.Add(new DelegateMenuItem("添加组(&G)...", MenuNames.EditAddGroup, AddNodeDialogHelper.AddGroupDialog));
 				}
-				else {
+				else
+				{
 					ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem("请打开或创建文件");
 					toolStripMenuItem.Enabled = false;
 					menu.Items.Add(toolStripMenuItem);
 				}
 			}
-			else if (node is GroupBase groupBase) {
+			else if (node is GroupBase groupBase)
+			{
 				groupBase.AnyOrAllConnected(out var anyConnected, out var allConnected);
 				ToolStripMenuItem toolStripMenuItem = new DelegateMenuItem("整组连接(&C)", MenuNames.SessionConnect, groupBase.Connect) {
 					Enabled = !allConnected
@@ -414,40 +504,50 @@ namespace RdcMan {
 			}
 		}
 
-		public bool AnyOpenedEditableFiles() {
+		public bool AnyOpenedEditableFiles()
+		{
 			return base.Nodes.OfType<FileGroup>().Any((FileGroup file) => file.AllowEdit(popUI: false));
 		}
 
-		private TreeNode FindNodeInList(TreeNodeCollection nodes, string name) {
+		private TreeNode FindNodeInList(TreeNodeCollection nodes, string name)
+		{
 			return (from TreeNode node in nodes
-					where node.Text == name
-					select node).FirstOrDefault();
+				where node.Text == name
+				select node).FirstOrDefault();
 		}
 
-		public TreeNode FindNodeByName(string name) {
+		public TreeNode FindNodeByName(string name)
+		{
 			if (name == RootNode.Text)
+			{
 				return RootNode;
-
+			}
 			string[] array = name.Split(new string[1] { base.PathSeparator }, StringSplitOptions.None);
 			TreeNodeCollection treeNodeCollection = base.Nodes;
 			TreeNode treeNode = null;
 			string[] array2 = array;
-			foreach (string name2 in array2) {
+			foreach (string name2 in array2)
+			{
 				treeNode = FindNodeInList(treeNodeCollection, name2);
 				if (treeNode == null)
+				{
 					break;
-
+				}
 				treeNodeCollection = treeNode.Nodes;
 			}
 			return treeNode;
 		}
 
-		public void ConfirmRemove(RdcTreeNode node, bool askUser) {
+		public void ConfirmRemove(RdcTreeNode node, bool askUser)
+		{
 			if (node.ConfirmRemove(askUser))
+			{
 				RemoveNode(node);
+			}
 		}
 
-		private void DoRemoveChildren(RdcTreeNode node) {
+		private void DoRemoveChildren(RdcTreeNode node)
+		{
 			GroupBase groupBase = node as GroupBase;
 			if (groupBase.Nodes.Count > 0) {
 				DialogResult dialogResult = FormTools.YesNoDialog("删除 " + groupBase.Text + " 组的所有子项？");
@@ -457,16 +557,19 @@ namespace RdcMan {
 			groupBase.RemoveChildren();
 		}
 
-		protected override void OnItemDrag(ItemDragEventArgs e) {
+		protected override void OnItemDrag(ItemDragEventArgs e)
+		{
 			base.OnItemDrag(e);
 			RdcTreeNode rdcTreeNode = (_draggedNode = e.Item as RdcTreeNode);
 			_preDragSelectedNode = base.SelectedNode;
 			DoDragDrop(_draggedNode, DragDropEffects.Move);
 		}
 
-		protected override void OnQueryContinueDrag(QueryContinueDragEventArgs e) {
+		protected override void OnQueryContinueDrag(QueryContinueDragEventArgs e)
+		{
 			base.OnQueryContinueDrag(e);
-			if ((e.KeyState & 3) == 0) {
+			if ((e.KeyState & 3) == 0)
+			{
 				SuspendSelect();
 				base.SelectedNode = _preDragSelectedNode;
 				_preDragSelectedNode = null;
@@ -474,16 +577,19 @@ namespace RdcMan {
 			}
 		}
 
-		protected override void OnDragOver(DragEventArgs e) {
+		protected override void OnDragOver(DragEventArgs e)
+		{
 			base.OnDragOver(e);
 			Point pt = PointToClient(new Point(e.X, e.Y));
-			if (GetNodeAt(pt) is RdcTreeNode targetNode && _draggedNode.CanDropOnTarget(targetNode)) {
+			if (GetNodeAt(pt) is RdcTreeNode targetNode && _draggedNode.CanDropOnTarget(targetNode))
+			{
 				SuspendSelect();
 				base.SelectedNode = targetNode;
 				ResumeSelect();
 				e.Effect = e.AllowedEffect;
 			}
-			else {
+			else
+			{
 				SuspendSelect();
 				base.SelectedNode = _draggedNode;
 				ResumeSelect();
@@ -491,71 +597,92 @@ namespace RdcMan {
 			}
 		}
 
-		protected override void OnDragDrop(DragEventArgs e) {
+		protected override void OnDragDrop(DragEventArgs e)
+		{
 			base.OnDragDrop(e);
 			Point pt = PointToClient(new Point(e.X, e.Y));
-			if (GetNodeAt(pt) is RdcTreeNode rdcTreeNode) {
+			if (GetNodeAt(pt) is RdcTreeNode rdcTreeNode)
+			{
 				GroupBase groupBase = (rdcTreeNode as GroupBase) ?? (rdcTreeNode.Parent as GroupBase);
 				if (groupBase != _draggedNode && groupBase != _draggedNode.Parent)
+				{
 					MoveNode(_draggedNode, groupBase);
+				}
 			}
 		}
 
-		protected override void OnNodeMouseDoubleClick(TreeNodeMouseClickEventArgs e) {
+		protected override void OnNodeMouseDoubleClick(TreeNodeMouseClickEventArgs e)
+		{
 			base.OnNodeMouseDoubleClick(e);
-			if (e.Button == MouseButtons.Left && !Helpers.IsControlKeyPressed && base.SelectedNode is ServerBase serverBase) {
+			if (e.Button == MouseButtons.Left && !Helpers.IsControlKeyPressed && base.SelectedNode is ServerBase serverBase)
+			{
 				serverBase.Connect();
 				SetDelayedFocusServer(serverBase);
 			}
 		}
 
-		public void MoveNode(RdcTreeNode node, GroupBase newParent) {
+		public void MoveNode(RdcTreeNode node, GroupBase newParent)
+		{
 			if (newParent != null && newParent.HandleMove(node))
 				return;
-
-			Operation(OperationBehavior.RestoreSelected, delegate {
-				if (node.Parent == null) {
+			Operation(OperationBehavior.RestoreSelected, delegate
+			{
+				if (node.Parent == null)
+				{
 					base.Nodes.Remove(node);
 					OnGroupChanged(RootNode, ChangeType.TreeChanged);
 				}
-				else {
+				else
+				{
 					if (node is ServerBase && (node as ServerBase).ServerNode is TemporaryServer temporaryServer)
+					{
 						node = temporaryServer;
-
+					}
 					GroupBase groupBase = node.Parent as GroupBase;
 					groupBase.Nodes.Remove(node);
 					OnGroupChanged(groupBase, ChangeType.TreeChanged);
 				}
-				if (newParent == null) {
+				if (newParent == null)
+				{
 					base.Nodes.Add(node);
 					OnGroupChanged(RootNode, ChangeType.TreeChanged);
 				}
-				else {
+				else
+				{
 					newParent.Nodes.Add(node);
 					OnGroupChanged(newParent, ChangeType.TreeChanged);
 				}
 				OnNodeChanged(node, ChangeType.TreeChanged);
 				if (!node.IsVisible)
+				{
 					node.EnsureVisible();
+				}
 			});
 		}
 
-		public void OnGroupChanged(GroupBase group, ChangeType changeType) {
+		public void OnGroupChanged(GroupBase group, ChangeType changeType)
+		{
 			if (_noGroupChanged > 0 || group == null)
+			{
 				return;
-
+			}
 			Log.Write("OnGroupChanged({1}) {0}", group.Text, changeType);
 			HashSet<RdcTreeNode> set = new HashSet<RdcTreeNode>();
-			if (group == RootNode) {
-				if (changeType.HasFlag(ChangeType.PropertyChanged)) {
-					base.Nodes.VisitNodes(delegate (RdcTreeNode n) {
+			if (group == RootNode)
+			{
+				if (changeType.HasFlag(ChangeType.PropertyChanged))
+				{
+					base.Nodes.VisitNodes(delegate(RdcTreeNode n)
+					{
 						set.Add(n);
 					});
 				}
 			}
-			else {
+			else
+			{
 				group.CollectNodesToInvalidate(recurseChildren: true, set);
-				group.VisitParents(delegate (RdcTreeNode parent) {
+				group.VisitParents(delegate(RdcTreeNode parent)
+				{
 					parent.CollectNodesToInvalidate(recurseChildren: false, set);
 				});
 			}
@@ -563,56 +690,71 @@ namespace RdcMan {
 			this.GroupChanged?.Invoke(new GroupChangedEventArgs(group, changeType));
 		}
 
-		public void OnNodeChanged(RdcTreeNode node, ChangeType changeType) {
+		public void OnNodeChanged(RdcTreeNode node, ChangeType changeType)
+		{
 			Log.Write("OnNodeChanged({1}) {0}", node.Text, changeType);
 			if (this.SortNode(node) && node.Parent is GroupBase group)
+			{
 				OnGroupChanged(group, ChangeType.InvalidateUI);
-
+			}
 			if (node is GroupBase group2)
+			{
 				OnGroupChanged(group2, changeType);
+			}
 			else
+			{
 				OnServerChanged(node as ServerBase, changeType);
-
+			}
 			Program.TheForm.SetTitle();
 		}
 
-		private void OnServerChanged(ServerBase serverBase, ChangeType changeType) {
+		private void OnServerChanged(ServerBase serverBase, ChangeType changeType)
+		{
 			HashSet<RdcTreeNode> set = new HashSet<RdcTreeNode>();
 			serverBase.CollectNodesToInvalidate(recurseChildren: false, set);
 			InvalidateNodes(set);
 			this.ServerChanged?.Invoke(new ServerChangedEventArgs(serverBase, changeType));
 		}
 
-		public void SuspendSelect() {
+		public void SuspendSelect()
+		{
 			Interlocked.Increment(ref _noSelectCounter);
 		}
 
-		public void ResumeSelect() {
+		public void ResumeSelect()
+		{
 			Interlocked.Decrement(ref _noSelectCounter);
 		}
 
-		public void SuspendSort() {
+		public void SuspendSort()
+		{
 			Interlocked.Increment(ref _noSortCounter);
 		}
 
-		public void ResumeSort() {
+		public void ResumeSort()
+		{
 			Interlocked.Decrement(ref _noSortCounter);
 		}
 
-		public void SuspendGroupChanged() {
+		public void SuspendGroupChanged()
+		{
 			Interlocked.Increment(ref _noGroupChanged);
 		}
 
-		public void ResumeGroupChanged() {
+		public void ResumeGroupChanged()
+		{
 			Interlocked.Decrement(ref _noGroupChanged);
 		}
 
-		public static ImageConstants TranslateImage(ImageConstants index, bool toSelected) {
+		public static ImageConstants TranslateImage(ImageConstants index, bool toSelected)
+		{
 			return ImageConstantLookup[toSelected ? 1 : 0, (int)index];
 		}
 
-		private void InvalidateNodes(HashSet<RdcTreeNode> set) {
-			foreach (RdcTreeNode item in set.OrderByDescending((RdcTreeNode n) => n, new InvalidateComparer())) {
+		private void InvalidateNodes(HashSet<RdcTreeNode> set)
+		{
+			foreach (RdcTreeNode item in set.OrderByDescending((RdcTreeNode n) => n, new InvalidateComparer()))
+			{
 				item.InvalidateNode();
 			}
 		}

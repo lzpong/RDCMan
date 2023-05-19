@@ -1,10 +1,14 @@
-namespace RdcMan {
-	internal abstract class CheckedMenuItem : RdcMenuItem {
-		protected CheckedMenuItem(string text) {
+namespace RdcMan
+{
+	internal abstract class CheckedMenuItem : RdcMenuItem
+	{
+		protected CheckedMenuItem(string text)
+		{
 			Text = text;
 		}
 
-		protected sealed override void OnClick() {
+		protected sealed override void OnClick()
+		{
 			CheckChanged(!base.Checked);
 		}
 

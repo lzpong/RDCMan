@@ -1,0 +1,1719 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="RdcMan.About" Collapsed="true">
+    <Position X="48.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\About.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.AddCredentialsDialog" Collapsed="true">
+    <Position X="3.25" Y="29.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQQAAAAAAACAAAAAIAAAAAAAAAAAAAAIAAAAAAAEAA=</HashCode>
+      <FileName>RdcMan\AddCredentialsDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.AddNodeDialogHelper" Collapsed="true">
+    <Position X="50" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QgAgAAAACBAAAAAAIAAAAAAAAIAQAAAAAAAAAAACAAA=</HashCode>
+      <FileName>RdcMan\AddNodeDialogHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.ArgumentParser" Collapsed="true">
+    <Position X="51.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAGAAAAIQAAAAAAAQAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>RdcMan\ArgumentParser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.CheckedMenuItem" Collapsed="true">
+    <Position X="26.5" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\CheckedMenuItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.ClientPanel" Collapsed="true">
+    <Position X="53.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAwAAQRECYSACTAEAIAIAKAICixAAYIIEAgCCAA=</HashCode>
+      <FileName>RdcMan\ClientPanel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.ClientSizeCheckedMenuItem" Collapsed="true">
+    <Position X="27.75" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>RdcMan\ClientSizeCheckedMenuItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.BaseSetting&lt;T&gt;" Collapsed="true">
+    <Position X="9.5" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAACAgAAAAAAAAAggAAAAAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\BaseSetting.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="RdcMan.BoolSetting" Collapsed="true">
+    <Position X="14" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\BoolSetting.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.BuiltInVirtualGroup&lt;TServerRef&gt;" Collapsed="true">
+    <Position X="27.25" Y="23.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAGACQAIAAgEIEAIAACCCAAAAAJAAAECAgABKDAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\BuiltInVirtualGroup.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="RdcMan.BuiltInVirtualGroupCheckedMenuItem" Collapsed="true">
+    <Position X="30" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABQAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\BuiltInVirtualGroupCheckedMenuItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.CommonDisplaySettings" Collapsed="true">
+    <Position X="8.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAIAAAAAAAAAAAAAkAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\CommonDisplaySettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.CommonNodeSettings" Collapsed="true">
+    <Position X="14.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>RdcMan\ConfigForm\CommonNodeSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.ConnectionSettings" Collapsed="true">
+    <Position X="21.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAQgAAAIAAAAAIAAAKgAAAAAAAAAAAACACAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\ConnectionSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.ConnectionSettingsTabPage" Collapsed="true">
+    <Position X="28" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAggIAAAAgAAAAAAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\ConnectionSettingsTabPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.CredentialsProfile" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="60.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UAQAAIAAgAAAAAAUAgAAEAAIAgAAAAACAQIAAAAAAAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\CredentialsProfile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RdcMan.CredentialsStore" Collapsed="true">
+    <Position X="62.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAACAAgAACAAABAACAACAAACAAAAAgAAQAAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\CredentialsStore.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.CredentialsTabPage&lt;TSettingGroup&gt;" Collapsed="true">
+    <Position X="2.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAhAIAAAQAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\CredentialsTabPage.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="RdcMan.CredentialsUI" Collapsed="true">
+    <Position X="64" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAhAEAAIQIAAEAQSEhBAgAABQAAgIABEABRAREBA=</HashCode>
+      <FileName>RdcMan\ConfigForm\CredentialsUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.CustomClientSizeCheckedMenuItem" Collapsed="true">
+    <Position X="25.5" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\CustomClientSizeCheckedMenuItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.CustomSizeDialog" Collapsed="true">
+    <Position X="1" Y="28" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAYEAAAEAACAgAAAAQAAAAAEAAAAiAAAgAAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\CustomSizeDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.DefaultSettingsGroup" Collapsed="true">
+    <Position X="19.5" Y="23.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAQAAAQCAAAAAAACQAAAgAAAAAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\DefaultSettingsGroup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.DisplaySettingsTabPage&lt;TSettingsGroup&gt;" Collapsed="true">
+    <Position X="20.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\DisplaySettingsTabPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.EncryptionSettingsTabPage" Collapsed="true">
+    <Position X="23.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GAAAAgAIAAAAAAAAAAAAUAAAAAAAIEAAAAAQAAJAAAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\EncryptionSettingsTabPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.FileGroupPropertiesDialog" Collapsed="true">
+    <Position X="12.25" Y="32.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\FileGroupPropertiesDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.FileGroupPropertiesTabPage" Collapsed="true">
+    <Position X="12.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\FileGroupPropertiesTabPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.GatewaySettings" Collapsed="true">
+    <Position X="1" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAABAAAAAAAAAAIAAAAAIEAAIgAAAAAAAQAAEEAACAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\GatewaySettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.GatewaySettingsTabPage" Collapsed="true">
+    <Position X="3.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAABAIAAABQAACAAAICAAAACAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\GatewaySettingsTabPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.GlobalOptionsDialog" Collapsed="true">
+    <Position X="21.25" Y="29.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gIRAgCCAIFEEACoAQlIAgiATAYEAQAkAAABAQiAAAJg=</HashCode>
+      <FileName>RdcMan\ConfigForm\GlobalOptionsDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.GlobalSettings" Collapsed="true">
+    <Position X="23.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BgCAAEEUMQSBAgYKAEIAcqCgIwiCYAFIQCBMKAggGAQ=</HashCode>
+      <FileName>RdcMan\ConfigForm\GlobalSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.Group" Collapsed="true">
+    <Position X="37.5" Y="22.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAgAIAAAAAAAAAAAAAEAAAEAAgABAAAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\Group.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.GroupBase" Collapsed="true">
+    <Position X="27.25" Y="21" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BESEgiBAAgIEAgJQECQAAIADAAhNAJAAIADggCRCBAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\GroupBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.GroupBasePropertiesDialog" Collapsed="true">
+    <Position X="12.25" Y="30.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACIADAQAAQAAAIAAAAQAECAAAACAAAEAAAICCAAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\GroupBasePropertiesDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.GroupBasePropertiesTabPage&lt;TSettingsGroup&gt;" Collapsed="true">
+    <Position X="10" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAAACAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\GroupBasePropertiesTabPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.LogonCredentials" Collapsed="true">
+    <Position X="1" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EgAAAACQAAAAQQIAAAAAIgAAIhAAAAACAQAAgBQACAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\LogonCredentials.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="RdcMan.LogonCredentialsTabPage" Collapsed="true">
+    <Position X="1" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\LogonCredentialsTabPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.LogonSettingsDialog" Collapsed="true">
+    <Position X="3.25" Y="28" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAAAAAAAAEAAAEAAAAAAAAAgAAAAICAQCAAAAAEAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\LogonSettingsDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.PluginContext" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="57" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\PluginContext.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RdcMan.PointHelper" Collapsed="true">
+    <Position X="58.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAIAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\PointHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.PointSetting" Collapsed="true">
+    <Position X="9.5" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAACAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\PointSetting.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.Policies" Collapsed="true">
+    <Position X="60.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAIAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\Policies.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.Preferences" Collapsed="true">
+    <Position X="62.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AADAgMEUEQXBAAQICEYAUqCgAQiCYAFYgCBEKAxAECQ=</HashCode>
+      <FileName>RdcMan\ConfigForm\Preferences.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.ProfileSetting" Collapsed="true">
+    <Position X="18.5" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAADCAEAAAAAAACAgAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\ProfileSetting.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.RdcSettingsProvider" Collapsed="true">
+    <Position X="60.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IABAAAAAAAAEAQAAAAAAAgAAAABAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\RdcSettingsProvider.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.RemoteDesktopSettings" Collapsed="true">
+    <Position X="19" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAIAAAAAAAAIAAAAwIAAAIgAAAAAAAAQAAAAACAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\RemoteDesktopSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.Setting&lt;T&gt;" Collapsed="true">
+    <Position X="10.75" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\Setting.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.SettingAttribute" Collapsed="true">
+    <Position X="62.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAgAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\SettingAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.SettingExtensions" Collapsed="true">
+    <Position X="64" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>RdcMan\ConfigForm\SettingExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.SettingsGroup" Collapsed="true">
+    <Position X="13.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAgAEAAAAIAQCIgAABAAAEAAAgAAAAAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\SettingsGroup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.SettingsTabPage" Collapsed="true">
+    <Position X="15.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAKAAAAgAAACAgAAAAAAAAAACAAABAAAAAAgBA=</HashCode>
+      <FileName>RdcMan\ConfigForm\SettingsTabPage.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="RdcMan.SettingsTabPage&lt;TSettingsGroup&gt;" Collapsed="true">
+    <Position X="15.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAIAAAAAAAAAAAAIAAAAAAAAAIAkBAAAAAAgBA=</HashCode>
+      <FileName>RdcMan\ConfigForm\SettingsTabPage.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="RdcMan.SizeHelper" Collapsed="true">
+    <Position X="50" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAgAAAAAIAEAAAAAAAAAAAABAAAAAAAAAAAgA=</HashCode>
+      <FileName>RdcMan\ConfigForm\SizeHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.SizeSetting" Collapsed="true">
+    <Position X="5" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAACAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\SizeSetting.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.XmlSetting" Collapsed="true">
+    <Position X="7.25" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>RdcMan\ConfigForm\XmlSetting.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.EncryptionSettings" Collapsed="true">
+    <Position X="3.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAEIgAAIgAAAAAAEAAAAAAACAA=</HashCode>
+      <FileName>RdcMan\Configuration\EncryptionSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.EnumSetting&lt;TEnum&gt;" Collapsed="true">
+    <Position X="11.75" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>RdcMan\Configuration\EnumSetting.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.ConnectAsDialog" Collapsed="true">
+    <Position X="23.5" Y="30.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAAAAAAAAAAAAAgAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>RdcMan\ConnectAsDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.ConnectedGroup" Collapsed="true">
+    <Position X="24" Y="25.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAABAAAgAAAAYAAAAAAABAAEAAQAAAAAAIAAA=</HashCode>
+      <FileName>RdcMan\ConnectedGroup.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="RdcMan.ConnectedServerRef" Collapsed="true">
+    <Position X="8.25" Y="23.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\ConnectedServerRef.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.ConnectServersDialog" Collapsed="true">
+    <Position X="30.25" Y="29.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>RdcMan\ConnectServersDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.ConnectToDialog" Collapsed="true">
+    <Position X="25.75" Y="30.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAgAAAAA=</HashCode>
+      <FileName>RdcMan\ConnectToDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.ConnectToGroup" Collapsed="true">
+    <Position X="30.75" Y="25.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAEAAAAAAAAAAAAEAAQACAAAAAAAA=</HashCode>
+      <FileName>RdcMan\ConnectToGroup.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="RdcMan.ControlExtensions" Collapsed="true">
+    <Position X="58.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\ControlExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.RdpCtrl" Collapsed="true">
+    <Position X="57" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\Ctrl\RdpCtrl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.DefaultGroupPropertiesDialog" Collapsed="true">
+    <Position X="10" Y="32.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>RdcMan\DefaultGroupPropertiesDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.DelegateCheckedMenuItem" Collapsed="true">
+    <Position X="23.25" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABQAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>RdcMan\DelegateCheckedMenuItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.DelegateMenuItem" Collapsed="true">
+    <Position X="53.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\DelegateMenuItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.Encryption" Collapsed="true">
+    <Position X="60.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAABAAAAAAACAgAEIAAAAAAAIAAgQAQEACAIIAAAAAA=</HashCode>
+      <FileName>RdcMan\Encryption.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.EnumMenuItem&lt;T&gt;" Collapsed="true">
+    <Position X="35.5" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>RdcMan\EnumMenuItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.FavoriteServerRef" Collapsed="true">
+    <Position X="3.75" Y="23.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\FavoriteServerRef.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.FavoritesGroup" Collapsed="true">
+    <Position X="21.75" Y="25.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAgAQAAAAAAAAAAAAAEAAQAAAAAAIBAA=</HashCode>
+      <FileName>RdcMan\FavoritesGroup.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="RdcMan.FileGroup" Collapsed="true">
+    <Position X="35.25" Y="22.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACACCAAAQIAAgAIACAAAAACAAgAAIACEAAAiAAAQBA=</HashCode>
+      <FileName>RdcMan\FileGroup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.FileGroupSettings" Collapsed="true">
+    <Position X="14.5" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAIAAAAAIAAAIgAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>RdcMan\FileGroupSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.FileRequiredMenuItem" Collapsed="true">
+    <Position X="41.25" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAACAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\FileRequiredMenuItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.FindServersDialog" Collapsed="true">
+    <Position X="28" Y="29.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABCAAAAAFAAAAAIAAIAggAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\FindServersDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.FormTools" Collapsed="true">
+    <Position X="62.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQEBBAgAAQMAABKMAQEEAEKg4IVLYABmAEgAERCIAA=</HashCode>
+      <FileName>RdcMan\FormTools.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.GroupChangedEventArgs" Collapsed="true">
+    <Position X="64" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\GroupChangedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.GroupDisplaySettings" Collapsed="true">
+    <Position X="10" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAIAAAAAIBAAIAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>RdcMan\GroupDisplaySettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.GroupDisplaySettingsTabPage" Collapsed="true">
+    <Position X="21.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAABAAAAAAABAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\GroupDisplaySettingsTabPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.GroupPropertiesDialog" Collapsed="true">
+    <Position X="14.5" Y="32.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAEAAAAQAAA=</HashCode>
+      <FileName>RdcMan\GroupPropertiesDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.GroupPropertiesTabPage" Collapsed="true">
+    <Position X="7.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\GroupPropertiesTabPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.GroupSettings" Collapsed="true">
+    <Position X="13.25" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAIAAAAAIAAAIgAAAAAAAACAAAAACAE=</HashCode>
+      <FileName>RdcMan\GroupSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.HeaderColumnClickEventArgs" Collapsed="true">
+    <Position X="48.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\HeaderColumnClickEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.Helpers" Collapsed="true">
+    <Position X="50" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIQDAAAAAAAECAAAAAAAAACAAAAAAAAQAQAMAAEDAE=</HashCode>
+      <FileName>RdcMan\Helpers.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.HotKeyBox" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="51.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAQAQAAAAAAAAAAKAgAAAAAAAAAAAABAABA=</HashCode>
+      <FileName>RdcMan\HotKeyBox.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RdcMan.ImportServersPropertiesPage" Collapsed="true">
+    <Position X="14.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAAACAABIEAA=</HashCode>
+      <FileName>RdcMan\ImportServersPropertiesPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.InheritanceControl" Collapsed="true">
+    <Position X="53.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAIAAkCEAgABAAAAQACAoAEAAgAEAQAAAAAwAAAAA=</HashCode>
+      <FileName>RdcMan\Interface\InheritanceControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.InheritSettingsType" Collapsed="true">
+    <Position X="55.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAACAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>RdcMan\Interface\InheritSettingsType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.IntSetting" Collapsed="true">
+    <Position X="2.75" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\Interface\IntSetting.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.ListSessionsForm" Collapsed="true">
+    <Position X="58.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEACQAAACADBCBEAKCAEAACgABAEgEQIAhBAQABAAA=</HashCode>
+      <FileName>RdcMan\ListSessionsForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.ListSetting&lt;T&gt;" Collapsed="true">
+    <Position X="16.25" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>RdcMan\ListSetting.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.LocalResourcesSettings" Collapsed="true">
+    <Position X="25.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAABAAABAIAAABAoCAAIgAAABAAAEABAGAACAA=</HashCode>
+      <FileName>RdcMan\LocalResourcesSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.LocalResourcesTabPage" Collapsed="true">
+    <Position X="30.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIQAgA4AAAAAAAAAAAAQIAAAAAgAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>RdcMan\LocalResourcesTabPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.Log" Collapsed="true">
+    <Position X="60.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAIAAAAACAAACAAAAAAAAAAACABEAAAA=</HashCode>
+      <FileName>RdcMan\Log.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.LongRunningActionForm" Collapsed="true">
+    <Position X="64" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABEAAAFIAACAAAAAAABAAAABAAAAQAAQAIQAAAAAAA=</HashCode>
+      <FileName>RdcMan\LongRunningActionForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.MainForm" Collapsed="true">
+    <Position X="3.75" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AoG2sQg0CYQZoS8QCDGB0SYQRAAsE0ogISKEWggkmgA=</HashCode>
+      <FileName>RdcMan\MainForm.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="RdcMan.MenuExtensions" Collapsed="true">
+    <Position X="48.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\MenuExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.MenuHelper" Collapsed="true">
+    <Position X="50" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAQkAAAAAACAQAAAAgCAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>RdcMan\MenuHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.ConnectionStateChangedEventArgs" Collapsed="true">
+    <Position X="55.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAA=</HashCode>
+      <FileName>RdcMan\Models\ConnectionStateChangedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.DeferDecryptionItem" Collapsed="true">
+    <Position X="51.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>RdcMan\Models\DeferDecryptionItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.EnableTabsEventArgs" Collapsed="true">
+    <Position X="58.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIIAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>RdcMan\Models\EnableTabsEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.ServerChangedEventArgs" Collapsed="true">
+    <Position X="55.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>RdcMan\Models\ServerChangedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.SettingProperty" Collapsed="true">
+    <Position X="48.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>RdcMan\Models\SettingProperty.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.NodeHelper" Collapsed="true">
+    <Position X="53.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAQAAAACAgAQACAgAAAAAADIAAQAAAABAAEA=</HashCode>
+      <FileName>RdcMan\NodeHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.NodePropertiesDialog" Collapsed="true">
+    <Position X="14.5" Y="29.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAQAAAAAAEAAAAAACAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\NodePropertiesDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.NodePropertiesPage&lt;TSettingsGroup&gt;" Collapsed="true">
+    <Position X="12.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACJAAAAIAAAAAAAAEAQAAAAAAAAAAQAAAAAAAABCAAA=</HashCode>
+      <FileName>RdcMan\NodePropertiesPage.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="RdcMan.NumericTextBox" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="55.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAQAQAAAAAAAAAAAAAAAAAAAEEBAAABAABA=</HashCode>
+      <FileName>RdcMan\NumericTextBox.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RdcMan.RdpClient" Collapsed="true">
+    <Position X="48.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QgQQAAQFZBhaCYgMQLoEmAIoADACAAAEeAYEiBAQuEA=</HashCode>
+      <FileName>RdcMan\OcxClient\RdpClient.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.RdpClient5" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="50" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>RdcMan\OcxClient\RdpClient5.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RdcMan.RdpClient6" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="51.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>RdcMan\OcxClient\RdpClient6.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RdcMan.RdpClient7" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="53.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>RdcMan\OcxClient\RdpClient7.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RdcMan.RdpClient8" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="55.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\OcxClient\RdpClient8.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RdcMan.PasswordSetting" Collapsed="true">
+    <Position X="0.5" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAQAAAAAAACEgAABAAAAAAAgAAAAAA=</HashCode>
+      <FileName>RdcMan\PasswordSetting.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="RdcMan.Program" Collapsed="true">
+    <Position X="64" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CCLAAAAAAAAAQQBAoBAAAAAOAAAihUAACgEEFAAABEA=</HashCode>
+      <FileName>RdcMan\Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.QuickConnectDialog" Collapsed="true">
+    <Position X="24.75" Y="29.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAACAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\QuickConnectDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.QuickConnectTabPage" Collapsed="true">
+    <Position X="1" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAABAAAAAAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\QuickConnectTabPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.RdcBaseForm" Collapsed="true">
+    <Position X="5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACIAAAAAAAAAABGAAAQBAwAAAgAQAAAACCQAAAGAQ=</HashCode>
+      <FileName>RdcMan\RdcBaseForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.RdcCheckBox" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="50" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAABAABA=</HashCode>
+      <FileName>RdcMan\RdcCheckBox.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RdcMan.RdcDialog" Collapsed="true">
+    <Position X="15.75" Y="26.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAQAAQAIAAAAEQAgAAAIAABAIAAAABAACAAAA=</HashCode>
+      <FileName>RdcMan\RdcDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.RdcListView" Collapsed="true">
+    <Position X="51.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQEAYAAA=</HashCode>
+      <FileName>RdcMan\RdcListView.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.RdcMenuItem" Collapsed="true">
+    <Position X="33.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\RdcMenuItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.RdcMenuStrip" Collapsed="true">
+    <Position X="55.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\RdcMenuStrip.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.RdcNumericUpDown" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="57" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAACAQAAAAAAAAAAAAAAAAAAAAAAAAABAABA=</HashCode>
+      <FileName>RdcMan\RdcNumericUpDown.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RdcMan.RdcRadioButton" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="58.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAABAABA=</HashCode>
+      <FileName>RdcMan\RdcRadioButton.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RdcMan.RdcTextBox" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="62.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAACAQAAAAAAAAAAAAAAAAAAAAAAAAABAABA=</HashCode>
+      <FileName>RdcMan\RdcTextBox.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RdcMan.RdcTreeNode" Collapsed="true">
+    <Position X="19.5" Y="19.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>NQZIAiDABEYMAAAYEIAAIJACAgAGQVACEUCAoAbSAAA=</HashCode>
+      <FileName>RdcMan\RdcTreeNode.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="RdcMan.RdgFile" Collapsed="true">
+    <Position X="64" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IIAEAAABAAAwAQAJAAAQAAAKAQIAAEAABBAAAAAQAAA=</HashCode>
+      <FileName>RdcMan\RdgFile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.RecentlyUsedGroup" Collapsed="true">
+    <Position X="26.25" Y="25.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAEAAABIAAgAIAAYAAAAAAABBAFAAQAAAAAAIBAA=</HashCode>
+      <FileName>RdcMan\RecentlyUsedGroup.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="RdcMan.RecentlyUsedServerRef" Collapsed="true">
+    <Position X="10.5" Y="23.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\RecentlyUsedServerRef.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.ReconnectGroup" Collapsed="true">
+    <Position X="33" Y="25.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAQAAAAAAAAAAAAAEAAQAAAAAAIBAA=</HashCode>
+      <FileName>RdcMan\ReconnectGroup.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="RdcMan.ReconnectServerRef" Collapsed="true">
+    <Position X="15" Y="23.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAQAIAIAACAAgAAAAAQAAAAAAAAQAAIAAEAAAAYAAAA=</HashCode>
+      <FileName>RdcMan\ReconnectServerRef.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.RemoteDesktopsMenuItem" Collapsed="true">
+    <Position X="21" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAgAAAAAAAAAAAYAAAAACAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\RemoteDesktopsMenuItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.RemoteDesktopTabPage" Collapsed="true">
+    <Position X="5.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAIAAAgAAAAAAAAAEAAAAAAAAAAAAAAAAACAAg=</HashCode>
+      <FileName>RdcMan\RemoteDesktopTabPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.RemoteSessionInfo" Collapsed="true">
+    <Position X="58.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAQQAABAAAAAA=</HashCode>
+      <FileName>RdcMan\RemoteSessionInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.RemoteSessions" Collapsed="true">
+    <Position X="60.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAQAAAAAABAQAACAAAAAAAAEAAAAAAAAAABAAA=</HashCode>
+      <FileName>RdcMan\RemoteSessions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.Rule" Collapsed="true">
+    <Position X="62.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAEAAAAAgACAAAEAEAAAAKggQAAIAA=</HashCode>
+      <FileName>RdcMan\Rule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.RuleGroup" Collapsed="true">
+    <Position X="64" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAABgAAAAAAQgACAAAAAMAAAAAAgAAAIAA=</HashCode>
+      <FileName>RdcMan\RuleGroup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.RuleProperty" Collapsed="true">
+    <Position X="48.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\RuleProperty.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.SaveCredentialsDialog" Collapsed="true">
+    <Position X="5.5" Y="28" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQQAAAAAAACAAAAgAAAAAACAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>RdcMan\SaveCredentialsDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.SecuritySettings" Collapsed="true">
+    <Position X="5.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAACIAAAIgAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>RdcMan\SecuritySettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.SecuritySettingsTabPage" Collapsed="true">
+    <Position X="25.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\SecuritySettingsTabPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.SelectActiveServerForm" Collapsed="true">
+    <Position X="7.75" Y="28" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAEAAAAAAAAACAAAAYAAAAI=</HashCode>
+      <FileName>RdcMan\SelectActiveServerForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.SelectedNodeMenuItem&lt;T&gt;" Collapsed="true">
+    <Position X="45.75" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>RdcMan\SelectedNodeMenuItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.SelectedNodeMenuItem" Collapsed="true">
+    <Position X="45.75" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\SelectedNodeMenuItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.SelectServersDialogBase" Collapsed="true">
+    <Position X="29.25" Y="28" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACBACEEAAEAAEAAIACgAIAAAAAgAgKIAAAAAE=</HashCode>
+      <FileName>RdcMan\SelectServersDialogBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.SendKeys" Collapsed="true">
+    <Position X="50" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\SendKeys.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.SendKeysMenuItem" Collapsed="true">
+    <Position X="51.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\SendKeysMenuItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.Server" Collapsed="true">
+    <Position X="1.5" Y="22.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>hnQ8kiYJgYJG0kjNUsYAEJECWAAEecIkk2SsxqRSAoc=</HashCode>
+      <FileName>RdcMan\Server.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.ServerBase" Collapsed="true">
+    <Position X="8.25" Y="21" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gjAAECBAAAAAwBDAAAIAABAAEAAAAAAgAQAIAiACAAA=</HashCode>
+      <FileName>RdcMan\ServerBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.ServerBox" Collapsed="true">
+    <Position X="53.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQIAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\ServerBox.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.ServerDisplaySettings" Collapsed="true">
+    <Position X="7.75" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAIAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\ServerDisplaySettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.ServerDisplaySettingsTabPage" Collapsed="true">
+    <Position X="19" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\ServerDisplaySettingsTabPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.ServerForm" Collapsed="true">
+    <Position X="6" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABEAIAAkgQQBARAAQCACAAxQhICAEAAAAACEAAAAEAQ=</HashCode>
+      <FileName>RdcMan\ServerForm.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="RdcMan.ServerLabel" Collapsed="true">
+    <Position X="57" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IABAAAIABAAAAAAgAAAAAAAAAABAAAAQIAAAAiAAAAA=</HashCode>
+      <FileName>RdcMan\ServerLabel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.ServerMenuItem" Collapsed="true">
+    <Position X="43.5" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\ServerMenuItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.ServerPropertiesDialog" Collapsed="true">
+    <Position X="19" Y="30.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAQUAAA=</HashCode>
+      <FileName>RdcMan\ServerPropertiesDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.ServerPropertiesTabPage" Collapsed="true">
+    <Position X="16.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAJAAAAAAAAAAEQAAAAAVAACAQAQAIAAgBAAAg=</HashCode>
+      <FileName>RdcMan\ServerPropertiesTabPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.ServerRef" Collapsed="true">
+    <Position X="9.25" Y="22.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>hjQIEAAAAAIEwQBMUAIAAJAAEAAGQAAgAUAIgiRCAAA=</HashCode>
+      <FileName>RdcMan\ServerRef.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.ServerSettings" Collapsed="true">
+    <Position X="16.75" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAEAAAAAACAAKAAAAAIAAIIgAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>RdcMan\ServerSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.ServerTree" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="58.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IMBQCiAQjQAAmQGAgipRAACAALAgMIAA8AGDEQAPGkA=</HashCode>
+      <FileName>RdcMan\ServerTree.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RdcMan.ServerTreeLocationMenuItem" Collapsed="true">
+    <Position X="32.25" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>RdcMan\ServerTreeLocationMenuItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.ServerTreeVisibilityMenuItem" Collapsed="true">
+    <Position X="34.5" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>RdcMan\ServerTreeVisibilityMenuItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.SessionListSortComparer" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="60.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>RdcMan\SessionListSortComparer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RdcMan.SmartGroup" Collapsed="true">
+    <Position X="17.25" Y="23.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAQJAAgAIACAAAQACACJAAMAAAEgAgAECBAA=</HashCode>
+      <FileName>RdcMan\SmartGroup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.SmartGroupPropertiesDialog" Collapsed="true">
+    <Position X="16.75" Y="30.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAEAAAAQAAA=</HashCode>
+      <FileName>RdcMan\SmartGroupPropertiesDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.SmartGroupPropertiesTabPage" Collapsed="true">
+    <Position X="10" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABkCgBMEAAAAAAgAAgAAAAAAAAAAQAAAAAAAgAIACA=</HashCode>
+      <FileName>RdcMan\SmartGroupPropertiesTabPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.SmartGroupSettings" Collapsed="true">
+    <Position X="12.25" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAIAAAAAIAAAIgAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>RdcMan\SmartGroupSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.SmartServerRef" Collapsed="true">
+    <Position X="6" Y="23.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\SmartServerRef.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.SortExtensions" Collapsed="true">
+    <Position X="51.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAEAAAAAEAAAEAAAAAAAAgAAAAAAAMAAAAAAAA=</HashCode>
+      <FileName>RdcMan\SortExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.SortGroupsCheckedMenuItem" Collapsed="true">
+    <Position X="36.75" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>RdcMan\SortGroupsCheckedMenuItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.SortServersCheckedMenuItem" Collapsed="true">
+    <Position X="39" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>RdcMan\SortServersCheckedMenuItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.StringSetting" Collapsed="true">
+    <Position X="18.5" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\StringSetting.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.StringUtilities" Collapsed="true">
+    <Position X="53.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAQAAAAAAAhAAAAAAIAIAAIQgSAA=</HashCode>
+      <FileName>RdcMan\StringUtilities.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.TabbedSettingsDialog" Collapsed="true">
+    <Position X="18" Y="28" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAgBIAAAAAAAAAAAAAgAAAAAAAAIACAQAAABAAAA=</HashCode>
+      <FileName>RdcMan\TabbedSettingsDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.TemporaryServer" Collapsed="true">
+    <Position X="1.5" Y="23.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAEAAAAAAAABAAAA=</HashCode>
+      <FileName>RdcMan\TemporaryServer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.ThrottledAction" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="57" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAADAEACQAAAAAAAAAAAAAAHACgAABgAAAAAA=</HashCode>
+      <FileName>RdcMan\ThrottledAction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RdcMan.ThrottledOperation" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="58.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAACAEAAQAAAAAAAQAAAAAAAAAAAAEABAAIAA=</HashCode>
+      <FileName>RdcMan\ThrottledOperation.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RdcMan.ThumbnailLayout" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="60.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAEg4ACAEAJIEpAAAAAAmAAQEACAgAAAAAEAAAAA=</HashCode>
+      <FileName>RdcMan\ThumbnailLayout.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RdcMan.ValueComboBox&lt;TValue&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="48.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAECAEAAXAAAAAAAAAAAwAAAAAAAAAAACABAABA=</HashCode>
+      <FileName>RdcMan\ValueComboBox.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RdcMan.VirtualGroup" Collapsed="true">
+    <Position X="25" Y="22.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAIAAAJAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\VirtualGroup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.Configuration.Current" Collapsed="true">
+    <Position X="50" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACABAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\Configuration\Current.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.Configuration.DisplaySizeElement" Collapsed="true">
+    <Position X="55.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\Configuration\DisplaySizeElement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.Configuration.DisplaySizeElementCollection" Collapsed="true">
+    <Position X="57" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAIAAAAAAAAAAAAAABAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>RdcMan\Configuration\DisplaySizeElementCollection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.Configuration.LoggingElement" Collapsed="true">
+    <Position X="62.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIIAAQAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\Configuration\LoggingElement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.Configuration.ProgramUpdateElement" Collapsed="true">
+    <Position X="48.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>RdcMan\Configuration\ProgramUpdateElement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.Configuration.RdcManSection" Collapsed="true">
+    <Position X="53.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAQAAIAAIAAAAAAA=</HashCode>
+      <FileName>RdcMan\Configuration\RdcManSection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.Configuration.WarningThresholdsElement" Collapsed="true">
+    <Position X="50" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\Configuration\WarningThresholdsElement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RdcMan.Ctrl.InternalGroup" Collapsed="true">
+    <Position X="28.5" Y="25.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAEAAAAAAAgAQAAAAAAIAAAAAAEAAQAAQAAAIBAA=</HashCode>
+      <FileName>RdcMan\Ctrl\InternalGroup.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="RdcMan.Ctrl.InternalServerRef" Collapsed="true">
+    <Position X="12.75" Y="23.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\Ctrl\InternalServerRef.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Win32.Constants" Collapsed="true">
+    <Position X="57" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAADCQIAAAAggABgYAgAAAQAIAABAAAABACACAiAHA=</HashCode>
+      <FileName>Win32\Constants.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Win32.Crypto" Collapsed="true">
+    <Position X="48.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAABAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Win32\Crypto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Win32.Kernel" Collapsed="true">
+    <Position X="57" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAQAAAAAIAAAAAAAAEAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Win32\Kernel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Win32.Messages" Collapsed="true">
+    <Position X="51.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gABAAABAAAAAQBAAAAgACAAAAAAAiAAACCAABgAAAKA=</HashCode>
+      <FileName>Win32\Messages.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Win32.Structs" Collapsed="true">
+    <Position X="55.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Win32\Structs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Win32.User" Collapsed="true">
+    <Position X="62.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAACKCAAAAAAAACAAAAAAQAAgASgiAA=</HashCode>
+      <FileName>Win32\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Win32.Util" Collapsed="true">
+    <Position X="64" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Win32\Util.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Win32.WinTrust" Collapsed="true">
+    <Position X="51.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAgAAAAAEAAQ=</HashCode>
+      <FileName>Win32\WinTrust.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Win32.WinTrustData" Collapsed="true">
+    <Position X="53.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACAAEQAAEAAIQAABEgQAAAEAAAABA=</HashCode>
+      <FileName>Win32\WinTrustData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Win32.WinTrustFileInfo" Collapsed="true">
+    <Position X="55.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAABAAAAAACAAAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>Win32\WinTrustFileInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Win32.Wts" Collapsed="true">
+    <Position X="57" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAQAAgAAAAAAAACBAAAAAAAEAAAAgAAAAABAAA=</HashCode>
+      <FileName>Win32\Wts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="RdcMan.IBuiltInVirtualGroup" Collapsed="true">
+    <Position X="48.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAQAAAAgAAEAIAAAACAAAAAAAAAAAAiAAAAAA=</HashCode>
+      <FileName>RdcMan\Interface\IBuiltInVirtualGroup.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="RdcMan.ICredentialsTabPage" Collapsed="true">
+    <Position X="50" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\Interface\ICredentialsTabPage.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="RdcMan.IDeferDecryption" Collapsed="true">
+    <Position X="51.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\Interface\IDeferDecryption.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="RdcMan.ILogonCredentials" Collapsed="true">
+    <Position X="53.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAAAAAAAAAAAAAAAAAAAAAAgAAAAACAQAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\Interface\ILogonCredentials.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="RdcMan.IMainForm" Collapsed="true">
+    <Position X="55.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\Interface\IMainForm.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="RdcMan.INodePropertiesPage" Collapsed="true">
+    <Position X="57" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACBAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>RdcMan\Interface\INodePropertiesPage.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="RdcMan.IPlugin" Collapsed="true">
+    <Position X="58.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAACAAAAAAAAAgAAAAAQAAAAAAAAABAAAhAAAAAAA=</HashCode>
+      <FileName>RdcMan\Interface\IPlugin.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="RdcMan.IPluginContext" Collapsed="true">
+    <Position X="60.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\Interface\IPluginContext.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="RdcMan.IRdpClient" Collapsed="true">
+    <Position X="62.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\Interface\IRdpClient.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="RdcMan.IServerRefFactory" Collapsed="true">
+    <Position X="64" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\Interface\IServerRefFactory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="RdcMan.IServerTree" Collapsed="true">
+    <Position X="48.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>RdcMan\Interface\IServerTree.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="RdcMan.ISetting" Collapsed="true">
+    <Position X="50" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAgAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>RdcMan\Interface\ISetting.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="RdcMan.ISettingControl" Collapsed="true">
+    <Position X="51.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAEAAAAAAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\Interface\ISettingControl.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="RdcMan.ISettingsTabPage" Collapsed="true">
+    <Position X="53.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAIAACAAAAACAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\Interface\ISettingsTabPage.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="RdcMan.IUndockedServerForm" Collapsed="true">
+    <Position X="55.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAgAAAAA=</HashCode>
+      <FileName>RdcMan\Interface\IUndockedServerForm.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="RdcMan.ImageConstants" Collapsed="true">
+    <Position X="55.25" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAIAAACAAAAAQAAECAAIABQAAAAAAAA=</HashCode>
+      <FileName>RdcMan\Interface\ImageConstants.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="RdcMan.InheritanceMode" Collapsed="true">
+    <Position X="57" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAACAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>RdcMan\Interface\InheritanceMode.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="RdcMan.MenuNames" Collapsed="true">
+    <Position X="60.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIIgIBGAgBAZAUQaAEABCIpAQABlBkADwAQEAIEBIhA=</HashCode>
+      <FileName>RdcMan\MenuNames.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="RdcMan.ChangeType" Collapsed="true">
+    <Position X="48.25" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAgAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\Models\ChangeType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="RdcMan.ConnectionType" Collapsed="true">
+    <Position X="50" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>RdcMan\Models\ConnectionType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="RdcMan.ControlVisibility" Collapsed="true">
+    <Position X="51.75" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>RdcMan\Models\ControlVisibility.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="RdcMan.EncryptionMethod" Collapsed="true">
+    <Position X="53.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAECAAAA=</HashCode>
+      <FileName>RdcMan\Models\EncryptionMethod.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="RdcMan.LogonCredentialsDialogOptions" Collapsed="true">
+    <Position X="58.75" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAIAAAQEAAAA=</HashCode>
+      <FileName>RdcMan\Models\LogonCredentialsDialogOptions.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="RdcMan.ProfileScope" Collapsed="true">
+    <Position X="48.25" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABEAAAAAAAAAAABAAA=</HashCode>
+      <FileName>RdcMan\Models\ProfileScope.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="RdcMan.SaveResult" Collapsed="true">
+    <Position X="55.25" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IABAAIAAQAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\Models\SaveResult.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="RdcMan.NodeVisitorResult" Collapsed="true">
+    <Position X="62.25" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAEAAAAAAAAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\NodeVisitorResult.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="RdcMan.OperationBehavior" Collapsed="true">
+    <Position X="64" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQgAAAAAABAABAAAAAAAAABAAAAAAAAAEAAAA=</HashCode>
+      <FileName>RdcMan\OperationBehavior.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="RdcMan.ReconnectServerOptions" Collapsed="true">
+    <Position X="50" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAIAAAAEAAAA=</HashCode>
+      <FileName>RdcMan\ReconnectServerOptions.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="RdcMan.RuleGroupOperator" Collapsed="true">
+    <Position X="51.75" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\RuleGroupOperator.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="RdcMan.RuleOperator" Collapsed="true">
+    <Position X="53.5" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\RuleOperator.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="RdcMan.ServerProperty" Collapsed="true">
+    <Position X="57" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAEAAAAAACAAAAAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\ServerProperty.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="RdcMan.SortOrder" Collapsed="true">
+    <Position X="58.75" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAEAg=</HashCode>
+      <FileName>RdcMan\SortOrder.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Win32.WinTrustDataChoice" Collapsed="true">
+    <Position X="60.5" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAAAABAAAEAAAAAAAAAEAAAAg=</HashCode>
+      <FileName>Win32\WinTrustDataChoice.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Win32.WinTrustDataProvFlags" Collapsed="true">
+    <Position X="62.25" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEgAIAQAAABAAQAAIABAABAABAAAAACEAAAAAAACAAA=</HashCode>
+      <FileName>Win32\WinTrustDataProvFlags.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Win32.WinTrustDataRevocationChecks" Collapsed="true">
+    <Position X="64" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAEAAAA=</HashCode>
+      <FileName>Win32\WinTrustDataRevocationChecks.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Win32.WinTrustDataStateAction" Collapsed="true">
+    <Position X="48.25" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAQAAAAAAAAAAAAAAAAABAAACAACAAAA=</HashCode>
+      <FileName>Win32\WinTrustDataStateAction.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Win32.WinTrustDataUIChoice" Collapsed="true">
+    <Position X="50" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAIAAAAEAAAA=</HashCode>
+      <FileName>Win32\WinTrustDataUIChoice.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Win32.WinTrustDataUIContext" Collapsed="true">
+    <Position X="51.75" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Win32\WinTrustDataUIContext.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Win32.WinVerifyTrustResult" Collapsed="true">
+    <Position X="53.5" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAgAQAAAAACgIAgAAEAAAAAAAIIAAAAA=</HashCode>
+      <FileName>Win32\WinVerifyTrustResult.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Delegate Name="RdcMan.HeaderColumnClickEventHandler" Collapsed="true">
+    <Position X="48.25" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RdcMan\HeaderColumnClickEventHandler.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

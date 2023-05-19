@@ -1,7 +1,9 @@
 using Win32;
 
-namespace RdcMan {
-	internal class RemoteSessionInfo {
+namespace RdcMan
+{
+	internal class RemoteSessionInfo
+	{
 		public string ClientName;
 
 		public string DomainName;

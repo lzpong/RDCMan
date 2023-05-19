@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace RdcMan {
-	internal class ServerForm : RdcBaseForm, IUndockedServerForm {
+namespace RdcMan
+{
+	internal class ServerForm : RdcBaseForm, IUndockedServerForm
+	{
 		private static readonly Dictionary<Keys, Action<ServerForm>> Shortcuts;
 
 		private static readonly List<ServerForm> ServerForms;
@@ -35,24 +37,29 @@ namespace RdcMan {
 
 		ServerBase IUndockedServerForm.Server => _server;
 
-		static ServerForm() {
+		static ServerForm()
+		{
 			ServerForms = new List<ServerForm>();
-			Shortcuts = new Dictionary<Keys, Action<ServerForm>> {
+			Shortcuts = new Dictionary<Keys, Action<ServerForm>>
+			{
 				{
 					Keys.Return,
-					delegate(ServerForm f) {
+					delegate(ServerForm f)
+					{
 						f._server.Connect();
 					}
 				},
 				{
 					Keys.Return | Keys.Shift,
-					delegate(ServerForm f) {
+					delegate(ServerForm f)
+					{
 						f._server.DoConnectAs();
 					}
 				},
 				{
 					Keys.Return | Keys.Alt,
-					delegate(ServerForm f) {
+					delegate(ServerForm f)
+					{
 						f._server.DoPropertiesDialog();
 					}
 				}
@@ -61,36 +68,46 @@ namespace RdcMan {
 			ServerTree.Instance.ServerChanged += OnServerChanged;
 		}
 
-		private static void OnGroupChanged(GroupChangedEventArgs e) {
+		private static void OnGroupChanged(GroupChangedEventArgs e)
+		{
 			if (!e.ChangeType.HasFlag(ChangeType.PropertyChanged))
+			{
 				return;
-
-			using (Helpers.Timer("updating server form settings from group {0}", e.Group.Text)) {
+			}
+			using (Helpers.Timer("updating server form settings from group {0}", e.Group.Text))
+			{
 				if (e.Group == ServerTree.Instance.RootNode)
+				{
 					UpdateFromGlobalSettings();
-
+				}
 				UpdateFromServerSettings();
 			}
 		}
 
-		private static void OnServerChanged(ServerChangedEventArgs e) {
+		private static void OnServerChanged(ServerChangedEventArgs e)
+		{
 			if (!e.ChangeType.HasFlag(ChangeType.PropertyChanged))
+			{
 				return;
-
-			using (Helpers.Timer("updating server form settings from server {0}", e.Server.DisplayName)) {
+			}
+			using (Helpers.Timer("updating server form settings from server {0}", e.Server.DisplayName))
+			{
 				UpdateFromServerSettings();
 			}
 		}
 
-		private static void UpdateFromServerSettings() {
-			ServerForms.ForEach(delegate (ServerForm f) {
+		private static void UpdateFromServerSettings()
+		{
+			ServerForms.ForEach(delegate(ServerForm f)
+			{
 				f._server.InheritSettings();
 				f._server.SetClientSizeProperties();
 				f.SetTitle();
 			});
 		}
 
-		public ServerForm(Server server) {
+		public ServerForm(Server server)
+		{
 			_server = server;
 			server.InheritSettings();
 			base.Icon = Program.TheForm.Icon;
@@ -105,55 +122,67 @@ namespace RdcMan {
 			ServerForms.Add(this);
 		}
 
-		private static void UpdateFromGlobalSettings() {
-			ServerForms.ForEach(delegate (ServerForm f) {
+		private static void UpdateFromGlobalSettings()
+		{
+			ServerForms.ForEach(delegate(ServerForm f)
+			{
 				f.SetMainMenuVisibility();
 				f.SetClientSize(f._clientSize);
 			});
 		}
 
-		public override void SetClientSize(Size size) {
+		public override void SetClientSize(Size size)
+		{
 			int num = ((!Program.Preferences.HideMainMenu) ? _menuPanel.Height : 0);
 			base.ClientSize = new Size(size.Width, size.Height + num);
 		}
 
-		public override Size GetClientSize() {
+		public override Size GetClientSize()
+		{
 			return _clientSize;
 		}
 
-		protected override void OnShown(EventArgs e) {
+		protected override void OnShown(EventArgs e)
+		{
 			_server.Client.Control.Show();
 		}
 
-		protected override void OnClosed(EventArgs e) {
+		protected override void OnClosed(EventArgs e)
+		{
 			ServerForms.Remove(this);
 			_server.LeaveFullScreen();
 			base.Controls.Remove(_server.Client.Control);
 			_server.Dock();
 		}
 
-		protected override void OnSizeChanged(EventArgs e) {
+		protected override void OnSizeChanged(EventArgs e)
+		{
 			base.OnSizeChanged(e);
 			int num = ((!Program.Preferences.HideMainMenu) ? _menuPanel.Height : 0);
 			if (_clientSize.Width != 0 && _clientSize.Height != -num)
+			{
 				_savedClientSize = _clientSize;
-
+			}
 			_clientSize = new Size(base.ClientSize.Width, base.ClientSize.Height - num);
 			LayoutContent();
-			if (_clientSize.Width != 0 && _clientSize.Height != -num && (_savedClientSize.Width != _clientSize.Width || _savedClientSize.Height != _clientSize.Height)) {
+			if (_clientSize.Width != 0 && _clientSize.Height != -num && (_savedClientSize.Width != _clientSize.Width || _savedClientSize.Height != _clientSize.Height))
+			{
 				_server.Size = _clientSize;
 				_server.Resize();
 			}
 		}
 
-		protected override void LayoutContent() {
+		protected override void LayoutContent()
+		{
 			int num = ((!Program.Preferences.HideMainMenu) ? _menuPanel.Height : 0);
 			_server.Client.Control.Bounds = new Rectangle(0, num, _clientSize.Width, _clientSize.Height);
 			_menuPanel.Width = base.ClientSize.Width;
 		}
 
-		protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
-			if (!_menuStrip.IsActive && Shortcuts.TryGetValue(keyData, out var value)) {
+		protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+		{
+			if (!_menuStrip.IsActive && Shortcuts.TryGetValue(keyData, out var value))
+			{
 				value(this);
 				return true;
 			}
@@ -218,7 +247,8 @@ namespace RdcMan {
 			}));
 		}
 
-		protected override void UpdateMainMenu() {
+		protected override void UpdateMainMenu()
+		{
 			UpdateMenuItems(_menuStrip.Items);
 			bool isConnected = _server.IsConnected;
 			_sessionConnectServerMenuItem.Enabled = !isConnected;
@@ -226,14 +256,16 @@ namespace RdcMan {
 			_sessionReconnectServerMenuItem.Enabled = isConnected;
 			_sessionSendKeysMenuItem.Enabled = isConnected;
 			if (RdpClient.SupportsRemoteSessionActions)
+			{
 				_sessionRemoteActionsMenuItem.Enabled = isConnected;
-
+			}
 			_sessionDisconnectServerMenuItem.Enabled = isConnected;
 			_sessionFullScreenMenuItem.Enabled = isConnected;
 			_sessionScreenCaptureMenuItem.Enabled = isConnected;
 		}
 
-		private void SetTitle() {
+		private void SetTitle()
+		{
 			Text = _server.GetQualifiedNameForUI();
 		}
 	}

@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace RdcMan {
-	public class GatewaySettings : LogonCredentials {
-		//public new const string TabName = "网关设置";
+namespace RdcMan
+{
+	public class GatewaySettings : LogonCredentials
+	{
+		//public new const string TabName = "Gateway Settings";
 
-		private static readonly Dictionary<string, SettingProperty> _settingProperties;
+		private static Dictionary<string, SettingProperty> _settingProperties;
 
 		protected override Dictionary<string, SettingProperty> SettingProperties => _settingProperties;
 
@@ -27,19 +29,23 @@ namespace RdcMan {
 		[Setting("enableCredSspSupport", DefaultValue = true, IsObsolete = true)]
 		public BoolSetting EnableCredentialSspSupport { get; private set; }
 
-		static GatewaySettings() {
+		static GatewaySettings()
+		{
 			typeof(GatewaySettings).GetSettingProperties(out _settingProperties);
 		}
 
 		public GatewaySettings()
-			: base("网关设置", "gatewaySettings") {
+			: base("网关设置", "gatewaySettings")
+		{
 		}
 
-		public override TabPage CreateTabPage(TabbedSettingsDialog dialog) {
+		public override TabPage CreateTabPage(TabbedSettingsDialog dialog)
+		{
 			return new GatewaySettingsTabPage(dialog, this);
 		}
 
-		protected override void Copy(RdcTreeNode node) {
+		protected override void Copy(RdcTreeNode node)
+		{
 			Copy(node.GatewaySettings);
 		}
 	}

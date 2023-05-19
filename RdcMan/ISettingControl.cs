@@ -1,5 +1,7 @@
-namespace RdcMan {
-	public interface ISettingControl {
+namespace RdcMan
+{
+	public interface ISettingControl
+	{
 		void UpdateControl();
 
 		void UpdateSetting();

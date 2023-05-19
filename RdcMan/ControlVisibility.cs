@@ -1,5 +1,7 @@
-namespace RdcMan {
-	public enum ControlVisibility {
+namespace RdcMan
+{
+	public enum ControlVisibility
+	{
 		Dock,
 		AutoHide,
 		Hide

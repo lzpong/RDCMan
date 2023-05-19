@@ -1,8 +1,10 @@
 using System;
 
-namespace RdcMan {
+namespace RdcMan
+{
 	[Flags]
-	public enum LogonCredentialsDialogOptions {
+	public enum LogonCredentialsDialogOptions
+	{
 		None = 0,
 		AllowInheritance = 1,
 		ShowProfiles = 2,

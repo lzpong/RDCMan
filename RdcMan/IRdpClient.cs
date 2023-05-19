@@ -1,3 +1,4 @@
-namespace RdcMan {
+namespace RdcMan
+{
 	internal interface IRdpClient { }
 }

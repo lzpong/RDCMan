@@ -31,7 +31,8 @@ namespace Win32 {
 		public WinTrustData(string _fileName) {
 			if (Environment.OSVersion.Version.Major > 6 
 				|| (Environment.OSVersion.Version.Major == 6 && Environment.OSVersion.Version.Minor > 1) 
-				|| (Environment.OSVersion.Version.Major == 6 && Environment.OSVersion.Version.Minor == 1 && !string.IsNullOrEmpty(Environment.OSVersion.ServicePack))) {
+				|| (Environment.OSVersion.Version.Major == 6 && Environment.OSVersion.Version.Minor == 1 && !string.IsNullOrEmpty(Environment.OSVersion.ServicePack))
+				) {
 				ProvFlags |= WinTrustDataProvFlags.DisableMD2andMD4;
 			}
 			WinTrustFileInfo structure = new WinTrustFileInfo(_fileName);

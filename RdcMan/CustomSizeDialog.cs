@@ -2,8 +2,10 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace RdcMan {
-	public class CustomSizeDialog : RdcDialog {
+namespace RdcMan
+{
+	public class CustomSizeDialog : RdcDialog
+	{
 		private NumericTextBox _widthTextBox;
 
 		private NumericTextBox _heightTextBox;
@@ -19,23 +21,25 @@ namespace RdcMan {
 		public string HeightText => _heightTextBox.Text;
 
 		public CustomSizeDialog(Size size)
-			: base("自定义大小", "确定") {
+			: base("自定义大小", "确定")
+		{
 			InitComp();
 			_widthTextBox.Text = size.Width.ToString();
 			_heightTextBox.Text = size.Height.ToString();
 		}
 
-		private void InitComp() {
+		private void InitComp()
+		{
 			int num = 0;
 			Label label = new Label {
 				Location = new Point(8, 8),
-				Size = new Size(50, 23),
+				Size = new Size(60, 23),
 				Text = "宽度(&W)：",
 				TextAlign = ContentAlignment.MiddleLeft
 			};
 			Label label2 = new Label {
 				Location = new Point(8, 40),
-				Size = new Size(50, 23),
+				Size = new Size(60, 23),
 				Text = "高度(&H)：",
 				TextAlign = ContentAlignment.MiddleLeft
 			};
@@ -73,19 +77,22 @@ namespace RdcMan {
 			this.ScaleAndLayout();
 		}
 
-		private void fourThreeButton_Click(object sender, EventArgs e) {
+		private void fourThreeButton_Click(object sender, EventArgs e)
+		{
 			int num = int.Parse(_widthTextBox.Text);
 			int num2 = num * 3 / 4;
 			_heightTextBox.Text = num2.ToString();
 		}
 
-		private void sixteenNineButton_Click(object sender, EventArgs e) {
+		private void sixteenNineButton_Click(object sender, EventArgs e)
+		{
 			int num = int.Parse(_widthTextBox.Text);
 			int num2 = num * 9 / 16;
 			_heightTextBox.Text = num2.ToString();
 		}
 
-		private void sixteenTenButton_Click(object sender, EventArgs e) {
+		private void sixteenTenButton_Click(object sender, EventArgs e)
+		{
 			int num = int.Parse(_widthTextBox.Text);
 			int num2 = num * 10 / 16;
 			_heightTextBox.Text = num2.ToString();

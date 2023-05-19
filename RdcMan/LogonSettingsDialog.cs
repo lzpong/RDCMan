@@ -37,11 +37,11 @@ namespace RdcMan
 		{
 			LogonSettingsDialog logonSettingsDialog = new LogonSettingsDialog("±à¼­Æ¾¾Ý", "±£´æ");
 			int rowIndex = 0;
-			int num = 0;
-			logonSettingsDialog._logonCredentialsUI.AddControlsToParent(logonSettingsDialog, LogonCredentialsDialogOptions.None, ref rowIndex, ref num);
+			int tabIndex = 0;
+			logonSettingsDialog._logonCredentialsUI.AddControlsToParent(logonSettingsDialog, LogonCredentialsDialogOptions.None, ref rowIndex, ref tabIndex);
 			logonSettingsDialog._logonCredentialsUI.EnableDisableControls(enable: true);
 			logonSettingsDialog._logonCredentialsUI.InitFromCredentials(credentials);
-			logonSettingsDialog.FinalizeLayout(rowIndex, num);
+			logonSettingsDialog.FinalizeLayout(rowIndex, tabIndex);
 			return logonSettingsDialog;
 		}
 

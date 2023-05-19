@@ -1,5 +1,7 @@
-namespace RdcMan {
-	public enum NodeVisitorResult {
+namespace RdcMan
+{
+	public enum NodeVisitorResult
+	{
 		Continue,
 		NoRecurse,
 		Break

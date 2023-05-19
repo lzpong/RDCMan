@@ -1,5 +1,7 @@
-namespace RdcMan {
-	public interface IServerTree {
+namespace RdcMan
+{
+	public interface IServerTree
+	{
 		GroupBase RootNode { get; }
 
 		void AddNode(RdcTreeNode node, GroupBase parent);

@@ -1,9 +1,12 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace RdcMan {
-	public abstract class ServerBase : RdcTreeNode {
-		public enum DisplayStates {
+namespace RdcMan
+{
+	public abstract class ServerBase : RdcTreeNode
+	{
+		public enum DisplayStates
+		{
 			Invalid,
 			Normal,
 			Thumbnail
@@ -37,15 +40,20 @@ namespace RdcMan {
 
 		public abstract Server ServerNode { get; }
 
-		public override bool ConfirmRemove(bool askUser) {
+		public override bool ConfirmRemove(bool askUser)
+		{
 			if (!CanRemove(popUI: true))
+			{
 				return false;
-
-			if (askUser) {
+			}
+			if (askUser)
+			{
 				string text = "´Ó¡°{2}¡±ÖÐÉ¾³ý¡°{0}¡±{1}£¿".InvariantFormat(base.Text, RemoveTypeDescription, base.Parent.Text);
 				DialogResult dialogResult = FormTools.YesNoDialog(ParentForm, text, MessageBoxDefaultButton.Button1);
 				if (dialogResult != DialogResult.Yes)
+				{
 					return false;
+				}
 			}
 			return true;
 		}

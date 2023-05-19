@@ -3,9 +3,11 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Xml;
 
-namespace RdcMan {
-	public class RemoteDesktopSettings : SettingsGroup {
-		//internal const string TabName = "远程桌面设置";
+namespace RdcMan
+{
+	public class RemoteDesktopSettings : SettingsGroup
+	{
+		//internal const string TabName = "Remote Desktop Settings";
 
 		private static Dictionary<string, SettingProperty> _settingProperties;
 
@@ -23,26 +25,34 @@ namespace RdcMan {
 		[Setting("colorDepth", DefaultValue = 24)]
 		public IntSetting ColorDepth { get; private set; }
 
-		static RemoteDesktopSettings() {
+		static RemoteDesktopSettings()
+		{
 			typeof(RemoteDesktopSettings).GetSettingProperties(out _settingProperties);
 			_settingProperties["size"].Attribute.DefaultValue = new Size(1024, 768);
 		}
 
 		public RemoteDesktopSettings()
-			: base("远程桌面设置", "remoteDesktop") { }
+			: base("远程桌面设置", "remoteDesktop")
+		{
+		}
 
-		public override TabPage CreateTabPage(TabbedSettingsDialog dialog) {
+		public override TabPage CreateTabPage(TabbedSettingsDialog dialog)
+		{
 			return new RemoteDesktopTabPage(dialog, this);
 		}
 
-		protected override void WriteSettings(XmlTextWriter tw, RdcTreeNode node) {
+		protected override void WriteSettings(XmlTextWriter tw, RdcTreeNode node)
+		{
 			HashSet<ISetting> hashSet = new HashSet<ISetting>();
 			if (DesktopSizeSameAsClientAreaSize.Value || DesktopSizeFullScreen.Value)
+			{
 				hashSet.Add(DesktopSize);
+			}
 			base.WriteSettings(tw, node, hashSet);
 		}
 
-		protected override void Copy(RdcTreeNode node) {
+		protected override void Copy(RdcTreeNode node)
+		{
 			Copy(node.RemoteDesktopSettings);
 		}
 	}

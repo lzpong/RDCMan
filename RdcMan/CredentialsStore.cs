@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Xml;
 
-namespace RdcMan {
-	public class CredentialsStore {
+namespace RdcMan
+{
+	public class CredentialsStore
+	{
 		public const string XmlNodeName = "credentialsProfiles";
 
 		public const string ProfileXmlNodeName = "credentialsProfile";
@@ -12,9 +14,11 @@ namespace RdcMan {
 
 		public int ChangeId { get; private set; }
 
-		public CredentialsProfile this[string name] {
+		public CredentialsProfile this[string name]
+		{
 			get => _profiles[name];
-			set {
+			set
+			{
 				_profiles[name] = value;
 				ChangeId++;
 			}
@@ -22,12 +26,15 @@ namespace RdcMan {
 
 		public IEnumerable<CredentialsProfile> Profiles => _profiles.Values;
 
-		public CredentialsStore() {
+		public CredentialsStore()
+		{
 			_profiles = new Dictionary<string, CredentialsProfile>(StringComparer.OrdinalIgnoreCase);
 		}
 
-		public void ReadXml(XmlNode xmlNode, ProfileScope scope, RdcTreeNode node, ICollection<string> errors) {
-			foreach (XmlNode childNode in xmlNode.ChildNodes) {
+		public void ReadXml(XmlNode xmlNode, ProfileScope scope, RdcTreeNode node, ICollection<string> errors)
+		{
+			foreach (XmlNode childNode in xmlNode.ChildNodes)
+			{
 				LogonCredentials logonCredentials = new LogonCredentials("", "credentialsProfile");
 				logonCredentials.ReadXml(childNode, node, errors);
 				ILogonCredentials logonCredentials2 = logonCredentials;
@@ -37,9 +44,11 @@ namespace RdcMan {
 			}
 		}
 
-		public void WriteXml(XmlTextWriter tw, RdcTreeNode node) {
+		public void WriteXml(XmlTextWriter tw, RdcTreeNode node)
+		{
 			tw.WriteStartElement("credentialsProfiles");
-			foreach (CredentialsProfile profile in Profiles) {
+			foreach (CredentialsProfile profile in Profiles)
+			{
 				LogonCredentials logonCredentials = new LogonCredentials("", "credentialsProfile");
 				logonCredentials.InheritSettingsType.Mode = InheritanceMode.None;
 				logonCredentials.ProfileName.Value = ((ILogonCredentials)profile).ProfileName;
@@ -51,16 +60,19 @@ namespace RdcMan {
 			tw.WriteEndElement();
 		}
 
-		public bool TryGetValue(string name, out CredentialsProfile profile) {
+		public bool TryGetValue(string name, out CredentialsProfile profile)
+		{
 			return _profiles.TryGetValue(name, out profile);
 		}
 
-		public void Remove(string name) {
+		public void Remove(string name)
+		{
 			_profiles.Remove(name);
 			ChangeId++;
 		}
 
-		public bool Contains(string name) {
+		public bool Contains(string name)
+		{
 			return _profiles.ContainsKey(name);
 		}
 	}

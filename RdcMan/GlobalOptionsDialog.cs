@@ -3,14 +3,18 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace RdcMan {
-	public class GlobalOptionsDialog : TabbedSettingsDialog {
-		private class BandwidthItem {
+namespace RdcMan
+{
+	public class GlobalOptionsDialog : TabbedSettingsDialog
+	{
+		private class BandwidthItem
+		{
 			public string Text;
 
 			public int Flags;
 
-			public BandwidthItem(string text, int flags) {
+			public BandwidthItem(string text, int flags)
+			{
 				Text = text;
 				Flags = flags;
 			}
@@ -64,7 +68,9 @@ namespace RdcMan {
 
 		private readonly BandwidthItem[] _bandwidthItems;
 
-		protected GlobalOptionsDialog(Form parentForm) : base("选项", "确定", parentForm) {
+		protected GlobalOptionsDialog(Form parentForm)
+			: base("选项", "确定", parentForm)
+		{
 			_bandwidthItems = new BandwidthItem[5]
 			{
 				new BandwidthItem("Modem (28.8 Kbps)", 15),
@@ -76,15 +82,18 @@ namespace RdcMan {
 			InitializeComponent();
 		}
 
-		public static GlobalOptionsDialog New() {
+		public static GlobalOptionsDialog New()
+		{
 			GlobalOptionsDialog globalOptionsDialog = new GlobalOptionsDialog(Program.TheForm);
 			globalOptionsDialog.InitializeControlsFromPreferences();
 			return globalOptionsDialog;
 		}
 
-		private void InitializeControlsFromPreferences() {
+		private void InitializeControlsFromPreferences()
+		{
 			MainForm theForm = Program.TheForm;
-			foreach (CheckBox control in _virtualGroupsGroup.Controls) {
+			foreach (CheckBox control in _virtualGroupsGroup.Controls)
+			{
 				control.Checked = (control.Tag as IBuiltInVirtualGroup).IsInTree;
 			}
 			_treeLocationCombo.SelectedValue = Program.TheForm.ServerTreeLocation;
@@ -93,32 +102,41 @@ namespace RdcMan {
 			_connectionBarAutoHiddenCheckBox.Checked = Program.Preferences.ConnectionBarState == RdpClient.ConnectionBarState.AutoHide;
 			_connectionBarAutoHiddenCheckBox.Enabled = _connectionBarEnabledCheckBox.Enabled;
 			if (RdpClient.SupportsPanning)
+			{
 				_panningAccelerationUpDown.Enabled = Program.Preferences.EnablePanning;
-
+			}
 			Size clientSize = theForm.GetClientSize();
-			RadioButton radioButton = _casSizeGroup.Controls.OfType<RadioButton>().Where(delegate (RadioButton r) {
+			RadioButton radioButton = _casSizeGroup.Controls.OfType<RadioButton>().Where(delegate(RadioButton r)
+			{
 				Size? size = (Size?)r.Tag;
 				Size size2 = clientSize;
 				return !size.HasValue ? false : !size.HasValue || size.GetValueOrDefault() == size2;
 			}).FirstOrDefault();
 			if (radioButton != null)
+			{
 				radioButton.Checked = true;
+			}
 			else
+			{
 				_casCustomRadio.Checked = true;
-
+			}
 			_casCustomButton.Text = clientSize.ToFormattedString();
 			_thumbnailPixelsButton.Text = Program.Preferences.ThumbnailSize.ToFormattedString();
 			_thumbnailPercentageTextBox.Text = Program.Preferences.ThumbnailPercentage.ToString();
 			if (Program.Preferences.ThumbnailSizeIsInPixels)
+			{
 				_thumbnailPixelsRadio.Checked = true;
+			}
 			else
+			{
 				_thumbnailPercentageRadio.Checked = true;
-
+			}
 			SetBandwidthCheckBoxes(Program.Preferences.PerformanceFlags);
 			_persistentBitmapCachingCheckBox.Checked = Program.Preferences.PersistentBitmapCaching;
 		}
 
-		public void UpdatePreferences() {
+		public void UpdatePreferences()
+		{
 			UpdateSettings();
 			MainForm theForm = Program.TheForm;
 			foreach (CheckBox control in _virtualGroupsGroup.Controls) {
@@ -147,7 +165,8 @@ namespace RdcMan {
 			Program.Preferences.ThumbnailPercentage = thumbnailPercentage;
 		}
 
-		private void InitializeComponent() {
+		private void InitializeComponent()
+		{
 			this.CreateGeneralPage();
 			this.CreateServerTreePage();
 			this.CreateClientAreaPage();
@@ -158,7 +177,8 @@ namespace RdcMan {
 			this.ScaleAndLayout();
 		}
 
-		private TabPage NewTabPage(string name) {
+		private TabPage NewTabPage(string name)
+		{
 			TabPage tabPage = new SettingsTabPage {
 				Location = FormTools.TopLeftLocation(),
 				Size = new Size(FormTools.TabControlWidth-8, FormTools.TabControlHeight-14),
@@ -169,20 +189,21 @@ namespace RdcMan {
 			return tabPage;
 		}
 
-		private TabPage CreateFullScreenPage() {
+		private TabPage CreateFullScreenPage()
+		{
 			int rowIndex = 0;
-			int num = 0;
+			int tabIndex = 0;
 			TabPage tabPage = NewTabPage("全屏");
-			_connectionBarEnabledCheckBox = FormTools.NewCheckBox("显示全屏连接栏", 0, rowIndex++, num++);
+			_connectionBarEnabledCheckBox = FormTools.NewCheckBox("显示全屏连接栏", 0, rowIndex++, tabIndex++);
 			_connectionBarEnabledCheckBox.CheckedChanged += ConnectionBarEnabledCheckedChanged;
-			_connectionBarAutoHiddenCheckBox = FormTools.NewCheckBox("自动隐藏连接栏", 0, rowIndex++, num++);
+			_connectionBarAutoHiddenCheckBox = FormTools.NewCheckBox("自动隐藏连接栏", 0, rowIndex++, tabIndex++);
 			_connectionBarAutoHiddenCheckBox.Location = new Point(_connectionBarEnabledCheckBox.Left + 24, _connectionBarAutoHiddenCheckBox.Top);
-			FormTools.AddCheckBox(tabPage, "全屏窗口始终位于最顶层", Program.Preferences.Settings.FullScreenWindowIsTopMost, 0, ref rowIndex, ref num);
+			FormTools.AddCheckBox(tabPage, "全屏窗口始终位于最顶层", Program.Preferences.Settings.FullScreenWindowIsTopMost, 0, ref rowIndex, ref tabIndex);
 			if (RdpClient.SupportsMonitorSpanning) {
-				FormTools.AddCheckBox(tabPage, "必要时使用多台显示器", Program.Preferences.Settings.UseMultipleMonitors, 0, ref rowIndex, ref num);
+				FormTools.AddCheckBox(tabPage, "必要时使用多台显示器", Program.Preferences.Settings.UseMultipleMonitors, 0, ref rowIndex, ref tabIndex);
 			}
 			if (RdpClient.SupportsPanning) {
-				_enablePanningCheckBox = FormTools.NewCheckBox("使用滑动而不是滚动条", 0, rowIndex++, num++);
+				_enablePanningCheckBox = FormTools.NewCheckBox("使用滑动而不是滚动条", 0, rowIndex++, tabIndex++);
 				_enablePanningCheckBox.Setting = Program.Preferences.Settings.EnablePanning;
 				_enablePanningCheckBox.CheckedChanged += EnablePanningCheckedChanged;
 				Label label = FormTools.NewLabel("滑动速度", 0, rowIndex);
@@ -193,7 +214,7 @@ namespace RdcMan {
 					Minimum = 1m,
 					Maximum = 9m,
 					Size = new Size(40, FormTools.ControlHeight),
-					TabIndex = num++,
+					TabIndex = tabIndex++,
 					Setting = Program.Preferences.Settings.PanningAcceleration
 				};
 				tabPage.Controls.Add(_enablePanningCheckBox, label, _panningAccelerationUpDown);
@@ -202,60 +223,63 @@ namespace RdcMan {
 			return tabPage;
 		}
 
-		private TabPage CreateExperiencePage() {
+		private TabPage CreateExperiencePage()
+		{
 			TabPage tabPage = NewTabPage("体验");
 			int rowIndex = 0;
-			int num = 0;
-			_bandwidthComboBox = FormTools.AddLabeledValueDropDown(tabPage, "连接速度(&S)：", ref rowIndex, ref num, (BandwidthItem v) => v.Text, _bandwidthItems);
+			int tabIndex = 0;
+			_bandwidthComboBox = FormTools.AddLabeledValueDropDown(tabPage, "连接速度(&S)：", ref rowIndex, ref tabIndex, (BandwidthItem v) => v.Text, _bandwidthItems);
 			_bandwidthComboBox.SelectedIndexChanged += BandwidthCombo_ControlChanged;
 			Label label = FormTools.NewLabel("允许以下：", 0, rowIndex);
-			_desktopBackgroundCheckBox = FormTools.NewCheckBox("桌面背景", 1, rowIndex++, num++);
+			_desktopBackgroundCheckBox = FormTools.NewCheckBox("桌面背景", 1, rowIndex++, tabIndex++);
 			_desktopBackgroundCheckBox.CheckedChanged += PerfCheckBox_CheckedChanged;
-			_fontSmoothingCheckBox = FormTools.NewCheckBox("字体平滑", 1, rowIndex++, num++);
+			_fontSmoothingCheckBox = FormTools.NewCheckBox("字体平滑", 1, rowIndex++, tabIndex++);
 			_fontSmoothingCheckBox.CheckedChanged += PerfCheckBox_CheckedChanged;
-			_desktopCompositionCheckBox = FormTools.NewCheckBox("桌面拼合", 1, rowIndex++, num++);
+			_desktopCompositionCheckBox = FormTools.NewCheckBox("桌面拼合", 1, rowIndex++, tabIndex++);
 			_desktopCompositionCheckBox.CheckedChanged += PerfCheckBox_CheckedChanged;
-			_windowDragCheckBox = FormTools.NewCheckBox("拖动时显示窗口内容", 1, rowIndex++, num++);
+			_windowDragCheckBox = FormTools.NewCheckBox("拖动时显示窗口内容", 1, rowIndex++, tabIndex++);
 			_windowDragCheckBox.CheckedChanged += PerfCheckBox_CheckedChanged;
-			_menuAnimationCheckBox = FormTools.NewCheckBox("菜单和窗口动画", 1, rowIndex++, num++);
+			_menuAnimationCheckBox = FormTools.NewCheckBox("菜单和窗口动画", 1, rowIndex++, tabIndex++);
 			_menuAnimationCheckBox.CheckedChanged += PerfCheckBox_CheckedChanged;
-			_themesCheckBox = FormTools.NewCheckBox("主题", 1, rowIndex++, num++);
+			_themesCheckBox = FormTools.NewCheckBox("主题", 1, rowIndex++, tabIndex++);
 			_themesCheckBox.CheckedChanged += PerfCheckBox_CheckedChanged;
 			rowIndex++;
-			_persistentBitmapCachingCheckBox = FormTools.NewCheckBox("持久位图缓存", 1, rowIndex++, num++);
+			_persistentBitmapCachingCheckBox = FormTools.NewCheckBox("持久位图缓存", 1, rowIndex++, tabIndex++);
 			tabPage.Controls.Add(label, _desktopBackgroundCheckBox, _fontSmoothingCheckBox, _desktopCompositionCheckBox, _windowDragCheckBox, _menuAnimationCheckBox, _themesCheckBox, _persistentBitmapCachingCheckBox);
 			return tabPage;
 		}
 
-		private TabPage CreateHotKeysPage() {
+		private TabPage CreateHotKeysPage()
+		{
 			GlobalSettings settings = Program.Preferences.Settings;
 			TabPage tabPage = NewTabPage("热键");
 			GroupBox groupBox = new GroupBox {
 				Text = "ALT 热键（仅在 Windows 组合键未重定向时有效）"
 			};
 			int rowIndex = 0;
-			int num = 0;
-			AddHotKeyBox(groupBox, "ALT+TAB", "ALT+", settings.HotKeyAltTab, ref rowIndex, ref num);
-			AddHotKeyBox(groupBox, "ALT+SHIFT+TAB", "ALT+", settings.HotKeyAltShiftTab, ref rowIndex, ref num);
-			AddHotKeyBox(groupBox, "ALT+ESC", "ALT+", settings.HotKeyAltEsc, ref rowIndex, ref num);
-			AddHotKeyBox(groupBox, "ALT+SPACE", "ALT+", settings.HotKeyAltSpace, ref rowIndex, ref num);
-			AddHotKeyBox(groupBox, "CTRL+ESC", "ALT+", settings.HotKeyCtrlEsc, ref rowIndex, ref num);
+			int tabIndex = 0;
+			AddHotKeyBox(groupBox, "ALT+TAB", "ALT+", settings.HotKeyAltTab, ref rowIndex, ref tabIndex);
+			AddHotKeyBox(groupBox, "ALT+SHIFT+TAB", "ALT+", settings.HotKeyAltShiftTab, ref rowIndex, ref tabIndex);
+			AddHotKeyBox(groupBox, "ALT+ESC", "ALT+", settings.HotKeyAltEsc, ref rowIndex, ref tabIndex);
+			AddHotKeyBox(groupBox, "ALT+SPACE", "ALT+", settings.HotKeyAltSpace, ref rowIndex, ref tabIndex);
+			AddHotKeyBox(groupBox, "CTRL+ESC", "ALT+", settings.HotKeyCtrlEsc, ref rowIndex, ref tabIndex);
 			groupBox.SizeAndLocate(null);
 			GroupBox groupBox2 = new GroupBox {
 				Text = "CTRL+ALT 热键（始终有效）"
 			};
 			rowIndex = 0;
-			num = 0;
-			AddHotKeyBox(groupBox2, "CTRL+ALT+DEL", "CTRL+ALT+", settings.HotKeyCtrlAltDel, ref rowIndex, ref num);
-			AddHotKeyBox(groupBox2, "全屏", "CTRL+ALT+", settings.HotKeyFullScreen, ref rowIndex, ref num);
-			AddHotKeyBox(groupBox2, "上一个会话", "CTRL+ALT+", settings.HotKeyFocusReleaseLeft, ref rowIndex, ref num);
-			AddHotKeyBox(groupBox2, "选择会话", "CTRL+ALT+", settings.HotKeyFocusReleaseRight, ref rowIndex, ref num);
+			tabIndex = 0;
+			AddHotKeyBox(groupBox2, "CTRL+ALT+DEL", "CTRL+ALT+", settings.HotKeyCtrlAltDel, ref rowIndex, ref tabIndex);
+			AddHotKeyBox(groupBox2, "全屏", "CTRL+ALT+", settings.HotKeyFullScreen, ref rowIndex, ref tabIndex);
+			AddHotKeyBox(groupBox2, "上一个会话", "CTRL+ALT+", settings.HotKeyFocusReleaseLeft, ref rowIndex, ref tabIndex);
+			AddHotKeyBox(groupBox2, "选择会话", "CTRL+ALT+", settings.HotKeyFocusReleaseRight, ref rowIndex, ref tabIndex);
 			groupBox2.SizeAndLocate(groupBox);
 			tabPage.Controls.Add(groupBox, groupBox2);
 			return tabPage;
 		}
 
-		private void AddHotKeyBox(Control parent, string label, string prefix, EnumSetting<Keys> setting, ref int rowIndex, ref int tabIndex) {
+		private void AddHotKeyBox(Control parent, string label, string prefix, EnumSetting<Keys> setting, ref int rowIndex, ref int tabIndex)
+		{
 			parent.Controls.Add(FormTools.NewLabel(label, 0, rowIndex));
 			HotKeyBox value = new HotKeyBox {
 				Prefix = prefix,
@@ -328,21 +352,22 @@ namespace RdcMan {
 			return tabPage;
 		}
 
-		private TabPage CreateServerTreePage() {
+		private TabPage CreateServerTreePage()
+		{
 			int rowIndex = 0;
-			int num = 0;
+			int tabIndex = 0;
 			TabPage tabPage = NewTabPage("树");
 			GroupBox groupBox = new GroupBox {
 				Text = "服务器树"
 			};
-			FormTools.AddCheckBox(groupBox, "单击以选择将焦点转移到远程客户端", Program.Preferences.Settings.FocusOnClick, 0, ref rowIndex, ref num);
-			FormTools.AddCheckBox(groupBox, "树控件处于非活动状态时使节点变暗", Program.Preferences.Settings.DimNodesWhenInactive, 0, ref rowIndex, ref num);
-			_treeLocationCombo = FormTools.AddLabeledValueDropDown(groupBox, "位置：", ref rowIndex, ref num, (DockStyle v) => v.ToString(), new DockStyle[2]
+			FormTools.AddCheckBox(groupBox, "单击以选择将焦点转移到远程客户端", Program.Preferences.Settings.FocusOnClick, 0, ref rowIndex, ref tabIndex);
+			FormTools.AddCheckBox(groupBox, "树控件处于非活动状态时使节点变暗", Program.Preferences.Settings.DimNodesWhenInactive, 0, ref rowIndex, ref tabIndex);
+			_treeLocationCombo = FormTools.AddLabeledValueDropDown(groupBox, "位置：", ref rowIndex, ref tabIndex, (DockStyle v) => v.ToString(), new DockStyle[2]
 			{
 				DockStyle.Left,
 				DockStyle.Right
 			});
-			_treeVisibilityCombo = FormTools.AddLabeledValueDropDown(groupBox, "可见性：", ref rowIndex, ref num, (ControlVisibility v) => v.ToString(), new ControlVisibility[3]
+			_treeVisibilityCombo = FormTools.AddLabeledValueDropDown(groupBox, "可见性：", ref rowIndex, ref tabIndex, (ControlVisibility v) => v.ToString(), new ControlVisibility[3]
 			{
 				ControlVisibility.Dock,
 				ControlVisibility.AutoHide,
@@ -357,7 +382,7 @@ namespace RdcMan {
 				Size = new Size(40, 24),
 				Setting = Program.Preferences.Settings.ServerTreeAutoHidePopUpDelay,
 				TabStop = true,
-				TabIndex = num++
+				TabIndex = tabIndex++
 			};
 			_treeVisibilityCombo.SelectedIndexChanged += delegate {
 				serverTreeAutoHidePopUpDelay.Enabled = _treeVisibilityCombo.SelectedValue == ControlVisibility.AutoHide;
@@ -384,31 +409,32 @@ namespace RdcMan {
 			FormTools.LayoutGroupBox(_virtualGroupsGroup, 2, groupBox);
 			_virtualGroupsGroup.Height -= 6;
 			rowIndex = 0;
-			num = 0;
+			tabIndex = 0;
 			GroupBox groupBox2 = new GroupBox {
 				Text = "排序"
 			};
-			FormTools.AddLabeledValueDropDown(groupBox2, "组排序顺序：", Program.Preferences.Settings.GroupSortOrder, ref rowIndex, ref num, Helpers.SortOrderToString, new SortOrder[2] {
+			FormTools.AddLabeledValueDropDown(groupBox2, "组排序顺序：", Program.Preferences.Settings.GroupSortOrder, ref rowIndex, ref tabIndex, Helpers.SortOrderToString, new SortOrder[2] {
 				SortOrder.ByName,
 				SortOrder.None
 			});
-			FormTools.AddLabeledEnumDropDown(groupBox2, "服务器排序顺序：", Program.Preferences.Settings.ServerSortOrder, ref rowIndex, ref num, Helpers.SortOrderToString);
+			FormTools.AddLabeledEnumDropDown(groupBox2, "服务器排序顺序：", Program.Preferences.Settings.ServerSortOrder, ref rowIndex, ref tabIndex, Helpers.SortOrderToString);
 			FormTools.LayoutGroupBox(groupBox2, 2, _virtualGroupsGroup);
 			tabPage.Controls.Add(groupBox, _virtualGroupsGroup, groupBox2);
 			return tabPage;
 		}
 
-		private TabPage CreateGeneralPage() {
+		private TabPage CreateGeneralPage()
+		{
 			int rowIndex = 0;
-			int num = 0;
+			int tabIndex = 0;
 			TabPage tabPage = NewTabPage("常规");
-			FormTools.AddCheckBox(tabPage, "隐藏主菜单，直到按下 ALT", Program.Preferences.Settings.HideMainMenu, 0, ref rowIndex, ref num);
-			RdcCheckBox autoSaveCheckBox = FormTools.AddCheckBox(tabPage, "自动保存间隔：", Program.Preferences.Settings.AutoSaveFiles, 0, ref rowIndex, ref num);
+			FormTools.AddCheckBox(tabPage, "隐藏主菜单，直到按下 ALT", Program.Preferences.Settings.HideMainMenu, 0, ref rowIndex, ref tabIndex);
+			RdcCheckBox autoSaveCheckBox = FormTools.AddCheckBox(tabPage, "自动保存间隔：", Program.Preferences.Settings.AutoSaveFiles, 0, ref rowIndex, ref tabIndex);
 			autoSaveCheckBox.Size = new Size(120, 24);
 			NumericTextBox autoSaveInterval = new NumericTextBox(0, 60, "自动保存间隔必须为 0 到 60 分钟（含）") {
 				Location = new Point(autoSaveCheckBox.Right + 1, autoSaveCheckBox.Top + 2),
 				Size = new Size(FormTools.ControlHeight, 24),
-				TabIndex = num++,
+				TabIndex = tabIndex++,
 				TabStop = true,
 				Enabled = false
 			};
@@ -421,10 +447,10 @@ namespace RdcMan {
 				Size = new Size(60, 24),
 				Text = "分钟"
 			};
-			RdcCheckBox rdcCheckBox = FormTools.AddCheckBox(tabPage, "启动时提示重新连接已连接的服务器", Program.Preferences.Settings.ReconnectOnStartup, 0, ref rowIndex, ref num);
+			RdcCheckBox rdcCheckBox = FormTools.AddCheckBox(tabPage, "启动时提示重新连接已连接的服务器", Program.Preferences.Settings.ReconnectOnStartup, 0, ref rowIndex, ref tabIndex);
 			Button button = new Button {
 				Location = new Point(8, rdcCheckBox.Bottom + 8),
-				TabIndex = num++,
+				TabIndex = tabIndex++,
 				Text = "默认组设置...",
 				Width = 140
 			};
@@ -435,42 +461,51 @@ namespace RdcMan {
 			return tabPage;
 		}
 
-		private void EnablePanningCheckedChanged(object sender, EventArgs e) {
+		private void EnablePanningCheckedChanged(object sender, EventArgs e)
+		{
 			_panningAccelerationUpDown.Enabled = _enablePanningCheckBox.Checked;
 		}
 
-		private void ConnectionBarEnabledCheckedChanged(object sender, EventArgs e) {
+		private void ConnectionBarEnabledCheckedChanged(object sender, EventArgs e)
+		{
 			_connectionBarAutoHiddenCheckBox.Enabled = _connectionBarEnabledCheckBox.Checked;
 		}
 
-		private void CustomSizeClick(object sender, EventArgs e) {
+		private void CustomSizeClick(object sender, EventArgs e)
+		{
 			Button button = sender as Button;
 			Size size = SizeHelper.Parse(button.Text);
 			using CustomSizeDialog customSizeDialog = new CustomSizeDialog(size);
-			if (customSizeDialog.ShowDialog() == DialogResult.OK) {
+			if (customSizeDialog.ShowDialog() == DialogResult.OK)
+			{
 				button.Text = customSizeDialog.WidthText + SizeHelper.Separator + customSizeDialog.HeightText;
 				_thumbnailPixelsRadio.Checked = true;
 			}
 		}
 
-		private void ThumbnailPercentageRadioCheckedChanged(object sender, EventArgs e) {
+		private void ThumbnailPercentageRadioCheckedChanged(object sender, EventArgs e)
+		{
 			_thumbnailPercentageTextBox.Enabled = (sender as RadioButton).Checked;
 			_thumbnailPixelsButton.Enabled = !_thumbnailPercentageTextBox.Enabled;
 		}
 
-		private void BandwidthCombo_ControlChanged(object sender, EventArgs e) {
+		private void BandwidthCombo_ControlChanged(object sender, EventArgs e)
+		{
 			BandwidthSettingsChanged();
 		}
 
-		private void BandwidthSettingsChanged() {
-			if (!_inHandler) {
+		private void BandwidthSettingsChanged()
+		{
+			if (!_inHandler)
+			{
 				_inHandler = true;
 				SetBandwidthCheckBoxes(_bandwidthComboBox.SelectedValue.Flags);
 				_inHandler = false;
 			}
 		}
 
-		private void SetBandwidthCheckBoxes(int flags) {
+		private void SetBandwidthCheckBoxes(int flags)
+		{
 			_desktopBackgroundCheckBox.Checked = (flags & 1) == 0;
 			_fontSmoothingCheckBox.Checked = (flags & 0x80) != 0;
 			_desktopCompositionCheckBox.Checked = (flags & 0x100) != 0;
@@ -479,8 +514,10 @@ namespace RdcMan {
 			_themesCheckBox.Checked = (flags & 8) == 0;
 		}
 
-		private void PerfCheckBox_CheckedChanged(object sender, EventArgs e) {
-			if (!_inHandler) {
+		private void PerfCheckBox_CheckedChanged(object sender, EventArgs e)
+		{
+			if (!_inHandler)
+			{
 				_inHandler = true;
 				int flags = ComputeFlagsFromCheckBoxes();
 				BandwidthItem selectedValue = _bandwidthItems.Where((BandwidthItem i) => i.Flags == flags).FirstOrDefault() ?? _bandwidthItems.First((BandwidthItem i) => i.Text.Equals("自定义"));
@@ -489,7 +526,8 @@ namespace RdcMan {
 			}
 		}
 
-		private int ComputeFlagsFromCheckBoxes() {
+		private int ComputeFlagsFromCheckBoxes()
+		{
 			int num = 0;
 			if (!_desktopBackgroundCheckBox.Checked)
 				num |= 1;

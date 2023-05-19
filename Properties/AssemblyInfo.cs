@@ -12,4 +12,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyKeyFile("")]
 [assembly: AssemblyKeyName("")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("2.90.1420.0")]
+[assembly: AssemblyVersion("2.92.1430.0")]

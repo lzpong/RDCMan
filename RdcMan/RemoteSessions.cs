@@ -3,33 +3,41 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Win32;
 
-namespace RdcMan {
-	internal class RemoteSessions {
+namespace RdcMan
+{
+	internal class RemoteSessions
+	{
 		private IntPtr _hServer;
 
 		private readonly ServerBase _server;
 
-		public RemoteSessions(ServerBase server) {
+		public RemoteSessions(ServerBase server)
+		{
 			_server = server;
 			_hServer = (IntPtr)0;
 		}
 
-		public bool OpenServer() {
+		public bool OpenServer()
+		{
 			_hServer = Wts.OpenServer(_server.ServerName);
 			if (_hServer == (IntPtr)0)
+			{
 				return false;
-
+			}
 			return true;
 		}
 
-		public void CloseServer() {
-			if (_hServer != (IntPtr)0) {
+		public void CloseServer()
+		{
+			if (_hServer != (IntPtr)0)
+			{
 				Wts.CloseServer(_hServer);
 				_hServer = (IntPtr)0;
 			}
 		}
 
-		public IList<RemoteSessionInfo> QuerySessions() {
+		public IList<RemoteSessionInfo> QuerySessions()
+		{
 			if (_hServer == (IntPtr)0)
 				throw new Exception("在 OpenServer 成功之前调用了 QuerySessions");
 			if (!Wts.EnumerateSessions(_hServer, 0, 1, out var pSessionInfo, out var count))
@@ -66,11 +74,13 @@ namespace RdcMan {
 			}
 		}
 
-		public bool DisconnectSession(int id) {
+		public bool DisconnectSession(int id)
+		{
 			return Wts.DisconnectSession(_hServer, id, wait: true);
 		}
 
-		public bool LogOffSession(int id) {
+		public bool LogOffSession(int id)
+		{
 			return Wts.LogOffSession(_hServer, id, wait: true);
 		}
 	}

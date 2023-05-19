@@ -1,5 +1,7 @@
-namespace RdcMan {
-	public class SecuritySettingsTabPage : SettingsTabPage<SecuritySettings> {
+namespace RdcMan
+{
+	public class SecuritySettingsTabPage : SettingsTabPage<SecuritySettings>
+	{
 		public SecuritySettingsTabPage(TabbedSettingsDialog dialog, SecuritySettings settings)
 			: base(dialog, settings) {
 			int num = 0;

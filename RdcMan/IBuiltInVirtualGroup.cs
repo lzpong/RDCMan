@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.Xml;
 
-namespace RdcMan {
-	internal interface IBuiltInVirtualGroup {
+namespace RdcMan
+{
+	internal interface IBuiltInVirtualGroup
+	{
 		string XmlNodeName { get; }
 
 		string Text { get; }

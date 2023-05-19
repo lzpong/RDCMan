@@ -3,8 +3,10 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace RdcMan {
-	public class InheritanceControl {
+namespace RdcMan
+{
+	public class InheritanceControl
+	{
 		public CheckBox FromParentCheck;
 
 		//private const string SourcePrefix = "Source: ";
@@ -23,15 +25,18 @@ namespace RdcMan {
 
 		public event Action<bool> EnabledChanged;
 
-		public InheritanceControl(TabbedSettingsDialog dialog, string settingsGroupName) {
+		public InheritanceControl(TabbedSettingsDialog dialog, string settingsGroupName)
+		{
 			_dialog = dialog;
 			_settingsGroupName = settingsGroupName;
 			_sourceNode = DefaultSettingsGroup.Instance;
 			_enabled = true;
 		}
 
-		public void Create(Control parent, ref int rowIndex, ref int tabIndex) {
-			_disabledLabel = new Label {
+		public void Create(Control parent, ref int rowIndex, ref int tabIndex)
+		{
+			_disabledLabel = new Label
+			{
 				Enabled = true,
 				Location = new Point(0, (parent.Height - FormTools.ControlHeight) / 2),
 				Size = new Size(parent.Width, FormTools.ControlHeight),
@@ -40,7 +45,8 @@ namespace RdcMan {
 			};
 			FromParentCheck = FormTools.NewCheckBox("从父继承(&H)", 1, rowIndex++, tabIndex++);
 			FromParentCheck.CheckedChanged += CheckChangedHandler;
-			_sourceButton = new Button {
+			_sourceButton = new Button
+			{
 				Location = FormTools.NewLocation(1, rowIndex++)
 			};
 			_sourceButton.Size = new Size(340, _sourceButton.Height);
@@ -51,17 +57,20 @@ namespace RdcMan {
 			parent.Controls.Add(_sourceButton);
 		}
 
-		private void SourceButton_Click(object sender, EventArgs e) {
+		private void SourceButton_Click(object sender, EventArgs e)
+		{
 			string activeTabName = ((_sourceButton.Parent is TabPage tabPage) ? tabPage.Text : string.Empty);
 			_sourceNode.DoPropertiesDialog(_sourceButton.FindForm(), activeTabName);
 		}
 
-		private void SourceButton_TextChanged(object sender, EventArgs e) {
+		private void SourceButton_TextChanged(object sender, EventArgs e)
+		{
 			string text = _sourceButton.Text;
 			Graphics graphics = _sourceButton.CreateGraphics();
 			bool flag = false;
 			SizeF sizeF = graphics.MeasureString(text, _sourceButton.Font);
-			while (Math.Round(sizeF.Width, 1) > (double)_sourceButton.Width) {
+			while (Math.Round(sizeF.Width, 1) > (double)_sourceButton.Width)
+			{
 				double num = Math.Round(sizeF.Width, 0) - (double)_sourceButton.Width;
 				int num2 = (int)Math.Round(num / (double)_sourceButton.Font.Size, 0) + 4;
 				text = "Source: ..." + text.Substring(num2 + "Source: ".Length);
@@ -69,76 +78,109 @@ namespace RdcMan {
 				sizeF = graphics.MeasureString(text, _sourceButton.Font);
 			}
 			if (flag)
+			{
 				_sourceButton.Text = text;
+			}
 		}
 
-		public void UpdateControlsFromSettings(InheritSettingsType settings) {
+		public void UpdateControlsFromSettings(InheritSettingsType settings)
+		{
 			bool flag = settings.Mode == InheritanceMode.FromParent;
 			if (flag != FromParentCheck.Checked)
+			{
 				FromParentCheck.Checked = flag;
+			}
 			else
+			{
 				OnSettingChanged();
+			}
 		}
 
-		public void Enable(bool value, string reason) {
+		public void Enable(bool value, string reason)
+		{
 			_enabled = value;
 			_disabledLabel.Text = "这些设置不可用 {0}".InvariantFormat(reason);
-			foreach (Control control in FromParentCheck.Parent.Controls) {
+			foreach (Control control in FromParentCheck.Parent.Controls)
+			{
 				control.Visible = _enabled;
 			}
 			_disabledLabel.Enabled = !_enabled;
 			_disabledLabel.Visible = !_enabled;
 			if (_enabled)
+			{
 				OnSettingChanged();
+			}
 		}
 
-		private void CheckChangedHandler(object sender, EventArgs e) {
+		private void CheckChangedHandler(object sender, EventArgs e)
+		{
 			OnSettingChanged();
 		}
 
-		private void OnSettingChanged() {
+		private void OnSettingChanged()
+		{
 			CheckBox fromParentCheck = FromParentCheck;
 			EnableDisableControls(!fromParentCheck.Checked);
-			if (fromParentCheck.Checked) {
+			if (fromParentCheck.Checked)
+			{
 				GroupBase groupBase = _dialog.TabPages.OfType<INodePropertiesPage>().First().ParentGroup;
-				if (groupBase != _sourceNode) {
+				if (groupBase != _sourceNode)
+				{
 					if (groupBase == null)
+					{
 						_sourceNode = DefaultSettingsGroup.Instance;
-					else {
-						while (true) {
+					}
+					else
+					{
+						while (true)
+						{
 							SettingsGroup settingsGroupByName = groupBase.GetSettingsGroupByName(_settingsGroupName);
 							if (settingsGroupByName.InheritSettingsType.Mode != 0)
+							{
 								break;
-
+							}
 							groupBase = settingsGroupByName.InheritSettingsType.GetInheritedSettingsNode(groupBase);
 						}
 						_sourceNode = groupBase;
 					}
 				}
 				if (_sourceNode != DefaultSettingsGroup.Instance)
+				{
 					_sourceButton.Text = "Source: " + _sourceNode.FullPath;
+				}
 				else
+				{
 					_sourceButton.Text = "Source: 默认设置";
-
+				}
 				_sourceButton.Show();
 			}
 			else
+			{
 				_sourceButton.Hide();
+			}
 		}
 
-		public void EnableDisableControls(bool enable) {
-			foreach (Control control in FromParentCheck.Parent.Controls) {
+		public void EnableDisableControls(bool enable)
+		{
+			foreach (Control control in FromParentCheck.Parent.Controls)
+			{
 				if (control != FromParentCheck && control != _sourceButton)
+				{
 					control.Enabled = enable;
+				}
 			}
 			if (this.EnabledChanged != null)
+			{
 				this.EnabledChanged(enable);
+			}
 		}
 
-		public InheritanceMode GetInheritanceMode() {
+		public InheritanceMode GetInheritanceMode()
+		{
 			if (FromParentCheck.Checked)
+			{
 				return InheritanceMode.FromParent;
-
+			}
 			return InheritanceMode.None;
 		}
 	}

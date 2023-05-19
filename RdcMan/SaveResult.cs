@@ -1,5 +1,7 @@
-namespace RdcMan {
-	public enum SaveResult {
+namespace RdcMan
+{
+	public enum SaveResult
+	{
 		Cancel,
 		NoSave,
 		Save,

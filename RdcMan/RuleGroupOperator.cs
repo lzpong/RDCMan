@@ -1,5 +1,7 @@
-namespace RdcMan {
-	public enum RuleGroupOperator {
+namespace RdcMan
+{
+	public enum RuleGroupOperator
+	{
 		Any,
 		All
 	}
