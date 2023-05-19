@@ -455,8 +455,11 @@ namespace RdcMan
 				_savedSize = clientSize;
 			}
 		}
-
-		protected override void OnMouseDown(MouseEventArgs e) {
+        /// <summary>
+        /// 双点击缩略图激活远程桌面显示  lzpong 2023/05/19
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnMouseDown(MouseEventArgs e) {
 			if (e.Button == MouseButtons.Left && e.Clicks == 2) {
 				ServerBox box = null;
 
