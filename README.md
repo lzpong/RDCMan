@@ -66,12 +66,12 @@ Use .Net Framework 4.8
   
 9. 未停靠时双击激活远程桌面显示
 影响文件:  
-  SeverBox.cs::OnMouseDown       line:23    新增
+  SeverBox.cs::OnMouseDown       line:23    新增  
   
 10. 双点击缩略图激活远程桌面显示
 影响文件:  
-  SeverBox.cs::DbClickShow       line:35    新增
-  CiientPanel.cs::OnMouseDown    line:459   新增
+  SeverBox.cs::DbClickShow       line:35    新增  
+  CientPanel.cs::OnMouseDown    line:459   新增  
   
   
   
